@@ -52,8 +52,8 @@
             </div>
             <div class="results grid">
                 <a v-for="result in results" class="result bg-white p-2 rounded headline text-black no-underline issue-box" :href="result.html_url" :title="result.title" target="_blank">
-                    <h1 class="text-center text-3xl mb-4 break-words" v-text="result.title"></h1>
-                    <h3 class="text-center text-blue mb-4 break-words" v-text="`${result.user.login}/${result.repoTitle}`"></h3>
+                    <h1 class="text-center text-2xl mb-4 break-words max-w-xs mx-auto" v-text="result.title"></h1>
+                    <h3 class="text-center text-blue mb-4 break-words max-w-xs mx-auto" v-text="`${result.user.login}/${result.repoTitle}`"></h3>
                 </a>
             </div>
             <div class="text-center mt-10" v-if="showViewMore">
