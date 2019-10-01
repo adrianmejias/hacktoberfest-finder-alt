@@ -1,15 +1,26 @@
-let mix = require('laravel-mix');
-var tailwindcss = require('tailwindcss');
+const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 require('laravel-mix-purgecss');
 
-mix.js('assets/js/app.js', 'build')
-    .sass('assets/sass/app.scss', 'build')
-	    .options({
-	      processCssUrls: false,
-	      postCss: [ tailwindcss('./tailwind.js') ],
-	    })
-	    .purgeCss({
-	        enabled: true,
-	        extensions: ['html'],
-	        folders: ['./'],
-	    });
+mix.js('src/js/app.js', 'public/js')
+    .sass('src/sass/app.scss', 'public/css')
+    .options({
+        processCssUrls: false,
+        postCss: [tailwindcss('./tailwind.js')]
+    })
+    .purgeCss({
+        enabled: mix.inProduction(),
+        globs: [
+            path.join(__dirname, 'public/index.html'),
+        ],
+        extensions: ['html', 'js'],
+        folders: ['src']
+    })
+    .setPublicPath('public')
+    .extract(['vue']);
+
+if (mix.inProduction()) {
+    mix.version();
+} else {
+    mix.sourceMaps();
+}
