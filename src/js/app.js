@@ -52,7 +52,6 @@ const app = new Vue({
                             .join();
                     });
 
-                    this.page = this.page++;
                     this.showViewMore = true;
                     this.isFetching = false;
                 })
@@ -60,6 +59,11 @@ const app = new Vue({
                     this.showViewMore = false;
                     this.isFetching = false;
                 });
+        },
+
+        loadMoreIssues() {
+            this.page ++;
+            this.loadIssues();
         },
 
         chooseLanguage(language) {
