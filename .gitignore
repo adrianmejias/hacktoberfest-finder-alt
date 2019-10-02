@@ -2,8 +2,6 @@
 .idea
 node_modules
 .DS_Store
-build
-!build/.gitkeep
 package-lock.json
 mix-manifest.json
 hot

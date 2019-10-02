@@ -2,7 +2,8 @@ const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 require('laravel-mix-purgecss');
 
-mix.js('src/js/app.js', 'public/js')
+mix.setPublicPath('public')
+    .js('src/js/app.js', 'public/js')
     .sass('src/sass/app.scss', 'public/css')
     .options({
         processCssUrls: false,
@@ -16,7 +17,6 @@ mix.js('src/js/app.js', 'public/js')
         extensions: ['html', 'js'],
         folders: ['src']
     })
-    .setPublicPath('public')
     .extract(['vue']);
 
 if (mix.inProduction()) {
