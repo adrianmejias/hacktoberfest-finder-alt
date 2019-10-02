@@ -1,10 +1,9 @@
 // Give cache name
-var cacheName = 'hacktoberfest-finder';
+const cacheName = 'hacktoberfest-finder';
 
 // Define files to cache
-var filesToCache = [
+const filesToCache = [
     '/',
-    '/fonts/squealer.ttf',
     '/images/header.png',
     '/images/digital-ocean.png',
     '/images/dev.svg',

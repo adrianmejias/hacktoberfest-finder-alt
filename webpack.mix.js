@@ -1,21 +1,25 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
+const postCSSNested = require('postcss-nested');
+
 require('laravel-mix-purgecss');
+require('laravel-mix-postcss-config');
 
 mix.setPublicPath('public')
     .js('src/js/app.js', 'public/js')
-    .sass('src/sass/app.scss', 'public/css')
+    .postCss('src/css/app.css', 'public/css')
     .options({
         processCssUrls: false,
-        postCss: [tailwindcss('./tailwind.js')]
+        postCss: [tailwindcss]
+    })
+    .postCssConfig({
+        plugins: [postCSSNested()]
     })
     .purgeCss({
         enabled: mix.inProduction(),
-        globs: [
-            path.join(__dirname, 'public/index.html'),
-        ],
+        globs: [path.join(__dirname, 'public/index.html')],
         extensions: ['html', 'js'],
-        folders: ['src']
+        folders: ['src', 'public']
     })
     .extract(['vue']);
 
