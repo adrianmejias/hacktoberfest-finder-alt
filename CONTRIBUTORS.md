@@ -9,6 +9,8 @@
 - [SARAN-thala](https://github.com/SARAN-thala)
 - [wooojek](https://github.com/wooojek)
 - [vanya829](https://github.com/vanya829)
+- [MrEvertide](https://github.com/mrevertide)
+- [deadSnowman](https://github.com/deadSnowman)
 - [adrianmejias](https://github.com/adrianmejias)
 
 ## 2018

@@ -721,6 +721,14 @@ ol {
   background-color: #ffffff;
 }
 
+.bg-gray {
+  background-color: #ccc;
+}
+
+.bg-pinkish {
+  background-color: #f3ebeb;
+}
+
 .bg-primary {
   background-color: #A11EC6;
 }
@@ -749,6 +757,14 @@ ol {
   background-color: #ffffff;
 }
 
+.hover\:bg-gray:hover {
+  background-color: #ccc;
+}
+
+.hover\:bg-pinkish:hover {
+  background-color: #f3ebeb;
+}
+
 .hover\:bg-primary:hover {
   background-color: #A11EC6;
 }
@@ -775,6 +791,14 @@ ol {
 
 .focus\:bg-white:focus {
   background-color: #ffffff;
+}
+
+.focus\:bg-gray:focus {
+  background-color: #ccc;
+}
+
+.focus\:bg-pinkish:focus {
+  background-color: #f3ebeb;
 }
 
 .focus\:bg-primary:focus {
@@ -885,6 +909,14 @@ ol {
   border-color: #ffffff;
 }
 
+.border-gray {
+  border-color: #ccc;
+}
+
+.border-pinkish {
+  border-color: #f3ebeb;
+}
+
 .border-primary {
   border-color: #A11EC6;
 }
@@ -913,6 +945,14 @@ ol {
   border-color: #ffffff;
 }
 
+.hover\:border-gray:hover {
+  border-color: #ccc;
+}
+
+.hover\:border-pinkish:hover {
+  border-color: #f3ebeb;
+}
+
 .hover\:border-primary:hover {
   border-color: #A11EC6;
 }
@@ -939,6 +979,14 @@ ol {
 
 .focus\:border-white:focus {
   border-color: #ffffff;
+}
+
+.focus\:border-gray:focus {
+  border-color: #ccc;
+}
+
+.focus\:border-pinkish:focus {
+  border-color: #f3ebeb;
 }
 
 .focus\:border-primary:focus {
@@ -3815,6 +3863,46 @@ ol {
   color: #ffffff;
 }
 
+.placeholder-gray::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+.placeholder-gray::-moz-placeholder {
+  color: #ccc;
+}
+
+.placeholder-gray:-ms-input-placeholder {
+  color: #ccc;
+}
+
+.placeholder-gray::-ms-input-placeholder {
+  color: #ccc;
+}
+
+.placeholder-gray::placeholder {
+  color: #ccc;
+}
+
+.placeholder-pinkish::-webkit-input-placeholder {
+  color: #f3ebeb;
+}
+
+.placeholder-pinkish::-moz-placeholder {
+  color: #f3ebeb;
+}
+
+.placeholder-pinkish:-ms-input-placeholder {
+  color: #f3ebeb;
+}
+
+.placeholder-pinkish::-ms-input-placeholder {
+  color: #f3ebeb;
+}
+
+.placeholder-pinkish::placeholder {
+  color: #f3ebeb;
+}
+
 .placeholder-primary::-webkit-input-placeholder {
   color: #A11EC6;
 }
@@ -3953,6 +4041,46 @@ ol {
 
 .focus\:placeholder-white:focus::placeholder {
   color: #ffffff;
+}
+
+.focus\:placeholder-gray:focus::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+.focus\:placeholder-gray:focus::-moz-placeholder {
+  color: #ccc;
+}
+
+.focus\:placeholder-gray:focus:-ms-input-placeholder {
+  color: #ccc;
+}
+
+.focus\:placeholder-gray:focus::-ms-input-placeholder {
+  color: #ccc;
+}
+
+.focus\:placeholder-gray:focus::placeholder {
+  color: #ccc;
+}
+
+.focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
+  color: #f3ebeb;
+}
+
+.focus\:placeholder-pinkish:focus::-moz-placeholder {
+  color: #f3ebeb;
+}
+
+.focus\:placeholder-pinkish:focus:-ms-input-placeholder {
+  color: #f3ebeb;
+}
+
+.focus\:placeholder-pinkish:focus::-ms-input-placeholder {
+  color: #f3ebeb;
+}
+
+.focus\:placeholder-pinkish:focus::placeholder {
+  color: #f3ebeb;
 }
 
 .focus\:placeholder-primary:focus::-webkit-input-placeholder {
@@ -4262,6 +4390,14 @@ ol {
   color: #ffffff;
 }
 
+.text-gray {
+  color: #ccc;
+}
+
+.text-pinkish {
+  color: #f3ebeb;
+}
+
 .text-primary {
   color: #A11EC6;
 }
@@ -4290,6 +4426,14 @@ ol {
   color: #ffffff;
 }
 
+.hover\:text-gray:hover {
+  color: #ccc;
+}
+
+.hover\:text-pinkish:hover {
+  color: #f3ebeb;
+}
+
 .hover\:text-primary:hover {
   color: #A11EC6;
 }
@@ -4316,6 +4460,14 @@ ol {
 
 .focus\:text-white:focus {
   color: #ffffff;
+}
+
+.focus\:text-gray:focus {
+  color: #ccc;
+}
+
+.focus\:text-pinkish:focus {
+  color: #f3ebeb;
 }
 
 .focus\:text-primary:focus {
@@ -4727,7 +4879,7 @@ ol {
   }
 
   .grid a {
-    height: 250px;
+    min-height: 250px;
   }
 }
 
@@ -4808,6 +4960,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .sm\:bg-gray {
+    background-color: #ccc;
+  }
+
+  .sm\:bg-pinkish {
+    background-color: #f3ebeb;
+  }
+
   .sm\:bg-primary {
     background-color: #A11EC6;
   }
@@ -4836,6 +4996,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .sm\:hover\:bg-gray:hover {
+    background-color: #ccc;
+  }
+
+  .sm\:hover\:bg-pinkish:hover {
+    background-color: #f3ebeb;
+  }
+
   .sm\:hover\:bg-primary:hover {
     background-color: #A11EC6;
   }
@@ -4862,6 +5030,14 @@ ol {
 
   .sm\:focus\:bg-white:focus {
     background-color: #ffffff;
+  }
+
+  .sm\:focus\:bg-gray:focus {
+    background-color: #ccc;
+  }
+
+  .sm\:focus\:bg-pinkish:focus {
+    background-color: #f3ebeb;
   }
 
   .sm\:focus\:bg-primary:focus {
@@ -4972,6 +5148,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .sm\:border-gray {
+    border-color: #ccc;
+  }
+
+  .sm\:border-pinkish {
+    border-color: #f3ebeb;
+  }
+
   .sm\:border-primary {
     border-color: #A11EC6;
   }
@@ -5000,6 +5184,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .sm\:hover\:border-gray:hover {
+    border-color: #ccc;
+  }
+
+  .sm\:hover\:border-pinkish:hover {
+    border-color: #f3ebeb;
+  }
+
   .sm\:hover\:border-primary:hover {
     border-color: #A11EC6;
   }
@@ -5026,6 +5218,14 @@ ol {
 
   .sm\:focus\:border-white:focus {
     border-color: #ffffff;
+  }
+
+  .sm\:focus\:border-gray:focus {
+    border-color: #ccc;
+  }
+
+  .sm\:focus\:border-pinkish:focus {
+    border-color: #f3ebeb;
   }
 
   .sm\:focus\:border-primary:focus {
@@ -7902,6 +8102,46 @@ ol {
     color: #ffffff;
   }
 
+  .sm\:placeholder-gray::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:placeholder-gray::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:placeholder-gray:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:placeholder-gray::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:placeholder-gray::placeholder {
+    color: #ccc;
+  }
+
+  .sm\:placeholder-pinkish::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:placeholder-pinkish::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:placeholder-pinkish:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:placeholder-pinkish::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:placeholder-pinkish::placeholder {
+    color: #f3ebeb;
+  }
+
   .sm\:placeholder-primary::-webkit-input-placeholder {
     color: #A11EC6;
   }
@@ -8040,6 +8280,46 @@ ol {
 
   .sm\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
+  }
+
+  .sm\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:focus\:placeholder-gray:focus::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:focus\:placeholder-gray:focus:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:focus\:placeholder-gray:focus::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .sm\:focus\:placeholder-gray:focus::placeholder {
+    color: #ccc;
+  }
+
+  .sm\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:focus\:placeholder-pinkish:focus::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .sm\:focus\:placeholder-pinkish:focus::placeholder {
+    color: #f3ebeb;
   }
 
   .sm\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
@@ -8349,6 +8629,14 @@ ol {
     color: #ffffff;
   }
 
+  .sm\:text-gray {
+    color: #ccc;
+  }
+
+  .sm\:text-pinkish {
+    color: #f3ebeb;
+  }
+
   .sm\:text-primary {
     color: #A11EC6;
   }
@@ -8377,6 +8665,14 @@ ol {
     color: #ffffff;
   }
 
+  .sm\:hover\:text-gray:hover {
+    color: #ccc;
+  }
+
+  .sm\:hover\:text-pinkish:hover {
+    color: #f3ebeb;
+  }
+
   .sm\:hover\:text-primary:hover {
     color: #A11EC6;
   }
@@ -8403,6 +8699,14 @@ ol {
 
   .sm\:focus\:text-white:focus {
     color: #ffffff;
+  }
+
+  .sm\:focus\:text-gray:focus {
+    color: #ccc;
+  }
+
+  .sm\:focus\:text-pinkish:focus {
+    color: #f3ebeb;
   }
 
   .sm\:focus\:text-primary:focus {
@@ -8860,6 +9164,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .md\:bg-gray {
+    background-color: #ccc;
+  }
+
+  .md\:bg-pinkish {
+    background-color: #f3ebeb;
+  }
+
   .md\:bg-primary {
     background-color: #A11EC6;
   }
@@ -8888,6 +9200,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .md\:hover\:bg-gray:hover {
+    background-color: #ccc;
+  }
+
+  .md\:hover\:bg-pinkish:hover {
+    background-color: #f3ebeb;
+  }
+
   .md\:hover\:bg-primary:hover {
     background-color: #A11EC6;
   }
@@ -8914,6 +9234,14 @@ ol {
 
   .md\:focus\:bg-white:focus {
     background-color: #ffffff;
+  }
+
+  .md\:focus\:bg-gray:focus {
+    background-color: #ccc;
+  }
+
+  .md\:focus\:bg-pinkish:focus {
+    background-color: #f3ebeb;
   }
 
   .md\:focus\:bg-primary:focus {
@@ -9024,6 +9352,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .md\:border-gray {
+    border-color: #ccc;
+  }
+
+  .md\:border-pinkish {
+    border-color: #f3ebeb;
+  }
+
   .md\:border-primary {
     border-color: #A11EC6;
   }
@@ -9052,6 +9388,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .md\:hover\:border-gray:hover {
+    border-color: #ccc;
+  }
+
+  .md\:hover\:border-pinkish:hover {
+    border-color: #f3ebeb;
+  }
+
   .md\:hover\:border-primary:hover {
     border-color: #A11EC6;
   }
@@ -9078,6 +9422,14 @@ ol {
 
   .md\:focus\:border-white:focus {
     border-color: #ffffff;
+  }
+
+  .md\:focus\:border-gray:focus {
+    border-color: #ccc;
+  }
+
+  .md\:focus\:border-pinkish:focus {
+    border-color: #f3ebeb;
   }
 
   .md\:focus\:border-primary:focus {
@@ -11954,6 +12306,46 @@ ol {
     color: #ffffff;
   }
 
+  .md\:placeholder-gray::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .md\:placeholder-gray::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .md\:placeholder-gray:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .md\:placeholder-gray::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .md\:placeholder-gray::placeholder {
+    color: #ccc;
+  }
+
+  .md\:placeholder-pinkish::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:placeholder-pinkish::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:placeholder-pinkish:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:placeholder-pinkish::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:placeholder-pinkish::placeholder {
+    color: #f3ebeb;
+  }
+
   .md\:placeholder-primary::-webkit-input-placeholder {
     color: #A11EC6;
   }
@@ -12092,6 +12484,46 @@ ol {
 
   .md\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
+  }
+
+  .md\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .md\:focus\:placeholder-gray:focus::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .md\:focus\:placeholder-gray:focus:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .md\:focus\:placeholder-gray:focus::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .md\:focus\:placeholder-gray:focus::placeholder {
+    color: #ccc;
+  }
+
+  .md\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:focus\:placeholder-pinkish:focus::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .md\:focus\:placeholder-pinkish:focus::placeholder {
+    color: #f3ebeb;
   }
 
   .md\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
@@ -12401,6 +12833,14 @@ ol {
     color: #ffffff;
   }
 
+  .md\:text-gray {
+    color: #ccc;
+  }
+
+  .md\:text-pinkish {
+    color: #f3ebeb;
+  }
+
   .md\:text-primary {
     color: #A11EC6;
   }
@@ -12429,6 +12869,14 @@ ol {
     color: #ffffff;
   }
 
+  .md\:hover\:text-gray:hover {
+    color: #ccc;
+  }
+
+  .md\:hover\:text-pinkish:hover {
+    color: #f3ebeb;
+  }
+
   .md\:hover\:text-primary:hover {
     color: #A11EC6;
   }
@@ -12455,6 +12903,14 @@ ol {
 
   .md\:focus\:text-white:focus {
     color: #ffffff;
+  }
+
+  .md\:focus\:text-gray:focus {
+    color: #ccc;
+  }
+
+  .md\:focus\:text-pinkish:focus {
+    color: #f3ebeb;
   }
 
   .md\:focus\:text-primary:focus {
@@ -12912,6 +13368,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .lg\:bg-gray {
+    background-color: #ccc;
+  }
+
+  .lg\:bg-pinkish {
+    background-color: #f3ebeb;
+  }
+
   .lg\:bg-primary {
     background-color: #A11EC6;
   }
@@ -12940,6 +13404,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .lg\:hover\:bg-gray:hover {
+    background-color: #ccc;
+  }
+
+  .lg\:hover\:bg-pinkish:hover {
+    background-color: #f3ebeb;
+  }
+
   .lg\:hover\:bg-primary:hover {
     background-color: #A11EC6;
   }
@@ -12966,6 +13438,14 @@ ol {
 
   .lg\:focus\:bg-white:focus {
     background-color: #ffffff;
+  }
+
+  .lg\:focus\:bg-gray:focus {
+    background-color: #ccc;
+  }
+
+  .lg\:focus\:bg-pinkish:focus {
+    background-color: #f3ebeb;
   }
 
   .lg\:focus\:bg-primary:focus {
@@ -13076,6 +13556,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .lg\:border-gray {
+    border-color: #ccc;
+  }
+
+  .lg\:border-pinkish {
+    border-color: #f3ebeb;
+  }
+
   .lg\:border-primary {
     border-color: #A11EC6;
   }
@@ -13104,6 +13592,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .lg\:hover\:border-gray:hover {
+    border-color: #ccc;
+  }
+
+  .lg\:hover\:border-pinkish:hover {
+    border-color: #f3ebeb;
+  }
+
   .lg\:hover\:border-primary:hover {
     border-color: #A11EC6;
   }
@@ -13130,6 +13626,14 @@ ol {
 
   .lg\:focus\:border-white:focus {
     border-color: #ffffff;
+  }
+
+  .lg\:focus\:border-gray:focus {
+    border-color: #ccc;
+  }
+
+  .lg\:focus\:border-pinkish:focus {
+    border-color: #f3ebeb;
   }
 
   .lg\:focus\:border-primary:focus {
@@ -16006,6 +16510,46 @@ ol {
     color: #ffffff;
   }
 
+  .lg\:placeholder-gray::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:placeholder-gray::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:placeholder-gray:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:placeholder-gray::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:placeholder-gray::placeholder {
+    color: #ccc;
+  }
+
+  .lg\:placeholder-pinkish::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:placeholder-pinkish::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:placeholder-pinkish:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:placeholder-pinkish::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:placeholder-pinkish::placeholder {
+    color: #f3ebeb;
+  }
+
   .lg\:placeholder-primary::-webkit-input-placeholder {
     color: #A11EC6;
   }
@@ -16144,6 +16688,46 @@ ol {
 
   .lg\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
+  }
+
+  .lg\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:focus\:placeholder-gray:focus::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:focus\:placeholder-gray:focus:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:focus\:placeholder-gray:focus::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .lg\:focus\:placeholder-gray:focus::placeholder {
+    color: #ccc;
+  }
+
+  .lg\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:focus\:placeholder-pinkish:focus::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .lg\:focus\:placeholder-pinkish:focus::placeholder {
+    color: #f3ebeb;
   }
 
   .lg\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
@@ -16453,6 +17037,14 @@ ol {
     color: #ffffff;
   }
 
+  .lg\:text-gray {
+    color: #ccc;
+  }
+
+  .lg\:text-pinkish {
+    color: #f3ebeb;
+  }
+
   .lg\:text-primary {
     color: #A11EC6;
   }
@@ -16481,6 +17073,14 @@ ol {
     color: #ffffff;
   }
 
+  .lg\:hover\:text-gray:hover {
+    color: #ccc;
+  }
+
+  .lg\:hover\:text-pinkish:hover {
+    color: #f3ebeb;
+  }
+
   .lg\:hover\:text-primary:hover {
     color: #A11EC6;
   }
@@ -16507,6 +17107,14 @@ ol {
 
   .lg\:focus\:text-white:focus {
     color: #ffffff;
+  }
+
+  .lg\:focus\:text-gray:focus {
+    color: #ccc;
+  }
+
+  .lg\:focus\:text-pinkish:focus {
+    color: #f3ebeb;
   }
 
   .lg\:focus\:text-primary:focus {
@@ -16964,6 +17572,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .xl\:bg-gray {
+    background-color: #ccc;
+  }
+
+  .xl\:bg-pinkish {
+    background-color: #f3ebeb;
+  }
+
   .xl\:bg-primary {
     background-color: #A11EC6;
   }
@@ -16992,6 +17608,14 @@ ol {
     background-color: #ffffff;
   }
 
+  .xl\:hover\:bg-gray:hover {
+    background-color: #ccc;
+  }
+
+  .xl\:hover\:bg-pinkish:hover {
+    background-color: #f3ebeb;
+  }
+
   .xl\:hover\:bg-primary:hover {
     background-color: #A11EC6;
   }
@@ -17018,6 +17642,14 @@ ol {
 
   .xl\:focus\:bg-white:focus {
     background-color: #ffffff;
+  }
+
+  .xl\:focus\:bg-gray:focus {
+    background-color: #ccc;
+  }
+
+  .xl\:focus\:bg-pinkish:focus {
+    background-color: #f3ebeb;
   }
 
   .xl\:focus\:bg-primary:focus {
@@ -17128,6 +17760,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .xl\:border-gray {
+    border-color: #ccc;
+  }
+
+  .xl\:border-pinkish {
+    border-color: #f3ebeb;
+  }
+
   .xl\:border-primary {
     border-color: #A11EC6;
   }
@@ -17156,6 +17796,14 @@ ol {
     border-color: #ffffff;
   }
 
+  .xl\:hover\:border-gray:hover {
+    border-color: #ccc;
+  }
+
+  .xl\:hover\:border-pinkish:hover {
+    border-color: #f3ebeb;
+  }
+
   .xl\:hover\:border-primary:hover {
     border-color: #A11EC6;
   }
@@ -17182,6 +17830,14 @@ ol {
 
   .xl\:focus\:border-white:focus {
     border-color: #ffffff;
+  }
+
+  .xl\:focus\:border-gray:focus {
+    border-color: #ccc;
+  }
+
+  .xl\:focus\:border-pinkish:focus {
+    border-color: #f3ebeb;
   }
 
   .xl\:focus\:border-primary:focus {
@@ -20058,6 +20714,46 @@ ol {
     color: #ffffff;
   }
 
+  .xl\:placeholder-gray::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:placeholder-gray::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:placeholder-gray:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:placeholder-gray::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:placeholder-gray::placeholder {
+    color: #ccc;
+  }
+
+  .xl\:placeholder-pinkish::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:placeholder-pinkish::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:placeholder-pinkish:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:placeholder-pinkish::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:placeholder-pinkish::placeholder {
+    color: #f3ebeb;
+  }
+
   .xl\:placeholder-primary::-webkit-input-placeholder {
     color: #A11EC6;
   }
@@ -20196,6 +20892,46 @@ ol {
 
   .xl\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
+  }
+
+  .xl\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:focus\:placeholder-gray:focus::-moz-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:focus\:placeholder-gray:focus:-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:focus\:placeholder-gray:focus::-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  .xl\:focus\:placeholder-gray:focus::placeholder {
+    color: #ccc;
+  }
+
+  .xl\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:focus\:placeholder-pinkish:focus::-moz-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
+    color: #f3ebeb;
+  }
+
+  .xl\:focus\:placeholder-pinkish:focus::placeholder {
+    color: #f3ebeb;
   }
 
   .xl\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
@@ -20505,6 +21241,14 @@ ol {
     color: #ffffff;
   }
 
+  .xl\:text-gray {
+    color: #ccc;
+  }
+
+  .xl\:text-pinkish {
+    color: #f3ebeb;
+  }
+
   .xl\:text-primary {
     color: #A11EC6;
   }
@@ -20533,6 +21277,14 @@ ol {
     color: #ffffff;
   }
 
+  .xl\:hover\:text-gray:hover {
+    color: #ccc;
+  }
+
+  .xl\:hover\:text-pinkish:hover {
+    color: #f3ebeb;
+  }
+
   .xl\:hover\:text-primary:hover {
     color: #A11EC6;
   }
@@ -20559,6 +21311,14 @@ ol {
 
   .xl\:focus\:text-white:focus {
     color: #ffffff;
+  }
+
+  .xl\:focus\:text-gray:focus {
+    color: #ccc;
+  }
+
+  .xl\:focus\:text-pinkish:focus {
+    color: #f3ebeb;
   }
 
   .xl\:focus\:text-primary:focus {
