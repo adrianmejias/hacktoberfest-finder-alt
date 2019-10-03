@@ -37,7 +37,7 @@ const app = new Vue({
             isFetching: false,
             showViewMore: false,
             noReplyOnly: false,
-            showFullBody: -1
+            currentResult: null
         };
     },
 
@@ -153,10 +153,6 @@ const app = new Vue({
             this.isFilterToggled = !this.isFilterToggled;
         },
 
-        toggleFullBody(resultId) {
-            this.showFullBody = resultId;
-        },
-
         toggleNoReplyFilter() {
             this.results = [];
             this.noReplyOnly = !this.noReplyOnly;
@@ -164,6 +160,10 @@ const app = new Vue({
             this.isFetching = false;
             this.page = 1;
             this.loadIssues();
+        },
+
+        toggleIssue(result) {
+            this.currentResult = result;
         }
     },
 

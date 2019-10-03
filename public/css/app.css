@@ -4535,7 +4535,7 @@ ol {
   flex-direction: column;
 }
 
-.grid a {
+.grid .grit-item {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -4547,9 +4547,18 @@ ol {
     grid-gap: 1rem;
   }
 
-  .grid a {
+  .grid .grid-item {
     min-height: 250px;
   }
+}
+
+.grid-item-container {
+  background-color: #000;
+  z-index: 10;
+}
+
+.grid-item-container .grid-item {
+  margin-top: 5%;
 }
 
 @media (min-width: 576px) {
