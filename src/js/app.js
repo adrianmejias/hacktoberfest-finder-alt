@@ -43,6 +43,7 @@ const app = new Vue({
 
     methods: {
         loadIssues() {
+            this.showViewMore = false;
             this.isFetching = true;
 
             fetch(`https://api.github.com/search/issues?page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
@@ -62,12 +63,8 @@ const app = new Vue({
                         })
                     );
 
-                    this.showViewMore = true;
+                    this.showViewMore = this.results.length > 0;
                     this.isFetching = false;
-
-                    if (response.items.length === 0) { // case when all the issues are already loaded
-                        this.showViewMore = false;
-                    }
                 })
                 .catch(error => {
                     this.showViewMore = false;
