@@ -89,8 +89,7 @@ a {
 abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -486,26 +485,6 @@ img {
 
 textarea {
   resize: vertical;
-}
-
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: #a0aec0;
-}
-
-input::-moz-placeholder,
-textarea::-moz-placeholder {
-  color: #a0aec0;
-}
-
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
-  color: #a0aec0;
-}
-
-input::-ms-input-placeholder,
-textarea::-ms-input-placeholder {
-  color: #a0aec0;
 }
 
 input::placeholder,
@@ -3040,73 +3019,59 @@ ol {
 }
 
 .object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .object-fill {
-  -o-object-fit: fill;
-     object-fit: fill;
+  object-fit: fill;
 }
 
 .object-none {
-  -o-object-fit: none;
-     object-fit: none;
+  object-fit: none;
 }
 
 .object-scale-down {
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .object-bottom {
-  -o-object-position: bottom;
-     object-position: bottom;
+  object-position: bottom;
 }
 
 .object-center {
-  -o-object-position: center;
-     object-position: center;
+  object-position: center;
 }
 
 .object-left {
-  -o-object-position: left;
-     object-position: left;
+  object-position: left;
 }
 
 .object-left-bottom {
-  -o-object-position: left bottom;
-     object-position: left bottom;
+  object-position: left bottom;
 }
 
 .object-left-top {
-  -o-object-position: left top;
-     object-position: left top;
+  object-position: left top;
 }
 
 .object-right {
-  -o-object-position: right;
-     object-position: right;
+  object-position: right;
 }
 
 .object-right-bottom {
-  -o-object-position: right bottom;
-     object-position: right bottom;
+  object-position: right bottom;
 }
 
 .object-right-top {
-  -o-object-position: right top;
-     object-position: right top;
+  object-position: right top;
 }
 
 .object-top {
-  -o-object-position: top;
-     object-position: top;
+  object-position: top;
 }
 
 .opacity-0 {
@@ -3803,360 +3768,72 @@ ol {
   padding-left: 1px;
 }
 
-.placeholder-transparent::-webkit-input-placeholder {
-  color: transparent;
-}
-
-.placeholder-transparent::-moz-placeholder {
-  color: transparent;
-}
-
-.placeholder-transparent:-ms-input-placeholder {
-  color: transparent;
-}
-
-.placeholder-transparent::-ms-input-placeholder {
-  color: transparent;
-}
-
 .placeholder-transparent::placeholder {
   color: transparent;
-}
-
-.placeholder-black::-webkit-input-placeholder {
-  color: #22292f;
-}
-
-.placeholder-black::-moz-placeholder {
-  color: #22292f;
-}
-
-.placeholder-black:-ms-input-placeholder {
-  color: #22292f;
-}
-
-.placeholder-black::-ms-input-placeholder {
-  color: #22292f;
 }
 
 .placeholder-black::placeholder {
   color: #22292f;
 }
 
-.placeholder-white::-webkit-input-placeholder {
-  color: #ffffff;
-}
-
-.placeholder-white::-moz-placeholder {
-  color: #ffffff;
-}
-
-.placeholder-white:-ms-input-placeholder {
-  color: #ffffff;
-}
-
-.placeholder-white::-ms-input-placeholder {
-  color: #ffffff;
-}
-
 .placeholder-white::placeholder {
   color: #ffffff;
-}
-
-.placeholder-gray::-webkit-input-placeholder {
-  color: #ccc;
-}
-
-.placeholder-gray::-moz-placeholder {
-  color: #ccc;
-}
-
-.placeholder-gray:-ms-input-placeholder {
-  color: #ccc;
-}
-
-.placeholder-gray::-ms-input-placeholder {
-  color: #ccc;
 }
 
 .placeholder-gray::placeholder {
   color: #ccc;
 }
 
-.placeholder-pinkish::-webkit-input-placeholder {
-  color: #f3ebeb;
-}
-
-.placeholder-pinkish::-moz-placeholder {
-  color: #f3ebeb;
-}
-
-.placeholder-pinkish:-ms-input-placeholder {
-  color: #f3ebeb;
-}
-
-.placeholder-pinkish::-ms-input-placeholder {
-  color: #f3ebeb;
-}
-
 .placeholder-pinkish::placeholder {
   color: #f3ebeb;
-}
-
-.placeholder-primary::-webkit-input-placeholder {
-  color: #A11EC6;
-}
-
-.placeholder-primary::-moz-placeholder {
-  color: #A11EC6;
-}
-
-.placeholder-primary:-ms-input-placeholder {
-  color: #A11EC6;
-}
-
-.placeholder-primary::-ms-input-placeholder {
-  color: #A11EC6;
 }
 
 .placeholder-primary::placeholder {
   color: #A11EC6;
 }
 
-.placeholder-secondary::-webkit-input-placeholder {
-  color: #152347;
-}
-
-.placeholder-secondary::-moz-placeholder {
-  color: #152347;
-}
-
-.placeholder-secondary:-ms-input-placeholder {
-  color: #152347;
-}
-
-.placeholder-secondary::-ms-input-placeholder {
-  color: #152347;
-}
-
 .placeholder-secondary::placeholder {
   color: #152347;
-}
-
-.placeholder-amber::-webkit-input-placeholder {
-  color: #FF9A56;
-}
-
-.placeholder-amber::-moz-placeholder {
-  color: #FF9A56;
-}
-
-.placeholder-amber:-ms-input-placeholder {
-  color: #FF9A56;
-}
-
-.placeholder-amber::-ms-input-placeholder {
-  color: #FF9A56;
 }
 
 .placeholder-amber::placeholder {
   color: #FF9A56;
 }
 
-.placeholder-blue::-webkit-input-placeholder {
-  color: #2B81D9;
-}
-
-.placeholder-blue::-moz-placeholder {
-  color: #2B81D9;
-}
-
-.placeholder-blue:-ms-input-placeholder {
-  color: #2B81D9;
-}
-
-.placeholder-blue::-ms-input-placeholder {
-  color: #2B81D9;
-}
-
 .placeholder-blue::placeholder {
   color: #2B81D9;
-}
-
-.focus\:placeholder-transparent:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-
-.focus\:placeholder-transparent:focus::-moz-placeholder {
-  color: transparent;
-}
-
-.focus\:placeholder-transparent:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-.focus\:placeholder-transparent:focus::-ms-input-placeholder {
-  color: transparent;
 }
 
 .focus\:placeholder-transparent:focus::placeholder {
   color: transparent;
 }
 
-.focus\:placeholder-black:focus::-webkit-input-placeholder {
-  color: #22292f;
-}
-
-.focus\:placeholder-black:focus::-moz-placeholder {
-  color: #22292f;
-}
-
-.focus\:placeholder-black:focus:-ms-input-placeholder {
-  color: #22292f;
-}
-
-.focus\:placeholder-black:focus::-ms-input-placeholder {
-  color: #22292f;
-}
-
 .focus\:placeholder-black:focus::placeholder {
   color: #22292f;
-}
-
-.focus\:placeholder-white:focus::-webkit-input-placeholder {
-  color: #ffffff;
-}
-
-.focus\:placeholder-white:focus::-moz-placeholder {
-  color: #ffffff;
-}
-
-.focus\:placeholder-white:focus:-ms-input-placeholder {
-  color: #ffffff;
-}
-
-.focus\:placeholder-white:focus::-ms-input-placeholder {
-  color: #ffffff;
 }
 
 .focus\:placeholder-white:focus::placeholder {
   color: #ffffff;
 }
 
-.focus\:placeholder-gray:focus::-webkit-input-placeholder {
-  color: #ccc;
-}
-
-.focus\:placeholder-gray:focus::-moz-placeholder {
-  color: #ccc;
-}
-
-.focus\:placeholder-gray:focus:-ms-input-placeholder {
-  color: #ccc;
-}
-
-.focus\:placeholder-gray:focus::-ms-input-placeholder {
-  color: #ccc;
-}
-
 .focus\:placeholder-gray:focus::placeholder {
   color: #ccc;
-}
-
-.focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
-  color: #f3ebeb;
-}
-
-.focus\:placeholder-pinkish:focus::-moz-placeholder {
-  color: #f3ebeb;
-}
-
-.focus\:placeholder-pinkish:focus:-ms-input-placeholder {
-  color: #f3ebeb;
-}
-
-.focus\:placeholder-pinkish:focus::-ms-input-placeholder {
-  color: #f3ebeb;
 }
 
 .focus\:placeholder-pinkish:focus::placeholder {
   color: #f3ebeb;
 }
 
-.focus\:placeholder-primary:focus::-webkit-input-placeholder {
-  color: #A11EC6;
-}
-
-.focus\:placeholder-primary:focus::-moz-placeholder {
-  color: #A11EC6;
-}
-
-.focus\:placeholder-primary:focus:-ms-input-placeholder {
-  color: #A11EC6;
-}
-
-.focus\:placeholder-primary:focus::-ms-input-placeholder {
-  color: #A11EC6;
-}
-
 .focus\:placeholder-primary:focus::placeholder {
   color: #A11EC6;
-}
-
-.focus\:placeholder-secondary:focus::-webkit-input-placeholder {
-  color: #152347;
-}
-
-.focus\:placeholder-secondary:focus::-moz-placeholder {
-  color: #152347;
-}
-
-.focus\:placeholder-secondary:focus:-ms-input-placeholder {
-  color: #152347;
-}
-
-.focus\:placeholder-secondary:focus::-ms-input-placeholder {
-  color: #152347;
 }
 
 .focus\:placeholder-secondary:focus::placeholder {
   color: #152347;
 }
 
-.focus\:placeholder-amber:focus::-webkit-input-placeholder {
-  color: #FF9A56;
-}
-
-.focus\:placeholder-amber:focus::-moz-placeholder {
-  color: #FF9A56;
-}
-
-.focus\:placeholder-amber:focus:-ms-input-placeholder {
-  color: #FF9A56;
-}
-
-.focus\:placeholder-amber:focus::-ms-input-placeholder {
-  color: #FF9A56;
-}
-
 .focus\:placeholder-amber:focus::placeholder {
   color: #FF9A56;
-}
-
-.focus\:placeholder-blue:focus::-webkit-input-placeholder {
-  color: #2B81D9;
-}
-
-.focus\:placeholder-blue:focus::-moz-placeholder {
-  color: #2B81D9;
-}
-
-.focus\:placeholder-blue:focus:-ms-input-placeholder {
-  color: #2B81D9;
-}
-
-.focus\:placeholder-blue:focus::-ms-input-placeholder {
-  color: #2B81D9;
 }
 
 .focus\:placeholder-blue:focus::placeholder {
@@ -4606,29 +4283,21 @@ ol {
 
 .select-none {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
 .select-text {
   -webkit-user-select: text;
-     -moz-user-select: text;
-      -ms-user-select: text;
           user-select: text;
 }
 
 .select-all {
   -webkit-user-select: all;
-     -moz-user-select: all;
-      -ms-user-select: all;
           user-select: all;
 }
 
 .select-auto {
   -webkit-user-select: auto;
-     -moz-user-select: auto;
-      -ms-user-select: auto;
           user-select: auto;
 }
 
@@ -7279,73 +6948,59 @@ ol {
   }
 
   .sm\:object-contain {
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 
   .sm\:object-cover {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 
   .sm\:object-fill {
-    -o-object-fit: fill;
-       object-fit: fill;
+    object-fit: fill;
   }
 
   .sm\:object-none {
-    -o-object-fit: none;
-       object-fit: none;
+    object-fit: none;
   }
 
   .sm\:object-scale-down {
-    -o-object-fit: scale-down;
-       object-fit: scale-down;
+    object-fit: scale-down;
   }
 
   .sm\:object-bottom {
-    -o-object-position: bottom;
-       object-position: bottom;
+    object-position: bottom;
   }
 
   .sm\:object-center {
-    -o-object-position: center;
-       object-position: center;
+    object-position: center;
   }
 
   .sm\:object-left {
-    -o-object-position: left;
-       object-position: left;
+    object-position: left;
   }
 
   .sm\:object-left-bottom {
-    -o-object-position: left bottom;
-       object-position: left bottom;
+    object-position: left bottom;
   }
 
   .sm\:object-left-top {
-    -o-object-position: left top;
-       object-position: left top;
+    object-position: left top;
   }
 
   .sm\:object-right {
-    -o-object-position: right;
-       object-position: right;
+    object-position: right;
   }
 
   .sm\:object-right-bottom {
-    -o-object-position: right bottom;
-       object-position: right bottom;
+    object-position: right bottom;
   }
 
   .sm\:object-right-top {
-    -o-object-position: right top;
-       object-position: right top;
+    object-position: right top;
   }
 
   .sm\:object-top {
-    -o-object-position: top;
-       object-position: top;
+    object-position: top;
   }
 
   .sm\:opacity-0 {
@@ -8042,360 +7697,72 @@ ol {
     padding-left: 1px;
   }
 
-  .sm\:placeholder-transparent::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .sm\:placeholder-transparent::-moz-placeholder {
-    color: transparent;
-  }
-
-  .sm\:placeholder-transparent:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .sm\:placeholder-transparent::-ms-input-placeholder {
-    color: transparent;
-  }
-
   .sm\:placeholder-transparent::placeholder {
     color: transparent;
-  }
-
-  .sm\:placeholder-black::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .sm\:placeholder-black::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .sm\:placeholder-black:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .sm\:placeholder-black::-ms-input-placeholder {
-    color: #22292f;
   }
 
   .sm\:placeholder-black::placeholder {
     color: #22292f;
   }
 
-  .sm\:placeholder-white::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .sm\:placeholder-white::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .sm\:placeholder-white:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .sm\:placeholder-white::-ms-input-placeholder {
-    color: #ffffff;
-  }
-
   .sm\:placeholder-white::placeholder {
     color: #ffffff;
-  }
-
-  .sm\:placeholder-gray::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .sm\:placeholder-gray::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .sm\:placeholder-gray:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .sm\:placeholder-gray::-ms-input-placeholder {
-    color: #ccc;
   }
 
   .sm\:placeholder-gray::placeholder {
     color: #ccc;
   }
 
-  .sm\:placeholder-pinkish::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .sm\:placeholder-pinkish::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .sm\:placeholder-pinkish:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .sm\:placeholder-pinkish::-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
   .sm\:placeholder-pinkish::placeholder {
     color: #f3ebeb;
-  }
-
-  .sm\:placeholder-primary::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .sm\:placeholder-primary::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .sm\:placeholder-primary:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .sm\:placeholder-primary::-ms-input-placeholder {
-    color: #A11EC6;
   }
 
   .sm\:placeholder-primary::placeholder {
     color: #A11EC6;
   }
 
-  .sm\:placeholder-secondary::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .sm\:placeholder-secondary::-moz-placeholder {
-    color: #152347;
-  }
-
-  .sm\:placeholder-secondary:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .sm\:placeholder-secondary::-ms-input-placeholder {
-    color: #152347;
-  }
-
   .sm\:placeholder-secondary::placeholder {
     color: #152347;
-  }
-
-  .sm\:placeholder-amber::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .sm\:placeholder-amber::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .sm\:placeholder-amber:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .sm\:placeholder-amber::-ms-input-placeholder {
-    color: #FF9A56;
   }
 
   .sm\:placeholder-amber::placeholder {
     color: #FF9A56;
   }
 
-  .sm\:placeholder-blue::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .sm\:placeholder-blue::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .sm\:placeholder-blue:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .sm\:placeholder-blue::-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
   .sm\:placeholder-blue::placeholder {
     color: #2B81D9;
-  }
-
-  .sm\:focus\:placeholder-transparent:focus::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .sm\:focus\:placeholder-transparent:focus::-moz-placeholder {
-    color: transparent;
-  }
-
-  .sm\:focus\:placeholder-transparent:focus:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .sm\:focus\:placeholder-transparent:focus::-ms-input-placeholder {
-    color: transparent;
   }
 
   .sm\:focus\:placeholder-transparent:focus::placeholder {
     color: transparent;
   }
 
-  .sm\:focus\:placeholder-black:focus::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .sm\:focus\:placeholder-black:focus::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .sm\:focus\:placeholder-black:focus:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .sm\:focus\:placeholder-black:focus::-ms-input-placeholder {
-    color: #22292f;
-  }
-
   .sm\:focus\:placeholder-black:focus::placeholder {
     color: #22292f;
-  }
-
-  .sm\:focus\:placeholder-white:focus::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .sm\:focus\:placeholder-white:focus::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .sm\:focus\:placeholder-white:focus:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .sm\:focus\:placeholder-white:focus::-ms-input-placeholder {
-    color: #ffffff;
   }
 
   .sm\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
   }
 
-  .sm\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .sm\:focus\:placeholder-gray:focus::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .sm\:focus\:placeholder-gray:focus:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .sm\:focus\:placeholder-gray:focus::-ms-input-placeholder {
-    color: #ccc;
-  }
-
   .sm\:focus\:placeholder-gray:focus::placeholder {
     color: #ccc;
-  }
-
-  .sm\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .sm\:focus\:placeholder-pinkish:focus::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .sm\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .sm\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
-    color: #f3ebeb;
   }
 
   .sm\:focus\:placeholder-pinkish:focus::placeholder {
     color: #f3ebeb;
   }
 
-  .sm\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .sm\:focus\:placeholder-primary:focus::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .sm\:focus\:placeholder-primary:focus:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .sm\:focus\:placeholder-primary:focus::-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
   .sm\:focus\:placeholder-primary:focus::placeholder {
     color: #A11EC6;
-  }
-
-  .sm\:focus\:placeholder-secondary:focus::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .sm\:focus\:placeholder-secondary:focus::-moz-placeholder {
-    color: #152347;
-  }
-
-  .sm\:focus\:placeholder-secondary:focus:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .sm\:focus\:placeholder-secondary:focus::-ms-input-placeholder {
-    color: #152347;
   }
 
   .sm\:focus\:placeholder-secondary:focus::placeholder {
     color: #152347;
   }
 
-  .sm\:focus\:placeholder-amber:focus::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .sm\:focus\:placeholder-amber:focus::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .sm\:focus\:placeholder-amber:focus:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .sm\:focus\:placeholder-amber:focus::-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
   .sm\:focus\:placeholder-amber:focus::placeholder {
     color: #FF9A56;
-  }
-
-  .sm\:focus\:placeholder-blue:focus::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .sm\:focus\:placeholder-blue:focus::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .sm\:focus\:placeholder-blue:focus:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .sm\:focus\:placeholder-blue:focus::-ms-input-placeholder {
-    color: #2B81D9;
   }
 
   .sm\:focus\:placeholder-blue:focus::placeholder {
@@ -8845,29 +8212,21 @@ ol {
 
   .sm\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .sm\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
   .sm\:select-all {
     -webkit-user-select: all;
-       -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
   .sm\:select-auto {
     -webkit-user-select: auto;
-       -moz-user-select: auto;
-        -ms-user-select: auto;
             user-select: auto;
   }
 
@@ -11483,73 +10842,59 @@ ol {
   }
 
   .md\:object-contain {
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 
   .md\:object-cover {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 
   .md\:object-fill {
-    -o-object-fit: fill;
-       object-fit: fill;
+    object-fit: fill;
   }
 
   .md\:object-none {
-    -o-object-fit: none;
-       object-fit: none;
+    object-fit: none;
   }
 
   .md\:object-scale-down {
-    -o-object-fit: scale-down;
-       object-fit: scale-down;
+    object-fit: scale-down;
   }
 
   .md\:object-bottom {
-    -o-object-position: bottom;
-       object-position: bottom;
+    object-position: bottom;
   }
 
   .md\:object-center {
-    -o-object-position: center;
-       object-position: center;
+    object-position: center;
   }
 
   .md\:object-left {
-    -o-object-position: left;
-       object-position: left;
+    object-position: left;
   }
 
   .md\:object-left-bottom {
-    -o-object-position: left bottom;
-       object-position: left bottom;
+    object-position: left bottom;
   }
 
   .md\:object-left-top {
-    -o-object-position: left top;
-       object-position: left top;
+    object-position: left top;
   }
 
   .md\:object-right {
-    -o-object-position: right;
-       object-position: right;
+    object-position: right;
   }
 
   .md\:object-right-bottom {
-    -o-object-position: right bottom;
-       object-position: right bottom;
+    object-position: right bottom;
   }
 
   .md\:object-right-top {
-    -o-object-position: right top;
-       object-position: right top;
+    object-position: right top;
   }
 
   .md\:object-top {
-    -o-object-position: top;
-       object-position: top;
+    object-position: top;
   }
 
   .md\:opacity-0 {
@@ -12246,360 +11591,72 @@ ol {
     padding-left: 1px;
   }
 
-  .md\:placeholder-transparent::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .md\:placeholder-transparent::-moz-placeholder {
-    color: transparent;
-  }
-
-  .md\:placeholder-transparent:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .md\:placeholder-transparent::-ms-input-placeholder {
-    color: transparent;
-  }
-
   .md\:placeholder-transparent::placeholder {
     color: transparent;
-  }
-
-  .md\:placeholder-black::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .md\:placeholder-black::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .md\:placeholder-black:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .md\:placeholder-black::-ms-input-placeholder {
-    color: #22292f;
   }
 
   .md\:placeholder-black::placeholder {
     color: #22292f;
   }
 
-  .md\:placeholder-white::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .md\:placeholder-white::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .md\:placeholder-white:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .md\:placeholder-white::-ms-input-placeholder {
-    color: #ffffff;
-  }
-
   .md\:placeholder-white::placeholder {
     color: #ffffff;
-  }
-
-  .md\:placeholder-gray::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .md\:placeholder-gray::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .md\:placeholder-gray:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .md\:placeholder-gray::-ms-input-placeholder {
-    color: #ccc;
   }
 
   .md\:placeholder-gray::placeholder {
     color: #ccc;
   }
 
-  .md\:placeholder-pinkish::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .md\:placeholder-pinkish::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .md\:placeholder-pinkish:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .md\:placeholder-pinkish::-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
   .md\:placeholder-pinkish::placeholder {
     color: #f3ebeb;
-  }
-
-  .md\:placeholder-primary::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .md\:placeholder-primary::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .md\:placeholder-primary:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .md\:placeholder-primary::-ms-input-placeholder {
-    color: #A11EC6;
   }
 
   .md\:placeholder-primary::placeholder {
     color: #A11EC6;
   }
 
-  .md\:placeholder-secondary::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .md\:placeholder-secondary::-moz-placeholder {
-    color: #152347;
-  }
-
-  .md\:placeholder-secondary:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .md\:placeholder-secondary::-ms-input-placeholder {
-    color: #152347;
-  }
-
   .md\:placeholder-secondary::placeholder {
     color: #152347;
-  }
-
-  .md\:placeholder-amber::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .md\:placeholder-amber::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .md\:placeholder-amber:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .md\:placeholder-amber::-ms-input-placeholder {
-    color: #FF9A56;
   }
 
   .md\:placeholder-amber::placeholder {
     color: #FF9A56;
   }
 
-  .md\:placeholder-blue::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .md\:placeholder-blue::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .md\:placeholder-blue:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .md\:placeholder-blue::-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
   .md\:placeholder-blue::placeholder {
     color: #2B81D9;
-  }
-
-  .md\:focus\:placeholder-transparent:focus::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .md\:focus\:placeholder-transparent:focus::-moz-placeholder {
-    color: transparent;
-  }
-
-  .md\:focus\:placeholder-transparent:focus:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .md\:focus\:placeholder-transparent:focus::-ms-input-placeholder {
-    color: transparent;
   }
 
   .md\:focus\:placeholder-transparent:focus::placeholder {
     color: transparent;
   }
 
-  .md\:focus\:placeholder-black:focus::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .md\:focus\:placeholder-black:focus::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .md\:focus\:placeholder-black:focus:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .md\:focus\:placeholder-black:focus::-ms-input-placeholder {
-    color: #22292f;
-  }
-
   .md\:focus\:placeholder-black:focus::placeholder {
     color: #22292f;
-  }
-
-  .md\:focus\:placeholder-white:focus::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .md\:focus\:placeholder-white:focus::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .md\:focus\:placeholder-white:focus:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .md\:focus\:placeholder-white:focus::-ms-input-placeholder {
-    color: #ffffff;
   }
 
   .md\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
   }
 
-  .md\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .md\:focus\:placeholder-gray:focus::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .md\:focus\:placeholder-gray:focus:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .md\:focus\:placeholder-gray:focus::-ms-input-placeholder {
-    color: #ccc;
-  }
-
   .md\:focus\:placeholder-gray:focus::placeholder {
     color: #ccc;
-  }
-
-  .md\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .md\:focus\:placeholder-pinkish:focus::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .md\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .md\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
-    color: #f3ebeb;
   }
 
   .md\:focus\:placeholder-pinkish:focus::placeholder {
     color: #f3ebeb;
   }
 
-  .md\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .md\:focus\:placeholder-primary:focus::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .md\:focus\:placeholder-primary:focus:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .md\:focus\:placeholder-primary:focus::-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
   .md\:focus\:placeholder-primary:focus::placeholder {
     color: #A11EC6;
-  }
-
-  .md\:focus\:placeholder-secondary:focus::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .md\:focus\:placeholder-secondary:focus::-moz-placeholder {
-    color: #152347;
-  }
-
-  .md\:focus\:placeholder-secondary:focus:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .md\:focus\:placeholder-secondary:focus::-ms-input-placeholder {
-    color: #152347;
   }
 
   .md\:focus\:placeholder-secondary:focus::placeholder {
     color: #152347;
   }
 
-  .md\:focus\:placeholder-amber:focus::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .md\:focus\:placeholder-amber:focus::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .md\:focus\:placeholder-amber:focus:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .md\:focus\:placeholder-amber:focus::-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
   .md\:focus\:placeholder-amber:focus::placeholder {
     color: #FF9A56;
-  }
-
-  .md\:focus\:placeholder-blue:focus::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .md\:focus\:placeholder-blue:focus::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .md\:focus\:placeholder-blue:focus:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .md\:focus\:placeholder-blue:focus::-ms-input-placeholder {
-    color: #2B81D9;
   }
 
   .md\:focus\:placeholder-blue:focus::placeholder {
@@ -13049,29 +12106,21 @@ ol {
 
   .md\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .md\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
   .md\:select-all {
     -webkit-user-select: all;
-       -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
   .md\:select-auto {
     -webkit-user-select: auto;
-       -moz-user-select: auto;
-        -ms-user-select: auto;
             user-select: auto;
   }
 
@@ -15687,73 +14736,59 @@ ol {
   }
 
   .lg\:object-contain {
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 
   .lg\:object-cover {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 
   .lg\:object-fill {
-    -o-object-fit: fill;
-       object-fit: fill;
+    object-fit: fill;
   }
 
   .lg\:object-none {
-    -o-object-fit: none;
-       object-fit: none;
+    object-fit: none;
   }
 
   .lg\:object-scale-down {
-    -o-object-fit: scale-down;
-       object-fit: scale-down;
+    object-fit: scale-down;
   }
 
   .lg\:object-bottom {
-    -o-object-position: bottom;
-       object-position: bottom;
+    object-position: bottom;
   }
 
   .lg\:object-center {
-    -o-object-position: center;
-       object-position: center;
+    object-position: center;
   }
 
   .lg\:object-left {
-    -o-object-position: left;
-       object-position: left;
+    object-position: left;
   }
 
   .lg\:object-left-bottom {
-    -o-object-position: left bottom;
-       object-position: left bottom;
+    object-position: left bottom;
   }
 
   .lg\:object-left-top {
-    -o-object-position: left top;
-       object-position: left top;
+    object-position: left top;
   }
 
   .lg\:object-right {
-    -o-object-position: right;
-       object-position: right;
+    object-position: right;
   }
 
   .lg\:object-right-bottom {
-    -o-object-position: right bottom;
-       object-position: right bottom;
+    object-position: right bottom;
   }
 
   .lg\:object-right-top {
-    -o-object-position: right top;
-       object-position: right top;
+    object-position: right top;
   }
 
   .lg\:object-top {
-    -o-object-position: top;
-       object-position: top;
+    object-position: top;
   }
 
   .lg\:opacity-0 {
@@ -16450,360 +15485,72 @@ ol {
     padding-left: 1px;
   }
 
-  .lg\:placeholder-transparent::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .lg\:placeholder-transparent::-moz-placeholder {
-    color: transparent;
-  }
-
-  .lg\:placeholder-transparent:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .lg\:placeholder-transparent::-ms-input-placeholder {
-    color: transparent;
-  }
-
   .lg\:placeholder-transparent::placeholder {
     color: transparent;
-  }
-
-  .lg\:placeholder-black::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .lg\:placeholder-black::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .lg\:placeholder-black:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .lg\:placeholder-black::-ms-input-placeholder {
-    color: #22292f;
   }
 
   .lg\:placeholder-black::placeholder {
     color: #22292f;
   }
 
-  .lg\:placeholder-white::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .lg\:placeholder-white::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .lg\:placeholder-white:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .lg\:placeholder-white::-ms-input-placeholder {
-    color: #ffffff;
-  }
-
   .lg\:placeholder-white::placeholder {
     color: #ffffff;
-  }
-
-  .lg\:placeholder-gray::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .lg\:placeholder-gray::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .lg\:placeholder-gray:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .lg\:placeholder-gray::-ms-input-placeholder {
-    color: #ccc;
   }
 
   .lg\:placeholder-gray::placeholder {
     color: #ccc;
   }
 
-  .lg\:placeholder-pinkish::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .lg\:placeholder-pinkish::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .lg\:placeholder-pinkish:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .lg\:placeholder-pinkish::-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
   .lg\:placeholder-pinkish::placeholder {
     color: #f3ebeb;
-  }
-
-  .lg\:placeholder-primary::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .lg\:placeholder-primary::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .lg\:placeholder-primary:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .lg\:placeholder-primary::-ms-input-placeholder {
-    color: #A11EC6;
   }
 
   .lg\:placeholder-primary::placeholder {
     color: #A11EC6;
   }
 
-  .lg\:placeholder-secondary::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .lg\:placeholder-secondary::-moz-placeholder {
-    color: #152347;
-  }
-
-  .lg\:placeholder-secondary:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .lg\:placeholder-secondary::-ms-input-placeholder {
-    color: #152347;
-  }
-
   .lg\:placeholder-secondary::placeholder {
     color: #152347;
-  }
-
-  .lg\:placeholder-amber::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .lg\:placeholder-amber::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .lg\:placeholder-amber:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .lg\:placeholder-amber::-ms-input-placeholder {
-    color: #FF9A56;
   }
 
   .lg\:placeholder-amber::placeholder {
     color: #FF9A56;
   }
 
-  .lg\:placeholder-blue::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .lg\:placeholder-blue::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .lg\:placeholder-blue:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .lg\:placeholder-blue::-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
   .lg\:placeholder-blue::placeholder {
     color: #2B81D9;
-  }
-
-  .lg\:focus\:placeholder-transparent:focus::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .lg\:focus\:placeholder-transparent:focus::-moz-placeholder {
-    color: transparent;
-  }
-
-  .lg\:focus\:placeholder-transparent:focus:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .lg\:focus\:placeholder-transparent:focus::-ms-input-placeholder {
-    color: transparent;
   }
 
   .lg\:focus\:placeholder-transparent:focus::placeholder {
     color: transparent;
   }
 
-  .lg\:focus\:placeholder-black:focus::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .lg\:focus\:placeholder-black:focus::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .lg\:focus\:placeholder-black:focus:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .lg\:focus\:placeholder-black:focus::-ms-input-placeholder {
-    color: #22292f;
-  }
-
   .lg\:focus\:placeholder-black:focus::placeholder {
     color: #22292f;
-  }
-
-  .lg\:focus\:placeholder-white:focus::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .lg\:focus\:placeholder-white:focus::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .lg\:focus\:placeholder-white:focus:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .lg\:focus\:placeholder-white:focus::-ms-input-placeholder {
-    color: #ffffff;
   }
 
   .lg\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
   }
 
-  .lg\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .lg\:focus\:placeholder-gray:focus::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .lg\:focus\:placeholder-gray:focus:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .lg\:focus\:placeholder-gray:focus::-ms-input-placeholder {
-    color: #ccc;
-  }
-
   .lg\:focus\:placeholder-gray:focus::placeholder {
     color: #ccc;
-  }
-
-  .lg\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .lg\:focus\:placeholder-pinkish:focus::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .lg\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .lg\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
-    color: #f3ebeb;
   }
 
   .lg\:focus\:placeholder-pinkish:focus::placeholder {
     color: #f3ebeb;
   }
 
-  .lg\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .lg\:focus\:placeholder-primary:focus::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .lg\:focus\:placeholder-primary:focus:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .lg\:focus\:placeholder-primary:focus::-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
   .lg\:focus\:placeholder-primary:focus::placeholder {
     color: #A11EC6;
-  }
-
-  .lg\:focus\:placeholder-secondary:focus::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .lg\:focus\:placeholder-secondary:focus::-moz-placeholder {
-    color: #152347;
-  }
-
-  .lg\:focus\:placeholder-secondary:focus:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .lg\:focus\:placeholder-secondary:focus::-ms-input-placeholder {
-    color: #152347;
   }
 
   .lg\:focus\:placeholder-secondary:focus::placeholder {
     color: #152347;
   }
 
-  .lg\:focus\:placeholder-amber:focus::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .lg\:focus\:placeholder-amber:focus::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .lg\:focus\:placeholder-amber:focus:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .lg\:focus\:placeholder-amber:focus::-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
   .lg\:focus\:placeholder-amber:focus::placeholder {
     color: #FF9A56;
-  }
-
-  .lg\:focus\:placeholder-blue:focus::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .lg\:focus\:placeholder-blue:focus::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .lg\:focus\:placeholder-blue:focus:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .lg\:focus\:placeholder-blue:focus::-ms-input-placeholder {
-    color: #2B81D9;
   }
 
   .lg\:focus\:placeholder-blue:focus::placeholder {
@@ -17253,29 +16000,21 @@ ol {
 
   .lg\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .lg\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
   .lg\:select-all {
     -webkit-user-select: all;
-       -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
   .lg\:select-auto {
     -webkit-user-select: auto;
-       -moz-user-select: auto;
-        -ms-user-select: auto;
             user-select: auto;
   }
 
@@ -19891,73 +18630,59 @@ ol {
   }
 
   .xl\:object-contain {
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 
   .xl\:object-cover {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 
   .xl\:object-fill {
-    -o-object-fit: fill;
-       object-fit: fill;
+    object-fit: fill;
   }
 
   .xl\:object-none {
-    -o-object-fit: none;
-       object-fit: none;
+    object-fit: none;
   }
 
   .xl\:object-scale-down {
-    -o-object-fit: scale-down;
-       object-fit: scale-down;
+    object-fit: scale-down;
   }
 
   .xl\:object-bottom {
-    -o-object-position: bottom;
-       object-position: bottom;
+    object-position: bottom;
   }
 
   .xl\:object-center {
-    -o-object-position: center;
-       object-position: center;
+    object-position: center;
   }
 
   .xl\:object-left {
-    -o-object-position: left;
-       object-position: left;
+    object-position: left;
   }
 
   .xl\:object-left-bottom {
-    -o-object-position: left bottom;
-       object-position: left bottom;
+    object-position: left bottom;
   }
 
   .xl\:object-left-top {
-    -o-object-position: left top;
-       object-position: left top;
+    object-position: left top;
   }
 
   .xl\:object-right {
-    -o-object-position: right;
-       object-position: right;
+    object-position: right;
   }
 
   .xl\:object-right-bottom {
-    -o-object-position: right bottom;
-       object-position: right bottom;
+    object-position: right bottom;
   }
 
   .xl\:object-right-top {
-    -o-object-position: right top;
-       object-position: right top;
+    object-position: right top;
   }
 
   .xl\:object-top {
-    -o-object-position: top;
-       object-position: top;
+    object-position: top;
   }
 
   .xl\:opacity-0 {
@@ -20654,360 +19379,72 @@ ol {
     padding-left: 1px;
   }
 
-  .xl\:placeholder-transparent::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .xl\:placeholder-transparent::-moz-placeholder {
-    color: transparent;
-  }
-
-  .xl\:placeholder-transparent:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .xl\:placeholder-transparent::-ms-input-placeholder {
-    color: transparent;
-  }
-
   .xl\:placeholder-transparent::placeholder {
     color: transparent;
-  }
-
-  .xl\:placeholder-black::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .xl\:placeholder-black::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .xl\:placeholder-black:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .xl\:placeholder-black::-ms-input-placeholder {
-    color: #22292f;
   }
 
   .xl\:placeholder-black::placeholder {
     color: #22292f;
   }
 
-  .xl\:placeholder-white::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .xl\:placeholder-white::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .xl\:placeholder-white:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .xl\:placeholder-white::-ms-input-placeholder {
-    color: #ffffff;
-  }
-
   .xl\:placeholder-white::placeholder {
     color: #ffffff;
-  }
-
-  .xl\:placeholder-gray::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .xl\:placeholder-gray::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .xl\:placeholder-gray:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .xl\:placeholder-gray::-ms-input-placeholder {
-    color: #ccc;
   }
 
   .xl\:placeholder-gray::placeholder {
     color: #ccc;
   }
 
-  .xl\:placeholder-pinkish::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .xl\:placeholder-pinkish::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .xl\:placeholder-pinkish:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .xl\:placeholder-pinkish::-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
   .xl\:placeholder-pinkish::placeholder {
     color: #f3ebeb;
-  }
-
-  .xl\:placeholder-primary::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .xl\:placeholder-primary::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .xl\:placeholder-primary:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .xl\:placeholder-primary::-ms-input-placeholder {
-    color: #A11EC6;
   }
 
   .xl\:placeholder-primary::placeholder {
     color: #A11EC6;
   }
 
-  .xl\:placeholder-secondary::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .xl\:placeholder-secondary::-moz-placeholder {
-    color: #152347;
-  }
-
-  .xl\:placeholder-secondary:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .xl\:placeholder-secondary::-ms-input-placeholder {
-    color: #152347;
-  }
-
   .xl\:placeholder-secondary::placeholder {
     color: #152347;
-  }
-
-  .xl\:placeholder-amber::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .xl\:placeholder-amber::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .xl\:placeholder-amber:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .xl\:placeholder-amber::-ms-input-placeholder {
-    color: #FF9A56;
   }
 
   .xl\:placeholder-amber::placeholder {
     color: #FF9A56;
   }
 
-  .xl\:placeholder-blue::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .xl\:placeholder-blue::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .xl\:placeholder-blue:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .xl\:placeholder-blue::-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
   .xl\:placeholder-blue::placeholder {
     color: #2B81D9;
-  }
-
-  .xl\:focus\:placeholder-transparent:focus::-webkit-input-placeholder {
-    color: transparent;
-  }
-
-  .xl\:focus\:placeholder-transparent:focus::-moz-placeholder {
-    color: transparent;
-  }
-
-  .xl\:focus\:placeholder-transparent:focus:-ms-input-placeholder {
-    color: transparent;
-  }
-
-  .xl\:focus\:placeholder-transparent:focus::-ms-input-placeholder {
-    color: transparent;
   }
 
   .xl\:focus\:placeholder-transparent:focus::placeholder {
     color: transparent;
   }
 
-  .xl\:focus\:placeholder-black:focus::-webkit-input-placeholder {
-    color: #22292f;
-  }
-
-  .xl\:focus\:placeholder-black:focus::-moz-placeholder {
-    color: #22292f;
-  }
-
-  .xl\:focus\:placeholder-black:focus:-ms-input-placeholder {
-    color: #22292f;
-  }
-
-  .xl\:focus\:placeholder-black:focus::-ms-input-placeholder {
-    color: #22292f;
-  }
-
   .xl\:focus\:placeholder-black:focus::placeholder {
     color: #22292f;
-  }
-
-  .xl\:focus\:placeholder-white:focus::-webkit-input-placeholder {
-    color: #ffffff;
-  }
-
-  .xl\:focus\:placeholder-white:focus::-moz-placeholder {
-    color: #ffffff;
-  }
-
-  .xl\:focus\:placeholder-white:focus:-ms-input-placeholder {
-    color: #ffffff;
-  }
-
-  .xl\:focus\:placeholder-white:focus::-ms-input-placeholder {
-    color: #ffffff;
   }
 
   .xl\:focus\:placeholder-white:focus::placeholder {
     color: #ffffff;
   }
 
-  .xl\:focus\:placeholder-gray:focus::-webkit-input-placeholder {
-    color: #ccc;
-  }
-
-  .xl\:focus\:placeholder-gray:focus::-moz-placeholder {
-    color: #ccc;
-  }
-
-  .xl\:focus\:placeholder-gray:focus:-ms-input-placeholder {
-    color: #ccc;
-  }
-
-  .xl\:focus\:placeholder-gray:focus::-ms-input-placeholder {
-    color: #ccc;
-  }
-
   .xl\:focus\:placeholder-gray:focus::placeholder {
     color: #ccc;
-  }
-
-  .xl\:focus\:placeholder-pinkish:focus::-webkit-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .xl\:focus\:placeholder-pinkish:focus::-moz-placeholder {
-    color: #f3ebeb;
-  }
-
-  .xl\:focus\:placeholder-pinkish:focus:-ms-input-placeholder {
-    color: #f3ebeb;
-  }
-
-  .xl\:focus\:placeholder-pinkish:focus::-ms-input-placeholder {
-    color: #f3ebeb;
   }
 
   .xl\:focus\:placeholder-pinkish:focus::placeholder {
     color: #f3ebeb;
   }
 
-  .xl\:focus\:placeholder-primary:focus::-webkit-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .xl\:focus\:placeholder-primary:focus::-moz-placeholder {
-    color: #A11EC6;
-  }
-
-  .xl\:focus\:placeholder-primary:focus:-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
-  .xl\:focus\:placeholder-primary:focus::-ms-input-placeholder {
-    color: #A11EC6;
-  }
-
   .xl\:focus\:placeholder-primary:focus::placeholder {
     color: #A11EC6;
-  }
-
-  .xl\:focus\:placeholder-secondary:focus::-webkit-input-placeholder {
-    color: #152347;
-  }
-
-  .xl\:focus\:placeholder-secondary:focus::-moz-placeholder {
-    color: #152347;
-  }
-
-  .xl\:focus\:placeholder-secondary:focus:-ms-input-placeholder {
-    color: #152347;
-  }
-
-  .xl\:focus\:placeholder-secondary:focus::-ms-input-placeholder {
-    color: #152347;
   }
 
   .xl\:focus\:placeholder-secondary:focus::placeholder {
     color: #152347;
   }
 
-  .xl\:focus\:placeholder-amber:focus::-webkit-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .xl\:focus\:placeholder-amber:focus::-moz-placeholder {
-    color: #FF9A56;
-  }
-
-  .xl\:focus\:placeholder-amber:focus:-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
-  .xl\:focus\:placeholder-amber:focus::-ms-input-placeholder {
-    color: #FF9A56;
-  }
-
   .xl\:focus\:placeholder-amber:focus::placeholder {
     color: #FF9A56;
-  }
-
-  .xl\:focus\:placeholder-blue:focus::-webkit-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .xl\:focus\:placeholder-blue:focus::-moz-placeholder {
-    color: #2B81D9;
-  }
-
-  .xl\:focus\:placeholder-blue:focus:-ms-input-placeholder {
-    color: #2B81D9;
-  }
-
-  .xl\:focus\:placeholder-blue:focus::-ms-input-placeholder {
-    color: #2B81D9;
   }
 
   .xl\:focus\:placeholder-blue:focus::placeholder {
@@ -21457,29 +19894,21 @@ ol {
 
   .xl\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .xl\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
   .xl\:select-all {
     -webkit-user-select: all;
-       -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
   .xl\:select-auto {
     -webkit-user-select: auto;
-       -moz-user-select: auto;
-        -ms-user-select: auto;
             user-select: auto;
   }
 

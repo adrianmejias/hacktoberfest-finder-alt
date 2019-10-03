@@ -1,4 +1,7 @@
 {
+  "name": "hacktoberfest-finder",
+  "version": "0.1.0",
+  "private": true,
   "main": "./public/index.html",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -19,5 +22,17 @@
     "sass-loader": "^8.0.0",
     "tailwindcss": "^1.1.2",
     "vue-template-compiler": "^2.6.10"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
