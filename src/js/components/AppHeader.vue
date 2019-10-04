@@ -1,5 +1,5 @@
 <template>
-    <header class="container mx-auto my-6 flex flex-row flex-wrap justify-between">
+    <header class="container mx-auto my-6 flex flex-row flex-wrap justify-between" v-cloak>
         <div class="flex flex-row flex-wrap items-center">
             <a href="https://hacktoberfest.digitalocean.com" title="Hacktoberfest 2019" target="_blank" rel="noreferrer">
                 <img class="mx-auto" src="/images/header.svg" alt="Hacktoberfest 2019" width="400px">

@@ -1,32 +1,16 @@
 /**
- * TailwindCSS
- */
-
-@tailwind base;
-
-ul {
-    list-style-type: disc;
-    padding-left: theme('padding.4');
-}
-
-ol {
-    list-style-type: decimal;
-    padding-left: theme('padding.4');
-}
-
-@tailwind components;
-@tailwind utilities;
-
-/**
  * Fonts
  */
 
 @import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i&display=swap');
 
-@font-face {
-    font-family: 'Space Mono', monospace;
-    @apply font-bold;
-}
+/**
+ * TailwindCSS
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /**
  * Vue
@@ -37,7 +21,7 @@ ol {
 }
 
 [v-cloak]::before {
-    content: 'loading...';
+    content: 'Loading...';
 }
 
 /**

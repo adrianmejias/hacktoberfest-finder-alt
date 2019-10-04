@@ -1,5 +1,5 @@
 <template>
-    <main class="container mx-auto my-12">
+    <main class="container mx-auto my-12" v-cloak>
         <div id="results" class="grid">
             <div v-for="result in results" class="bg-white hover:bg-pinkish rounded-lg p-2 text-black flex flex-col justify-center items-center overflow-hidden overflow-y-auto shadow-lg grid-item" @click="toggleIssue(result)">
                 <div class="flex flex-wrap flex-row w-full items-center justify-center mb-2">

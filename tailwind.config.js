@@ -126,10 +126,12 @@ module.exports = {
         'Fira Sans',
         'Droid Sans',
         'Helvetica Neue',
+        'Lato',
         'sans-serif'
       ],
       space: [
-        '"Space Mono", monospace'
+        '"Space Mono"',
+        'monospace'
       ]
     },
     fontSize: {
