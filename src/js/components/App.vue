@@ -126,6 +126,10 @@
             this.loadIssues();
         },
 
+        beforeDestroy() {
+            this.results = [];
+        },
+
         methods: {
             loadIssues() {
                 this.showViewMore = false;
@@ -149,7 +153,6 @@
                         );
 
                         this.showViewMore = this.results.length < response.total_count;
-                        console.log(this.showViewMore)
                         this.isFetching = false;
                     })
                     .catch(error => {

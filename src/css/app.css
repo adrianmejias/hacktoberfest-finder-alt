@@ -1,6 +1,6 @@
 /**
-  TailwindCSS
-*/
+ * TailwindCSS
+ */
 
 @tailwind base;
 
@@ -18,8 +18,8 @@ ol {
 @tailwind utilities;
 
 /**
-  Fonts
-*/
+ * Fonts
+ */
 
 @import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i&display=swap');
 
@@ -41,8 +41,21 @@ ol {
 }
 
 /**
-  Card Grid
-*/
+ * Dark Mode
+ */
+@media (prefers-color-scheme: dark) {
+    img {
+        opacity: .75;
+        transition: opacity .5s ease-in-out;
+    }
+    img:hover {
+        opacity: 1;
+    }
+}
+
+/**
+ * Card Grid
+ */
 
 .grid {
     @apply flex flex-col;
