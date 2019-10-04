@@ -1,125 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Hacktoberfest Issue Finder</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="description" content="Hacktoberfest Finder helps you find issues which you could help fix." />
+        <meta name="keywords" content="Hacktoberfest, Programming, GitHub, DigitalOcean, DEV" />
+        <meta name="author" content="Duncan McClean and Contributors" />
+        <meta property="og:title" content="Hacktoberfest 2019 Finder" />
+        <meta property="og:description" content="Hacktoberfest Finder helps you find issues which you could help fix." />
+        <meta property="og:image" content="" />
+        <meta property="og:url" content="https://hacktoberfest-finder.netlify.com" />
+        <script defer src="/js/manifest.js"></script>
+        <script defer src="/js/vendor.js"></script>
+        <script defer src="/js/app.js"></script>
+        <script defer>
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('/service-worker.js')
+                  .then(function () {
+                      console.log('Service Worker is now registered');
+                  });
+            }
+        </script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#6b3d53" />
+        <meta name="theme-color" content="#582d41" />
+        <link rel="stylesheet" href="/css/app.css" />
+    </head>
 
-<head>
-    <title>Hacktoberfest Issue Finder</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="Hacktoberfest Finder helps you find issues which you could help fix." />
-    <meta name="keywords" content="Hacktoberfest, Programming, GitHub, DigitalOcean, DEV" />
-    <meta name="author" content="Duncan McClean and Contributors" />
-    <meta property="og:title" content="Hacktoberfest 2019 Finder" />
-    <meta property="og:description" content="Hacktoberfest Finder helps you find issues which you could help fix." />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="https://hacktoberfest-finder.netlify.com" />
-    <script defer src="/js/manifest.js"></script>
-    <script defer src="/js/vendor.js"></script>
-    <script defer src="/js/app.js"></script>
-    <script defer>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/service-worker.js')
-              .then(function () {
-                  console.log('Service Worker is now registered');
-              });
-        }
-    </script>
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#6b3d53" />
-    <meta name="theme-color" content="#582d41" />
-    <link rel="stylesheet" href="/css/app.css" />
-</head>
-
-<body class="bg-secondary font-space">
-    <div id="app">
-        <header class="container mx-auto my-6 flex flex-row flex-wrap justify-between">
-            <div class="flex flex-row flex-wrap items-center">
-                <a href="https://hacktoberfest.digitalocean.com" title="Hacktoberfest 2019">
-                    <img class="mx-auto" src="/images/header.svg" alt="Hacktoberfest 2019" width="400px">
-                </a>
-                <h1 class="text-5xl font-bold text-primary uppercase mx-auto my-4 md:my-0 text-center">
-                    Issue Finder
-                </h1>
-            </div>
-            <div class="w-full md:w-auto flex flex-row flex-wrap items-center justify-around mx-auto my-4">
-                <span class="text-primary text-lg font-semibold uppercase mx-2">
-                    Filter By:
-                </span>
-                <div class="flex flex-column items-center filter relative">
-                    <button type="button" class="text-primary text-lg font-semibold uppercase relative focus:outline-none" @click="toggleFilter">
-                        Language
-                    </button>
-                    <div v-show="isFilterToggled" class="filter-values flex flex-col bg-primary absolute top-0 right-0 mt-2 w-48 shadow-xl rounded-lg overflow-hidden overflow-y-auto border-2 border-primary border-solid h-64">
-                        <button type="button" v-for="language in languages" class="font-thin text-1xl p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': currentLanguage === language, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage !== language }" @click="chooseLanguage(language)" v-text="language"></button>
-                    </div>
-                </div>
-                <span class="text-primary text-lg font-semibold uppercase mx-2">
-                    /
-                </span>
-                <button type="button" class="text-primary text-lg font-semibold uppercase mx-2 px-2 py-1 rounded border-1" :class="{ 'bg-primary text-secondary': noReplyOnly }" @click="toggleNoReplyFilter">
-                    No Reply
-                </button>
-            </div>
-            <div class="flex flex-row flex-wrap items-center">
-                <div class="text-primary text-lg font-semibold mx-2 my-2" v-if="currentLanguage">
-                    {{ currentLanguage }}:
-                </div>
-                <button type="button" v-for="name in labels" class="text-amber text-lg font-semibold mx-2 my-2" @click="removeLabel(name)">#{{ name.toLowerCase() }}</button>
-            </div>
-        </header>
-        <main class="container mx-auto my-12">
-            <div id="results" class="grid">
-                <div v-for="result in results" class="bg-white hover:bg-pinkish rounded-lg p-2 text-black flex flex-col justify-center items-center overflow-hidden overflow-y-auto shadow-lg grid-item" @click="toggleIssue(result)">
-                    <div class="flex flex-wrap flex-row w-full items-center justify-center mb-2">
-                        <button type="button" v-for="label in result.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }" @click.prevent.stop="appendLabel(label.name)">{{ label.name.toLowerCase() }}</button>
-                    </div>
-                    <h2 class="text-center text-xl mb-4 font-bold">{{ result.title }}</h2>
-                    <h3 class="text-center text-blue text-sm mb-4 break-words">{{ result.user.login }}/{{ result.repoTitle }}</h3>
-                    <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="result.body"></div>
-                    <div class="text-center text-xs mb-4" :class="{ 'text-amber': !result.comments }" v-if="!noReplyOnly">{{ result.comments > 0 ? `Replies: ${result.comments}` : 'Gimme Gimme' }}</div>
-                    <div class="text-center text-xs mb-4">
-                        <time :datetime="result.unformattedDate">Last updated: {{ result.formattedDate }}</time>
-                    </div>
-                </div>
-            </div>
-            <div v-if="showViewMore" class="flex flex-row items-center justify-center mt-6">
-                <button class="uppercase font-thin text-primary border-2 border-primary text-3xl bg-secondary hover:bg-primary hover:text-secondary py-2 px-4 rounded" :disabled="isFetching" @click="loadMoreIssues" v-text="isFetching ? 'Loading More Issues...' : 'Load More Issues'"></button>
-            </div>
-        </main>
-        <div class="grid-item-container fixed top-0 bottom-0 left-0 right-0 max-w-full h-full" v-if="currentResult" @click="currentResult = null">
-            <a :href="currentResult.html_url" target="_blank" class="bg-white hover:bg-pinkish rounded-lg p-2 text-black flex flex-col justify-center items-center overflow-hidden overflow-y-auto shadow-lg grid-item max-w-md mx-auto" :title="currentResult.title">
-                <div class="flex flex-wrap flex-row w-full items-center justify-center mb-2">
-                    <span v-for="label in currentResult.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }">{{ label.name.toLowerCase() }}</span>
-                </div>
-                <h2 class="text-center text-xl mb-4 font-bold">{{ currentResult.title }}</h2>
-                <h3 class="text-center text-blue text-sm mb-4 break-words">{{ currentResult.user.login }}/{{ currentResult.repoTitle }}</h3>
-                <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 overflow-hidden overflow-y-scroll max-w-sm whitespace-pre-wrap h-full" v-text="currentResult.body" style="max-height: 14rem;"></div>
-                <div class="text-center text-xs mb-4" :class="{ 'text-amber': !currentResult.comments }" v-if="!noReplyOnly">{{ currentResult.comments > 0 ? `Replies: ${currentResult.comments}` : 'Gimme Gimme' }}</div>
-                <div class="text-center text-xs mb-4">
-                    <time :datetime="currentResult.unformattedDate">Last updated: {{ currentResult.formattedDate }}</time>
-                </div>
-            </a>
+    <body class="bg-secondary font-space">
+        <div id="app">
+            <app></app>
         </div>
-    </div>
-    <footer class="bg-primary w-full mt-8">
-        <div class="container mx-auto flex flex-row items-center justify-between p-8">
-            <div class="flex flex-row items-center justify-center">
-                <p class="text-amber">Unofficial site by <a class="text-secondary" href="http://duncan.mcclean.co.uk">Duncan McClean</a> and <a class="text-secondary" href="https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTORS.md">contributors</a>. Contribute on <a class="text-secondary" href="https://github.com/damcclean/hacktoberfest-finder" target="_blank">GitHub!</a></p>
-            </div>
-            <div class="flex flex-row items-center justify-center">
-                <a class="mx-2 w-6 h-6" href="https://www.digitalocean.com">
-                    <img class="w-6 h-6" src="/images/digital-ocean.png">
-                </a>
-                <a class="mx-2 w-6 h-6" href="https://dev.to">
-                    <img class="w-6 h-6" src="/images/dev.svg">
-                </a>
-            </div>
-        </div>
-    </footer>
-</body>
-
+    </body>
 </html>

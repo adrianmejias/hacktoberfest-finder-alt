@@ -29,6 +29,18 @@ ol {
 }
 
 /**
+ * Vue
+ */
+
+[v-cloak] > * {
+    display: none;
+}
+
+[v-cloak]::before {
+    content: 'loading...';
+}
+
+/**
   Card Grid
 */
 
