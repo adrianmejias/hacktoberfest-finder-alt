@@ -23,7 +23,7 @@ const config = {
         '/js/vendor.js',
         '/css/app.css'
     ],
-    cachePathPattern: /^\/(?:(20[0-9]{2}|css|images|js|googleapis|gstatic|github)\/(.+)?)?$/,
+    cachePathPattern: /^\/(?:(20[0-9]{2}|css|images|js|favicons)\/(.+)?)?$/,
     offlineImage: `<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z" /><text fill="#9B9B9B" font-family="Times New Roman,Times,serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>`,
     offlinePage: '/offline/'
 };
@@ -103,10 +103,14 @@ self.addEventListener('fetch', event => {
         const failingCriteria = Object.keys(criteria).filter(
             criteriaKey => !criteria[criteriaKey]
         );
-        if (!failingCriteria.length && request.method === 'GET' && url.origin !== self.location.origin) {
-            if (/fonts\.(googleapis|gstatic)\.com/g.test(request.url)) {
-                return true;
-            } else if (/api\.github\.com/g.test(request.url)) {
+        if (!!failingCriteria.length && request.method === 'GET') {
+            if (url.origin !== self.location.origin) {
+                if (/fonts\.(googleapis|gstatic)\.com/g.test(request.url)) {
+                    return true;
+                } else if (/api\.github\.com/g.test(request.url)) {
+                    return true;
+                }
+            } else if (/(mix\-manifest|manifest)\.json/g.test(request.url)) {
                 return true;
             }
         }
