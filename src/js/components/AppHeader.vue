@@ -17,6 +17,7 @@
                     Language
                 </button>
                 <div v-show="isFilterToggled" class="filter-values flex flex-col bg-primary absolute top-0 right-0 mt-2 w-48 shadow-xl rounded-lg overflow-hidden overflow-y-auto border-2 border-primary border-solid h-64">
+                    <button type="button" class="font-bold text-1xl p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': !currentLanguage, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage }" @click="chooseLanguage('')">Any</button>
                     <button type="button" v-for="language in languages" class="font-thin text-1xl p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': currentLanguage === language, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage !== language }" @click="chooseLanguage(language)" v-text="language"></button>
                 </div>
             </div>

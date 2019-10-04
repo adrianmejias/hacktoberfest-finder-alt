@@ -232,6 +232,11 @@
             filterLabels() {
                 return 'label:' + this.labels.map(name => {
                     return `"${name}"`
+                        .split('+')
+                        .join('%2B')
+                        .split('#')
+                        .join('%23')
+                        .toLowerCase();
                 }).join('+label:');
             },
             filterNoReply() {
