@@ -78,7 +78,7 @@ ol {
 }
 
 .grid-item-container {
-    background-color: #000;
+    background-color: #000000c4;
     z-index: 10;
 
     .grid-item {

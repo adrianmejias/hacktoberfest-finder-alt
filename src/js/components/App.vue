@@ -1,95 +1,21 @@
 <template>
     <div v-cloak>
-        <header class="container mx-auto my-6 flex flex-row flex-wrap justify-between">
-            <div class="flex flex-row flex-wrap items-center">
-                <a href="https://hacktoberfest.digitalocean.com" title="Hacktoberfest 2019" target="_blank" rel="noreferrer">
-                    <img class="mx-auto" src="/images/header.svg" alt="Hacktoberfest 2019" width="400px">
-                </a>
-                <h1 class="text-5xl font-bold text-primary uppercase mx-auto my-4 md:my-0 text-center">
-                    Issue Finder
-                </h1>
-            </div>
-            <div class="w-full md:w-auto flex flex-row flex-wrap items-center justify-around mx-auto my-4">
-                <span class="text-primary text-lg font-semibold uppercase mx-2">
-                    Filter By:
-                </span>
-                <div class="flex flex-column items-center filter relative">
-                    <button type="button" class="text-primary text-lg font-semibold uppercase relative focus:outline-none" @click="toggleFilter">
-                        Language
-                    </button>
-                    <div v-show="isFilterToggled" class="filter-values flex flex-col bg-primary absolute top-0 right-0 mt-2 w-48 shadow-xl rounded-lg overflow-hidden overflow-y-auto border-2 border-primary border-solid h-64">
-                        <button type="button" v-for="language in languages" class="font-thin text-1xl p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': currentLanguage === language, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage !== language }" @click="chooseLanguage(language)" v-text="language"></button>
-                    </div>
-                </div>
-                <span class="text-primary text-lg font-semibold uppercase mx-2">
-                    /
-                </span>
-                <button type="button" class="text-primary text-lg font-semibold uppercase mx-2 px-2 py-1 rounded border-1" :class="{ 'bg-primary text-secondary': noReplyOnly }" @click="toggleNoReplyFilter">
-                    No Reply
-                </button>
-            </div>
-            <div class="flex flex-row flex-wrap items-center">
-                <div class="text-primary text-lg font-semibold mx-2 my-2" v-if="currentLanguage">
-                    {{ currentLanguage }}:
-                </div>
-                <button type="button" v-for="name in labels" class="text-amber text-lg font-semibold mx-2 my-2" @click="removeLabel(name)">#{{ name.toLowerCase() }}</button>
-            </div>
-        </header>
-        <main class="container mx-auto my-12">
-            <div id="results" class="grid">
-                <div v-for="result in results" class="bg-white hover:bg-pinkish rounded-lg p-2 text-black flex flex-col justify-center items-center overflow-hidden overflow-y-auto shadow-lg grid-item" @click="toggleIssue(result)">
-                    <div class="flex flex-wrap flex-row w-full items-center justify-center mb-2">
-                        <button type="button" v-for="label in result.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }" @click.prevent.stop="appendLabel(label.name)">{{ label.name.toLowerCase() }}</button>
-                    </div>
-                    <h2 class="text-center text-xl mb-4 font-bold">{{ result.title }}</h2>
-                    <h3 class="text-center text-blue text-sm mb-4 break-words">{{ result.user.login }}/{{ result.repoTitle }}</h3>
-                    <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="result.body"></div>
-                    <div class="text-center text-xs mb-4" :class="{ 'text-amber': !result.comments }" v-if="!noReplyOnly">{{ result.comments > 0 ? `Replies: ${result.comments}` : 'Gimme Gimme' }}</div>
-                    <div class="text-center text-xs mb-4">
-                        <time :datetime="result.unformattedDate">Last updated: {{ result.formattedDate }}</time>
-                    </div>
-                </div>
-            </div>
-            <div v-if="showViewMore" class="flex flex-row items-center justify-center mt-6">
-                <button class="uppercase font-thin text-primary border-2 border-primary text-3xl bg-secondary hover:bg-primary hover:text-secondary py-2 px-4 rounded" :disabled="isFetching" @click="loadMoreIssues" v-text="isFetching ? 'Loading More Issues...' : 'Load More Issues'"></button>
-            </div>
-        </main>
-        <div class="grid-item-container fixed top-0 bottom-0 left-0 right-0 max-w-full h-full" v-if="currentResult" @click="currentResult = null">
-            <a :href="currentResult.html_url" target="_blank" class="bg-white hover:bg-pinkish rounded-lg p-2 text-black flex flex-col justify-center items-center overflow-hidden overflow-y-auto shadow-lg grid-item max-w-md mx-auto" :title="currentResult.title">
-                <div class="flex flex-wrap flex-row w-full items-center justify-center mb-2">
-                    <span v-for="label in currentResult.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }">{{ label.name.toLowerCase() }}</span>
-                </div>
-                <h2 class="text-center text-xl mb-4 font-bold">{{ currentResult.title }}</h2>
-                <h3 class="text-center text-blue text-sm mb-4 break-words">{{ currentResult.user.login }}/{{ currentResult.repoTitle }}</h3>
-                <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 overflow-hidden overflow-y-scroll max-w-sm whitespace-pre-wrap h-full" v-text="currentResult.body" style="max-height: 14rem;"></div>
-                <div class="text-center text-xs mb-4" :class="{ 'text-amber': !currentResult.comments }" v-if="!noReplyOnly">{{ currentResult.comments > 0 ? `Replies: ${currentResult.comments}` : 'Gimme Gimme' }}</div>
-                <div class="text-center text-xs mb-4">
-                    <time :datetime="currentResult.unformattedDate">Last updated: {{ currentResult.formattedDate }}</time>
-                </div>
-            </a>
-        </div>
-        <footer class="bg-primary w-full mt-8">
-            <div class="container mx-auto flex flex-row items-center justify-between p-8">
-                <div class="flex flex-row items-center justify-center">
-                    <p class="text-amber">
-                        Unofficial site by <a class="text-secondary" href="http://duncan.mcclean.co.uk" target="_blank" title="Duncan McClean" rel="noreferrer">Duncan McClean</a> and <a class="text-secondary" href="https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTORS.md" target="_blank" title="contributors" rel="noreferrer">contributors</a>. Contribute on <a class="text-secondary" href="https://github.com/damcclean/hacktoberfest-finder" target="_blank" title="GitHub!" rel="noreferrer">GitHub!</a>
-                    </p>
-                </div>
-                <div class="flex flex-row items-center justify-center">
-                    <a class="mx-2 w-6 h-6" href="https://www.digitalocean.com" title="DigitalOcean" target="_blank" rel="noreferrer">
-                        <img class="w-6 h-6" src="/images/digital-ocean.png" alt="DigitalOcean">
-                    </a>
-                    <a class="mx-2 w-6 h-6" href="https://dev.to" title="DEV" target="_blank" rel="noreferrer">
-                        <img class="w-6 h-6" src="/images/dev.svg" alt="DEV">
-                    </a>
-                </div>
-            </div>
-        </footer>
+        <app-header :labels="labels" :languages="languages" :current-language="currentLanguage" :is-filter-toggled="isFilterToggled" :no-reply-only="noReplyOnly"></app-header>
+        <app-main :labels="labels" :no-reply-only="noReplyOnly" :is-fetching="isFetching" :results="results" :show-view-more="showViewMore"></app-main>
+        <app-main-modal :labels="labels" :no-reply-only="noReplyOnly" :current-result="currentResult"></app-main-modal>
+        <app-footer></app-footer>
     </div>
 </template>
 
 <script>
+    import AppHeader from './AppHeader';
+    import AppMain from './AppMain';
+    import AppMainModal from './AppMainModal';
+    import AppFooter from './AppFooter';
+
     export default {
+        components: { AppHeader, AppMain, AppMainModal, AppFooter },
+
         data() {
             return {
                 languages: [
@@ -121,11 +47,45 @@
         },
 
         created() {
-            this.currentLanguage = window.localStorage.getItem('language') || '';
-            this.labels = JSON.parse(window.localStorage.getItem('labels') || JSON.stringify(this.labels));
-            this.noReplyOnly = (window.localStorage.getItem('noreply') || 'false') === 'true';
+            this.currentLanguage = localStorage.getItem('language') || '';
+            this.labels = JSON.parse(localStorage.getItem('labels') || JSON.stringify(this.labels));
+            this.noReplyOnly = (localStorage.getItem('noreply') || 'false') === 'true';
 
             this.loadIssues();
+        },
+
+        mounted() {
+            Bus.$on('toggleFilter', () => {
+                this.toggleFilter();
+            });
+
+            Bus.$on('removeLabel', (labelName) => {
+                this.removeLabel(labelName);
+            });
+
+            Bus.$on('toggleNoReplyFilter', () => {
+                this.toggleNoReplyFilter();
+            });
+
+            Bus.$on('chooseLanguage', (language) => {
+                this.chooseLanguage(language);
+            });
+
+            Bus.$on('loadMoreIssues', () => {
+                this.loadMoreIssues();
+            });
+
+            Bus.$on('appendLabel', (labelName) => {
+                this.appendLabel(labelName);
+            });
+
+            Bus.$on('toggleIssue', (result) => {
+                this.toggleIssue(result);
+            });
+
+            Bus.$on('closeModal', () => {
+                this.closeModal();
+            });
         },
 
         beforeDestroy() {
@@ -216,7 +176,7 @@
             chooseLanguage(language) {
                 this.currentLanguage = language;
 
-                window.localStorage.setItem('language', this.currentLanguage);
+                localStorage.setItem('language', this.currentLanguage);
 
                 this.reloadIssues();
             },
@@ -225,7 +185,7 @@
                 if (!['hacktoberfest'].includes(labelName.toLowerCase())) {
                     this.labels.splice(this.labels.indexOf(labelName.toLowerCase()), 1);
 
-                    window.localStorage.setItem('labels', JSON.stringify(this.labels));
+                    localStorage.setItem('labels', JSON.stringify(this.labels));
 
                     this.reloadIssues();
                 }
@@ -238,7 +198,7 @@
                     this.labels.push(labelName);
                 }
 
-                window.localStorage.setItem('labels', JSON.stringify(this.labels));
+                localStorage.setItem('labels', JSON.stringify(this.labels));
 
                 this.reloadIssues();
             },
@@ -254,13 +214,17 @@
                 this.isFetching = false;
                 this.page = 1;
 
-                window.localStorage.setItem('noreply', this.noReplyOnly);
+                localStorage.setItem('noreply', this.noReplyOnly);
 
                 this.loadIssues();
             },
 
             toggleIssue(result) {
                 this.currentResult = result;
+            },
+
+            closeModal() {
+                this.toggleIssue(null);
             }
         },
 
