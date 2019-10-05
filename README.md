@@ -2,7 +2,7 @@
 
 > Web app to make it easy to find Github issues with the tag 'Hacktoberfest'.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bf2c479d-fcaf-4c46-b1ad-dccf2cc4e988/deploy-status)](https://app.netlify.com/sites/hacktoberfest-finder/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a71b1604-595b-4d9f-a7cc-ea7a55800225/deploy-status)](https://app.netlify.com/sites/hackerfest-finder-alt/deploys)
 
 ## ❓ What is Hacktoberfest?
 
