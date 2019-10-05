@@ -12,7 +12,7 @@
             <span class="text-primary text-lg font-semibold uppercase mx-2">
                 Filter By:
             </span>
-            <div class="flex flex-column items-center filter relative">
+            <div class="flex flex-column items-center filter relative" v-click-outside="hideFilter">
                 <button type="button" class="text-primary text-lg font-semibold uppercase relative focus:outline-none" @click="toggleFilter">
                     Language
                 </button>
@@ -36,10 +36,20 @@
 </template>
 
 <script>
+    import ClickOutside from 'vue-click-outside';
+
     export default {
         props: ['labels', 'languages', 'currentLanguage', 'isFilterToggled', 'noReplyOnly'],
 
+        directives: { ClickOutside },
+
         methods: {
+            hideFilter() {
+                if (this.isFilterToggled) {
+                    this.toggleFilter();
+                }
+            },
+
             toggleFilter() {
                 Bus.$emit('toggleFilter');
             },
