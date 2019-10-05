@@ -19,8 +19,10 @@
     export default {
         props: ['labels', 'noReplyOnly', 'currentResult'],
 
-        created() {
-            document.addEventListener('keydown', this.escapeModal, false);
+        mounted() {
+            (() => {
+                document.addEventListener('keydown', this.escapeModal, false);
+            })();
         },
 
         beforeDestroy() {
