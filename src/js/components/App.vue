@@ -2,7 +2,7 @@
     <div v-cloak>
         <app-header :labels="labels" :languages="languages" :current-language="currentLanguage" :is-filter-toggled="isFilterToggled" :no-reply-only="noReplyOnly"></app-header>
         <app-main :labels="labels" :no-reply-only="noReplyOnly" :is-fetching="isFetching" :results="results" :show-view-more="showViewMore"></app-main>
-        <app-main-modal :labels="labels" :no-reply-only="noReplyOnly" :current-result="currentResult"></app-main-modal>
+        <app-main-modal :labels="labels" :no-reply-only="noReplyOnly" :current-result="currentResult" v-if="currentResult"></app-main-modal>
         <app-footer></app-footer>
     </div>
 </template>

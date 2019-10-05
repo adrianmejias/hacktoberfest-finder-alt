@@ -1,5 +1,5 @@
 <template>
-    <section class="grid-item-container fixed top-0 bottom-0 left-0 right-0 max-w-full h-full" v-if="currentResult" @click="closeModal" v-cloak>
+    <section class="grid-item-container fixed top-0 bottom-0 left-0 right-0 max-w-full h-full" @click="closeModal" v-cloak>
         <a :href="currentResult.html_url" target="_blank" class="bg-white hover:bg-pinkish rounded-lg p-2 text-black flex flex-col justify-center items-center overflow-hidden overflow-y-auto shadow-lg grid-item max-w-md mx-auto" :title="currentResult.title" @click.prevent.stop="openWindow">
             <div class="flex flex-wrap flex-row w-full items-center justify-center mb-2">
                 <span v-for="label in currentResult.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }" v-text="label.name.toLowerCase()"></span>
@@ -19,7 +19,22 @@
     export default {
         props: ['labels', 'noReplyOnly', 'currentResult'],
 
+        created() {
+            document.addEventListener('keydown', this.escapeModal, false);
+        },
+
+        beforeDestroy() {
+            document.removeEventListener('keydown', this.escapeModal, false);
+        },
+
         methods: {
+            escapeModal(event) {
+                if ((event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) && (event.target.nodeName.toLowerCase() === 'body')) {
+                    event.preventDefault();
+                    this.closeModal();
+                }
+            },
+
             closeModal() {
                 Bus.$emit('closeModal');
             },
