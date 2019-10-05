@@ -6,7 +6,7 @@
 
 ---
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a71b1604-595b-4d9f-a7cc-ea7a55800225/deploy-status)](https://app.netlify.com/sites/hackerfest-finder-alt/deploys) [![GitHub Forks](https://img.shields.io/github/forks/damcclean/hacktoberfest-finder?logo=github&style=for-the-badge)](https://github.com/damcclean/hacktoberfest-finder/network/members) [![GitHub Stars](https://img.shields.io/github/stars/damcclean/hacktoberfest-finder?color=yellow&logo=github&style=for-the-badge)](https://github.com/damcclean/hacktoberfest-finder/stargazers) ![GitHub Code Size](https://img.shields.io/github/languages/code-size/damcclean/hacktoberfest-finder?style=for-the-badge&logo=docusign) ![GitHub Javascript](https://img.shields.io/github/languages/top/damcclean/hacktoberfest-finder?style=for-the-badge&logo=javascript)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a71b1604-595b-4d9f-a7cc-ea7a55800225/deploy-status)](https://app.netlify.com/sites/hackerfest-finder-alt/deploys) [![GitHub Forks](https://img.shields.io/github/forks/damcclean/hacktoberfest-finder?logo=github&style=for-the-badge)](https://github.com/damcclean/hacktoberfest-finder/network/members) [![GitHub Stars](https://img.shields.io/github/stars/damcclean/hacktoberfest-finder?color=yellow&logo=github&style=for-the-badge)](https://github.com/damcclean/hacktoberfest-finder/stargazers) ![GitHub Code Size](https://img.shields.io/github/languages/code-size/adrianmejias/hacktoberfest-finder?style=for-the-badge&logo=docusign) ![GitHub Javascript](https://img.shields.io/github/languages/top/adrianmejias/hacktoberfest-finder?style=for-the-badge&logo=javascript)
 
 ## What is Hacktoberfest?
 
