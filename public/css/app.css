@@ -4514,12 +4514,34 @@ video {
  * Vue
  */
 
-[v-cloak] > * {
+[v-cloak]>* {
   display: none;
 }
 
 [v-cloak]::before {
   content: 'Loading...';
+}
+
+/**
+ * Fixed Header
+ */
+
+.vue-fixed-header {
+  position: relative;
+}
+
+.vue-fixed-header--isFixed {
+  width: 100vw;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #152347;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 /**

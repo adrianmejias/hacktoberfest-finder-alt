@@ -16,12 +16,32 @@
  * Vue
  */
 
-[v-cloak] > * {
+[v-cloak]>* {
     display: none;
 }
 
 [v-cloak]::before {
     content: 'Loading...';
+}
+
+/**
+ * Fixed Header
+ */
+.vue-fixed-header {
+    position: relative;
+}
+
+.vue-fixed-header--isFixed {
+    width: 100vw;
+    @apply py-6;
+    @apply mt-0;
+    @apply mb-0;
+    @apply bg-secondary;
+    @apply fixed;
+    @apply top-0;
+    @apply left-0;
+    @apply right-0;
+    z-index: 10;
 }
 
 /**
@@ -32,6 +52,7 @@
         opacity: .75;
         transition: opacity .5s ease-in-out;
     }
+
     img:hover {
         opacity: 1;
     }
