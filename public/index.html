@@ -17,12 +17,14 @@
         <script defer src="/js/vendor.js"></script>
         <script defer src="/js/app.js"></script>
         <script defer>
-            if ('serviceWorker' in navigator) {
-              navigator.serviceWorker.register('/service-worker.js')
-                  .then(function () {
-                      console.log('%cService Worker is now registered', 'color: green;');
-                  });
-            }
+            (() => {
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.register('/service-worker.js')
+                      .then(() => {
+                          console.log('%cService Worker is now registered', 'color: green;');
+                      });
+                }
+            })();
         </script>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />

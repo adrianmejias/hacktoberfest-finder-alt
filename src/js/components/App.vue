@@ -52,9 +52,6 @@
                     'hacktoberfest'
                 ],
 
-                now: Date.now(),
-                // delay: 15 * 60 * 1000, // 15 minutes
-                delay: 1 * 60 * 1000,
                 results: [],
                 page: 1,
                 currentLanguage: '',
@@ -67,7 +64,6 @@
         },
 
         created() {
-            this.now = localStorage.getItem('now') || Date.now();
             this.currentLanguage = localStorage.getItem('language') || '';
             this.labels = JSON.parse(localStorage.getItem('labels') || JSON.stringify(this.labels));
             this.noReplyOnly = (localStorage.getItem('noreply') || 'false') === 'true';
@@ -120,13 +116,7 @@
                 this.showViewMore = false;
                 this.isFetching = true;
 
-                if (this.page === 1 && (new Date() - new Date(this.now)) > this.delay) {
-                    console.log('%cCache timestamp', 'color: orange;');
-                    this.now = Date.now();
-                    localStorage.setItem('now', this.now);
-                }
-
-                fetch(`https://api.github.com/search/issues?ts=${this.now}&page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
+                fetch(`https://api.github.com/search/issues?page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
                     .then(response => response.json())
                     .then(response => {
                         this.results = [...this.results, ...response.items];
