@@ -35,6 +35,7 @@
                     'hacktoberfest'
                 ],
 
+                now: Date.now(),
                 results: [],
                 page: 1,
                 currentLanguage: '',
@@ -97,7 +98,7 @@
                 this.showViewMore = false;
                 this.isFetching = true;
 
-                fetch(`https://api.github.com/search/issues?page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
+                fetch(`https://api.github.com/search/issues?ts=${this.now}&page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
                     .then(response => response.json())
                     .then(response => {
                         this.results = [...this.results, ...response.items];

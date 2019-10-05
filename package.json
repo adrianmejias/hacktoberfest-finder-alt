@@ -18,7 +18,7 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "cross-env": "6.0.0",
+    "cross-env": "6.0.3",
     "laravel-mix-postcss-config": "^1.0.2",
     "postcss-nested": "^4.1.2",
     "sass": "^1.23.0",

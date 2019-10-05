@@ -136,7 +136,7 @@ self.addEventListener('fetch', event => {
         })(acceptHeader);
         const cacheKey = cacheName(resourceType, opts);
 
-        if (['content', 'css', 'json', 'font'].includes(resourceType)) {
+        if (['content', 'json', 'font', 'css'].includes(resourceType)) {
             event.respondWith(
                 fetch(request)
                 .then(response => addToCache(cacheKey, request, response))

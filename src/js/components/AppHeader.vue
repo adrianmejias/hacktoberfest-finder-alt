@@ -29,10 +29,8 @@
             </button>
         </div>
         <div class="flex flex-row flex-wrap items-center">
-            <div class="text-primary text-lg font-semibold mx-2 my-2" v-if="currentLanguage">
-                {{ currentLanguage }}:
-            </div>
-            <button type="button" v-for="name in labels" class="text-amber text-lg font-semibold mx-2 my-2" @click="removeLabel(name)">#{{ name.toLowerCase() }}</button>
+            <div class="text-primary text-lg font-semibold mx-2 my-2" v-if="currentLanguage" v-text="currentLanguage"></div>
+            <button type="button" v-for="name in labels" class="text-amber text-lg font-semibold mx-2 my-2" @click="removeLabel(name)" v-text="`#${name.toLowerCase()}`"></button>
         </div>
     </header>
 </template>
