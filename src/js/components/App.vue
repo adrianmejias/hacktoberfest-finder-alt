@@ -28,7 +28,24 @@
                     'HTML',
                     'C++',
                     'C#',
-                    'Ruby'
+                    'Ruby',
+                    'Shell',
+                    'Visual Basic .NET',
+                    'Objective-C',
+                    'SQL',
+                    'MATLAB',
+                    'Groovy',
+                    'Delphi/Object Pascal',
+                    'Assembly language',
+                    'Visual Basic',
+                    'Swift',
+                    'Perl',
+                    'R',
+                    'Kotlin',
+                    'HCL',
+                    'CMake',
+                    'Rust',
+                    'SQLPL'
                 ],
 
                 labels: [
@@ -36,6 +53,8 @@
                 ],
 
                 now: Date.now(),
+                // delay: 15 * 60 * 1000, // 15 minutes
+                delay: 1 * 60 * 1000,
                 results: [],
                 page: 1,
                 currentLanguage: '',
@@ -48,9 +67,12 @@
         },
 
         created() {
+            this.now = localStorage.getItem('now') || Date.now();
             this.currentLanguage = localStorage.getItem('language') || '';
             this.labels = JSON.parse(localStorage.getItem('labels') || JSON.stringify(this.labels));
             this.noReplyOnly = (localStorage.getItem('noreply') || 'false') === 'true';
+
+            this.languages.sort();
 
             this.loadIssues();
         },
@@ -97,6 +119,12 @@
             loadIssues() {
                 this.showViewMore = false;
                 this.isFetching = true;
+
+                if ((this.now - Date.now()) > this.delay) {
+                    console.log('updated');
+                    this.now = Date.now();
+                    localStorage.setItem('now', this.now);
+                }
 
                 fetch(`https://api.github.com/search/issues?ts=${this.now}&page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
                     .then(response => response.json())
