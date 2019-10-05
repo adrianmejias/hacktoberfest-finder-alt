@@ -1,6 +1,6 @@
 # Hacktoberfest Finder
 
-> Web app to make it easy to find Github issues with the tag 'Hacktoberfest'.
+> Web app to make it easy to find Github issues with the tag 'Hacktoberfest'. Note: I rearranged the application so much that it would break the current parent repo so I'm just merging updates from the parent repo manually; thus I won't be able to create a pull request without issues AKA I went overboard.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a71b1604-595b-4d9f-a7cc-ea7a55800225/deploy-status)](https://app.netlify.com/sites/hackerfest-finder-alt/deploys)
 
