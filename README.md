@@ -6,7 +6,7 @@
 
 ---
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a71b1604-595b-4d9f-a7cc-ea7a55800225/deploy-status)](https://app.netlify.com/sites/hackerfest-finder-alt/deploys) ![GitHub Forks](https://img.shields.io/github/forks/damcclean/hacktoberfest-finder?logo=github&style=for-the-badge) ![GitHub Stars](https://img.shields.io/github/stars/damcclean/hacktoberfest-finder?color=yellow&logo=github&style=for-the-badge) ![GitHub Code Size](https://img.shields.io/github/languages/code-size/damcclean/hacktoberfest-finder?style=for-the-badge&logo=docusign) ![GitHub Javascript](https://img.shields.io/github/languages/top/damcclean/hacktoberfest-finder?style=for-the-badge&logo=javascript)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a71b1604-595b-4d9f-a7cc-ea7a55800225/deploy-status)](https://app.netlify.com/sites/hackerfest-finder-alt/deploys) [![GitHub Forks](https://img.shields.io/github/forks/damcclean/hacktoberfest-finder?logo=github&style=for-the-badge)](https://github.com/damcclean/hacktoberfest-finder/network/members) [![GitHub Stars](https://img.shields.io/github/stars/damcclean/hacktoberfest-finder?color=yellow&logo=github&style=for-the-badge)](https://github.com/damcclean/hacktoberfest-finder/stargazers) ![GitHub Code Size](https://img.shields.io/github/languages/code-size/damcclean/hacktoberfest-finder?style=for-the-badge&logo=docusign) ![GitHub Javascript](https://img.shields.io/github/languages/top/damcclean/hacktoberfest-finder?style=for-the-badge&logo=javascript)
 
 ## ❓ What is Hacktoberfest?
 
@@ -17,12 +17,13 @@
 * [Tailwind CSS](http://tailwindcss.com)
 * [Vuejs](https://vuejs.org/)
 
-## 💻 Local Setup
+## Local Setup
 
 If you want to get Hacktoberfest Finder setup on your computer, you'll need:
 
-* Node
-* npm/yarn
+* [Node](https://nodejs.org/en/)
+* [Npm](https://www.npmjs.com/)
+* [Yarn](https://yarnpkg.com)
 
 If you've got everything, you can install it by following the below steps.
 
@@ -32,19 +33,19 @@ If you've got everything, you can install it by following the below steps.
 
 ## License
 
-![GitHub license](https://img.shields.io/github/license/NikhilNamal17/popular-movie-quotes.svg?style=for-the-badge&logo=github)
+[![GitHub license](https://img.shields.io/github/license/damcclean/hacktoberfest-finder.svg?style=for-the-badge&logo=github)](LICENSE)
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-If you are a first time contributor, please add your name to [CONTRIBUTORS.md](https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTORS.md)
+If you are a first time contributor, please add your name to [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
-## 👥 Contributors
+## Contributors
 
-You can find a list of contributors to this project in the [`CONTRIBUTORS.md`](https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTORS.md) file.
+You can find a list of contributors to this project in the [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
 
-## 💫 Deploy
+## Deploy
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/adrianmejias/hacktoberfest-finder)
 
