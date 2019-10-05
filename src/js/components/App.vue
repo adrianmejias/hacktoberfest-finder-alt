@@ -120,8 +120,8 @@
                 this.showViewMore = false;
                 this.isFetching = true;
 
-                if ((this.now - Date.now()) > this.delay) {
-                    console.log('updated');
+                if (this.page === 1 && (new Date() - new Date(this.now)) > this.delay) {
+                    console.log('%cCache timestamp', 'color: orange;');
                     this.now = Date.now();
                     localStorage.setItem('now', this.now);
                 }
