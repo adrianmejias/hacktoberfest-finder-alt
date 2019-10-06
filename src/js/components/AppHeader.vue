@@ -3,7 +3,7 @@
         <header class="container mx-auto my-6 flex flex-row flex-wrap justify-between items-center" v-cloak>
             <div class="flex flex-row flex-wrap items-center">
                 <a href="https://hacktoberfest.digitalocean.com" title="Hacktoberfest 2019" target="_blank" rel="noreferrer">
-                    <img class="mx-auto md:w-64 sm:w-full" src="/images/header.svg" alt="Hacktoberfest 2019">
+                    <img class="mx-auto md:w-64 sm:w-full logo" src="/images/header.svg" alt="Hacktoberfest 2019">
                 </a>
                 <h1 class="text-5xl font-bold text-primary uppercase mx-auto my-4 md:my-0 text-center">
                     Issue Finder

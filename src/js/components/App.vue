@@ -119,9 +119,7 @@
                 fetch(`https://api.github.com/search/issues?page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`)
                     .then(response => response.json())
                     .then(response => {
-                        this.results = [...this.results, ...response.items];
-
-                        this.results = this.results.map(
+                        const items = response.items.map(
                             ({ repository_url, updated_at, ...rest }) => ({
                                 ...rest,
                                 repoTitle: repository_url
@@ -132,6 +130,16 @@
                                 formattedDate: this.formatDate(new Date(updated_at))
                             })
                         );
+
+                        this.results = [...this.results, ...items].sort((a, b) => {
+                            if (new Date(a.updated_at) > new Date(b.updated_at)) {
+                                return 1;
+                            } else if (new Date(b.updated_at) > new Date(a.updated_at)) {
+                                return -1;
+                            }
+
+                            return 0;
+                        });
 
                         this.showViewMore = this.results.length < response.total_count;
                         this.isFetching = false;
