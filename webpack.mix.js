@@ -1,10 +1,9 @@
-let mix = require('laravel-mix');
-let tailwindcss = require('tailwindcss');
-let postCSSNested = require('postcss-nested');
+const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
+const postCSSNested = require('postcss-nested');
 
-require('laravel-mix-purgecss')
-require('laravel-mix-postcss-config')
-
+require('laravel-mix-purgecss');
+require('laravel-mix-postcss-config');
 
 mix.js('assets/js/app.js', 'build')
     .postCss('assets/css/app.css', 'build')
@@ -19,12 +18,9 @@ mix.js('assets/js/app.js', 'build')
 		plugins: [
 			postCSSNested()
 		]
-	});
-
-if (mix.inProduction())	{
-	mix.purgeCss({
-	    enabled: true,
+	})
+	.purgeCss({
+	    enabled: mix.inProduction(),
 	    extensions: ['html'],
 	    folders: ['.']
 	});
-}

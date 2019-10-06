@@ -127,7 +127,8 @@ module.exports = {
         "sans-serif"
       ],
       space: [
-        "Space Mono"
+        "Space Mono",
+        "monospace"
       ]
     },
     fontSize: {

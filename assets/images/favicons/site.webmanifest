@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://hacktoberfest-finder.netlify.com",
+  "start_url": "/?launcher=true",
   "theme_color": "#152347",
   "background_color": "#152347",
   "display": "standalone"

@@ -40,20 +40,19 @@ const app = new Vue({
         loadIssues() {
             this.isFetching = true;
 
-            fetch(`https://api.github.com/search/issues?page=${this.page}&q=language:${this.filterLanguage}+label:hacktoberfest+type:issue+state:open+${this.noReplyOnly && 'comments:0'}`)
+            fetch(`https://api.github.com/search/issues?page=${this.page}&q=language:${this.filterLanguage}+label:hacktoberfest+type:issue+state:open${this.filterComments}`)
                 .then(response => response.json())
                 .then(response => {
-                    this.results = [
-                        ...this.results,
-                        ...response.items
-                    ];
-
-                    this.results = this.results.map(({repository_url, updated_at, ...rest}) => ({
+                    // make changes prior to appending items to results
+                    const items = response.items.map(({repository_url, updated_at, ...rest}) => ({
                       ...rest,
                       repoTitle: repository_url.split('/').slice(-1).join(),
                       formattedDate: `${new Date(updated_at).toLocaleDateString()}, ${new Date(updated_at).toLocaleTimeString()}`
                     }));
-                    this.page = this.page + 1;
+
+                    this.results = [...this.results, ...items];
+
+                    this.page ++;
                     this.showViewMore = true;
                     this.isFetching = false;
 
@@ -87,11 +86,15 @@ const app = new Vue({
             this.showViewMore = false;
             this.isFetching = false;
             this.page = 1;
+
             this.loadIssues()
         }
     },
 
     computed: {
+        filterComments() {
+            return this.noReplyOnly ? '+comments:0' : '';
+        },
         filterLanguage() {
             return this.currentLanguage.split('+').join('%2B').split('#').join('%23').toLowerCase();
         }
