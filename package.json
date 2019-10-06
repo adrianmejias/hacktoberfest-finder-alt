@@ -1,16 +1,9 @@
 {
-  "name": "hacktoberfest-finder",
-  "version": "0.1.0",
-  "private": true,
-  "main": "./public/index.html",
   "scripts": {
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "npm run development -- --watch",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "cross-env NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
     "laravel-mix": "^5.0.0",
@@ -21,24 +14,7 @@
     "cross-env": "6.0.3",
     "laravel-mix-postcss-config": "^1.0.2",
     "postcss-nested": "^4.1.2",
-    "sass": "^1.23.0",
-    "sass-loader": "^8.0.0",
-    "sw-precache-webpack-plugin": "^0.11.5",
     "tailwindcss": "^1.1.2",
-    "vue-click-outside": "^1.0.7",
-    "vue-fixed-header": "^3.2.2",
     "vue-template-compiler": "^2.6.10"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }

@@ -1,9 +1,9 @@
 .vscode
 .idea
-/public/hot
-/node_modules
+node_modules
 .DS_Store
+build
+!build/.gitkeep
 package-lock.json
 mix-manifest.json
-npm-debug.log
-yarn-error.log
+hot
