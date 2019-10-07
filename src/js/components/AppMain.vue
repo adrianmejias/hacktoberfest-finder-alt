@@ -9,6 +9,7 @@
                 <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${result.user.login}/${result.repoTitle}`"></h3>
                 <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="result.body"></div>
                 <div class="text-center text-xs mb-4" :class="{ 'text-amber': !result.comments }" v-if="!noReplyOnly" v-text="result.comments > 0 ? `Replies: ${result.comments}` : 'Gimme Gimme'"></div>
+                <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="`Opend by: ${result.user.login}`"></div>
                 <div class="text-center text-xs mb-4">
                     <time :datetime="result.unformattedDate" v-text="`Last updated: ${result.formattedDate}`"></time>
                 </div>
@@ -16,6 +17,11 @@
         </div>
         <div v-if="showViewMore || isFetching" class="flex flex-row items-center justify-center mt-6">
             <button type="button" class="uppercase font-thin text-primary border-2 border-primary text-3xl bg-secondary hover:bg-primary hover:text-secondary py-2 px-4 rounded" :disabled="isFetching" @click="loadMoreIssues" v-text="isFetching ? 'Loading More Issues...' : 'Load More Issues'"></button>
+        </div>
+        <div v-else-if="results.length === 0" class="flex flex-row items-center justify-center mt-6">
+            <div class="uppercase font-thin text-primary text-3xl bg-secondary py-2 px-4">
+                No issues found
+            </div>
         </div>
     </main>
 </template>

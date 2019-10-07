@@ -12,13 +12,14 @@
     import AppMain from './AppMain';
     import AppMainModal from './AppMainModal';
     import AppFooter from './AppFooter';
+    import languages from '../data/languages.json';
 
     export default {
         components: { AppHeader, AppMain, AppMainModal, AppFooter },
 
         data() {
             return {
-                languages: [
+                topLanguages: [
                     'JavaScript',
                     'TypeScript',
                     'Python',
@@ -28,25 +29,10 @@
                     'HTML',
                     'C++',
                     'C#',
-                    'Ruby',
-                    'Shell',
-                    'Visual Basic .NET',
-                    'Objective-C',
-                    'SQL',
-                    'MATLAB',
-                    'Groovy',
-                    'Delphi/Object Pascal',
-                    'Assembly language',
-                    'Visual Basic',
-                    'Swift',
-                    'Perl',
-                    'R',
-                    'Kotlin',
-                    'HCL',
-                    'CMake',
-                    'Rust',
-                    'SQLPL'
+                    'Ruby'
                 ],
+
+                languages: languages,
 
                 labels: [
                     'hacktoberfest'
