@@ -43,6 +43,7 @@
     @apply left-0;
     @apply right-0;
     z-index: 10;
+    opacity: 0.95;
 
     .logo-title {
         @apply text-lg;
