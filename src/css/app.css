@@ -33,7 +33,8 @@
 
 .vue-fixed-header--isFixed {
     width: 100vw;
-    @apply py-6;
+    @apply pt-6;
+    @apply pb-3;
     @apply mt-0;
     @apply mb-0;
     @apply bg-secondary;
@@ -42,6 +43,14 @@
     @apply left-0;
     @apply right-0;
     z-index: 10;
+
+    .logo-title {
+        @apply text-lg;
+    }
+
+    .logo-link {
+        @apply hidden;
+    }
 }
 
 /**
