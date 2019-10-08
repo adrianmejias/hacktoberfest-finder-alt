@@ -100,15 +100,21 @@
             },
 
             removeLabel(labelName) {
+                this.cancelAutoRefresh();
                 Bus.$emit('removeLabel', labelName);
+                this.startAutoRefresh();
             },
 
             toggleNoReplyFilter() {
+                this.cancelAutoRefresh();
                 Bus.$emit('toggleNoReplyFilter');
+                this.startAutoRefresh();
             },
 
             refreshLanguage() {
+                this.cancelAutoRefresh();
                 Bus.$emit('chooseLanguage', this.currentLanguage);
+                this.startAutoRefresh();
             },
 
             startAutoRefresh() {
