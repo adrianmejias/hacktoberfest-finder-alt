@@ -30,9 +30,19 @@
                 </button>
             </div>
             <div class="flex flex-row flex-wrap justify-center items-center">
-                <div class="md:w-64 sm:w-0"></div>
-                <div class="text-primary text-lg font-semibold mx-2 my-2" v-if="currentLanguage" v-text="`${currentLanguage}:`"></div>
-                <button type="button" v-for="name in labels" class="text-amber text-lg font-semibold mx-2 my-2" @click="removeLabel(name)" v-text="`#${name.toLowerCase()}`"></button>
+                <div class="md:w-64 sm:w-full">
+                    <label class="text-primary">
+                        <input class="mr-2 leading-tight" type="checkbox" v-model="autoRefresh">
+                        <span class="text-xs">
+                            Auto Refresh
+                        </span>
+                    </label>
+                    <button type="button" class="text-primary text-xs font-semibold mx-2 my-2" @click="refreshLanguage">
+                        (refresh)
+                    </button>
+                </div>
+                <div class="text-primary text-xs font-semibold mx-2 my-2" v-if="currentLanguage" v-text="`${currentLanguage}:`"></div>
+                <button type="button" v-for="name in labels" class="text-amber text-xs font-semibold mx-2 my-2" @click="removeLabel(name)" v-text="`#${name.toLowerCase()}`"></button>
             </div>
         </header>
     </fixed-header>
@@ -47,6 +57,36 @@
 
         components: { FixedHeader },
         directives: { ClickOutside },
+
+        data() {
+            return {
+                autoRefresh: false,
+                autoRefreshTime: 1000 * 60 * 15, // 15 minutes
+                autoTimer: null
+            }
+        },
+
+        watch: {
+            autoRefresh(newValue, oldValue) {
+                localStorage.setItem('auto-refresh', newValue);
+
+                if (newValue) {
+                    this.startAutoRefresh();
+                } else {
+                    this.cancelAutoRefresh();
+                }
+            }
+        },
+
+        created() {
+            this.autoRefresh = (localStorage.getItem('auto-refresh') || 'false') === 'true';
+
+            this.startAutoRefresh();
+        },
+
+        beforeDestroy() {
+            this.cancelAutoRefresh();
+        },
 
         methods: {
             hideFilter() {
@@ -67,8 +107,24 @@
                 Bus.$emit('toggleNoReplyFilter');
             },
 
+            refreshLanguage() {
+                Bus.$emit('chooseLanguage', this.currentLanguage);
+            },
+
+            startAutoRefresh() {
+                if (this.autoRefresh) {
+                    this.autoTimer = setInterval(this.refreshLanguage, this.autoRefreshTime);
+                }
+            },
+
+            cancelAutoRefresh() {
+                clearInterval(this.autoTimer);
+            },
+
             chooseLanguage(language) {
+                this.cancelAutoRefresh();
                 Bus.$emit('chooseLanguage', language);
+                this.startAutoRefresh();
             }
         }
     }

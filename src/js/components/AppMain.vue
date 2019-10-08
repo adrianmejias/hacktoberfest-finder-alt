@@ -9,7 +9,7 @@
                 <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${result.user.login}/${result.repoTitle}`"></h3>
                 <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="result.body"></div>
                 <div class="text-center text-xs mb-4" :class="{ 'text-amber': !result.comments }" v-if="!noReplyOnly" v-text="result.comments > 0 ? `Replies: ${result.comments}` : 'Gimme Gimme'"></div>
-                <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="`Opend by: ${result.user.login}`"></div>
+                <div class="text-left text-xs mb-4" v-text="`Opend by: ${result.user.login}`"></div>
                 <div class="text-center text-xs mb-4">
                     <time :datetime="result.unformattedDate" v-text="`Last updated: ${result.formattedDate}`"></time>
                 </div>

@@ -8,7 +8,7 @@
             <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${currentResult.user.login}/${currentResult.repoTitle}`"></h3>
             <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 overflow-hidden overflow-y-scroll max-w-sm whitespace-pre-wrap h-full" v-text="currentResult.body" style="max-height: 14rem;"></div>
             <div class="text-center text-xs mb-4" :class="{ 'text-amber': !currentResult.comments }" v-if="!noReplyOnly" v-text="currentResult.comments > 0 ? `Replies: ${currentResult.comments}` : 'Gimme Gimme'"></div>
-            <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="`Opend by: ${result.user.login}`"></div>
+            <div class="text-left text-xs mb-4" v-text="`Opend by: ${currentResult.user.login}`"></div>
             <div class="text-center text-xs mb-4">
                 <time :datetime="currentResult.unformattedDate" v-text="`Last updated: ${currentResult.formattedDate}`"></time>
             </div>
