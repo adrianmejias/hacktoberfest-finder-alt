@@ -16,8 +16,8 @@
                 <div class="flex flex-column justify-around items-center filter relative" v-click-outside="hideFilter">
                     <button type="button" class="text-primary text-lg font-semibold uppercase relative focus:outline-none" @click="toggleFilter" v-text="currentLanguage ? currentLanguage : 'Language'"></button>
                     <div v-show="isFilterToggled" class="filter-values flex flex-col bg-primary absolute top-0 right-0 mt-2 w-48 shadow-xl rounded-lg overflow-hidden overflow-y-auto border-2 border-primary border-solid h-64">
-                        <input class="bg-white appearance-none border-2 border-secondary rounded w-full p-2 text-secondary leading-tight focus:outline-none focus:border-1" type="search" ref="languageTextRef" placeholder="ie. javas..." v-model="filterLanguageText">
-                        <button type="button" class="font-bold text-md p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': !currentLanguage, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage }" @click="chooseLanguage('')">Any</button>
+                        <input class="bg-white appearance-none border-2 border-secondary rounded p-2 mx-auto text-secondary leading-tight z-10 fixed focus:outline-none focus:border-1" type="search" ref="languageTextRef" placeholder="ie. javas..." v-model="filterLanguageText" style="width: 11.7rem;">
+                        <button type="button" class="font-bold text-md p-2 language mt-12" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': !currentLanguage, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage }" @click="chooseLanguage('')">Any</button>
                         <button type="button" v-for="language in filteredLanguages" class="font-thin text-sm p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': currentLanguage === language, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage !== language }" @click="chooseLanguage(language)" v-text="language"></button>
                     </div>
                 </div>
