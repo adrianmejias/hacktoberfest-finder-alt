@@ -119,16 +119,7 @@
                             })
                         );
 
-                        this.results = [...this.results, ...items]
-                            .sort((a, b) => {
-                                if (new Date(a.updated_at) > new Date(b.updated_at)) {
-                                    return 1;
-                                } else if (new Date(b.updated_at) > new Date(a.updated_at)) {
-                                    return -1;
-                                }
-
-                                return 0;
-                            });
+                        this.results = [...this.results, ...items];
 
                         this.showViewMore = this.results.length < response.total_count;
 
