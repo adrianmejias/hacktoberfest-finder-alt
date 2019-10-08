@@ -5,12 +5,12 @@
                 <span v-for="label in currentResult.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }" v-text="label.name.toLowerCase()"></span>
             </div>
             <h2 class="text-center text-xl mb-4 font-bold" v-text="currentResult.title"></h2>
-            <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${currentResult.user.login}/${currentResult.repoTitle}`"></h3>
+            <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${currentResult.user.login}/${currentResult.repo_title}`"></h3>
             <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 overflow-hidden overflow-y-scroll max-w-sm whitespace-pre-wrap h-full" v-text="currentResult.body" style="max-height: 14rem;"></div>
             <div class="text-center text-xs mb-4" :class="{ 'text-amber': !currentResult.comments }" v-if="!noReplyOnly" v-text="currentResult.comments > 0 ? `Replies: ${currentResult.comments}` : 'Gimme Gimme'"></div>
             <div class="text-left text-xs mb-4" v-text="`Opend by: ${currentResult.user.login}`"></div>
             <div class="text-center text-xs mb-4">
-                <time :datetime="currentResult.unformattedDate" v-text="`Last updated: ${currentResult.formattedDate}`"></time>
+                <time :datetime="currentResult.unformatted_date" v-text="`Last updated: ${currentResult.formatted_date}`"></time>
             </div>
         </a>
     </section>

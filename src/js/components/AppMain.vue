@@ -6,12 +6,12 @@
                     <button type="button" v-for="label in result.labels" class="text-center rounded-sm text-xs px-2 py-1 m-1 shadow-md" :style="{ backgroundColor: `#${label.color}` }" :class="{ 'font-bold': labels.includes(label.name.toLowerCase()) }" @click.prevent.stop="appendLabel(label.name)" v-text="label.name.toLowerCase()"></button>
                 </div>
                 <h2 class="text-center text-xl mb-4 font-bold" v-text="result.title"></h2>
-                <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${result.user.login}/${result.repoTitle}`"></h3>
+                <h3 class="text-center text-blue text-sm mb-4 break-words" v-text="`${result.user.login}/${result.repo_title}`"></h3>
                 <div class="text-left border-gray border-solid border-l-4 pl-2 text-sm mb-4 truncate max-w-xs" v-text="result.body"></div>
                 <div class="text-center text-xs mb-4" :class="{ 'text-amber': !result.comments }" v-if="!noReplyOnly" v-text="result.comments > 0 ? `Replies: ${result.comments}` : 'Gimme Gimme'"></div>
                 <div class="text-left text-xs mb-4" v-text="`Opend by: ${result.user.login}`"></div>
                 <div class="text-center text-xs mb-4">
-                    <time :datetime="result.unformattedDate" v-text="`Last updated: ${result.formattedDate}`"></time>
+                    <time :datetime="result.unformatted_date" v-text="`Last updated: ${result.formatted_date}`"></time>
                 </div>
             </div>
         </div>

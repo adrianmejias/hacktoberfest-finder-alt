@@ -8,6 +8,7 @@
 </template>
 
 <script>
+    import * as moment from 'moment';
     import AppHeader from './AppHeader';
     import AppMain from './AppMain';
     import AppMainModal from './AppMainModal';
@@ -108,26 +109,33 @@
                         const items = response.items.map(
                             ({ repository_url, updated_at, ...rest }) => ({
                                 ...rest,
-                                repoTitle: repository_url
+                                repo_title: repository_url
                                     .split('/')
                                     .slice(-1)
                                     .join(),
-                                unformattedDate: this.unformatDate(updated_at),
-                                formattedDate: this.formatDate(new Date(updated_at))
+                                updated_at: updated_at,
+                                unformatted_date: this.unformatDate(new Date(updated_at)),
+                                formatted_date: this.formatDate(new Date(updated_at))
                             })
                         );
 
-                        this.results = [...this.results, ...items].sort((a, b) => {
-                            if (new Date(a.updated_at) > new Date(b.updated_at)) {
-                                return 1;
-                            } else if (new Date(b.updated_at) > new Date(a.updated_at)) {
-                                return -1;
-                            }
+                        this.results = [...this.results, ...items]
+                            .sort((a, b) => {
+                                if (new Date(a.updated_at) > new Date(b.updated_at)) {
+                                    return 1;
+                                } else if (new Date(b.updated_at) > new Date(a.updated_at)) {
+                                    return -1;
+                                }
 
-                            return 0;
-                        });
+                                return 0;
+                            });
 
                         this.showViewMore = this.results.length < response.total_count;
+
+                        this.results = this.results.filter(result => {
+                            return moment.utc(new Date(result.updated_at)).year() === moment.utc().year();
+                        });
+
                         this.isFetching = false;
                     })
                     .catch(error => {
@@ -137,38 +145,14 @@
             },
 
             unformatDate(updatedAt) {
-                return `${new Date(updatedAt).toLocaleDateString()} ${new Date(updatedAt).toLocaleTimeString()}`;
+                return moment.utc(updatedAt).format('YYYY-MM-DD HH:mm');
             },
 
             formatDate(updatedAt) {
-                const delta = Math.round((+new Date - updatedAt) / 1000);
-                const minute = 60;
-                const hour = minute * 60;
-                const day = hour * 24;
-                const week = day * 7;
-                const daysInYear = updatedAt.getFullYear() % 400 === 0 || (updatedAt.getFullYear() % 100 !== 0 && updatedAt.getFullYear() % 4 === 0) ? 366 : 365;
+                const updated = moment.utc(updatedAt);
+                const now = moment.utc();
 
-                if (delta < 30) {
-                    return 'just now';
-                } else if (delta < minute) {
-                    return delta + ' seconds ago';
-                } else if (delta < 2 * minute) {
-                    return 'a minute ago';
-                } else if (delta < hour) {
-                    return Math.floor(delta / minute) + ' minutes ago';
-                } else if (Math.floor(delta / hour) == 1) {
-                    return 'an hour ago';
-                } else if (delta < day) {
-                    return Math.floor(delta / hour) + ' hours ago';
-                } else if (delta < day * 2) {
-                    return 'yesterday';
-                } else if (delta < week) {
-                    return 'last week';
-                } else if (delta < daysInYear) {
-                    return 'last year';
-                }
-
-                return `${new Date(updatedAt).toLocaleDateString()}, ${new Date(updatedAt).toLocaleTimeString()}`;
+                return moment.duration(updated.diff(now)).humanize(true);
             },
 
             loadMoreIssues() {
