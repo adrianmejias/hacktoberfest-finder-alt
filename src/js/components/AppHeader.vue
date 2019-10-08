@@ -14,9 +14,7 @@
                     Filter By:
                 </span>
                 <div class="flex flex-column justify-around items-center filter relative" v-click-outside="hideFilter">
-                    <button type="button" class="text-primary text-lg font-semibold uppercase relative focus:outline-none" @click="toggleFilter">
-                        Language
-                    </button>
+                    <button type="button" class="text-primary text-lg font-semibold uppercase relative focus:outline-none" @click="toggleFilter" v-text="currentLanguage ? currentLanguage : 'Language'"></button>
                     <div v-show="isFilterToggled" class="filter-values flex flex-col bg-primary absolute top-0 right-0 mt-2 w-48 shadow-xl rounded-lg overflow-hidden overflow-y-auto border-2 border-primary border-solid h-64">
                         <button type="button" class="font-bold text-md p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': !currentLanguage, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage }" @click="chooseLanguage('')">Any</button>
                         <button type="button" v-for="language in languages" class="font-thin text-sm p-2 language" :class="{ 'text-white bg-secondary hover:bg-secondary hover:text-white': currentLanguage === language, 'text-secondary bg-primary hover:bg-secondary hover:text-white': currentLanguage !== language }" @click="chooseLanguage(language)" v-text="language"></button>
@@ -41,7 +39,6 @@
                         (refresh)
                     </button>
                 </div>
-                <div class="text-primary text-xs font-semibold mx-2 my-2" v-if="currentLanguage" v-text="`${currentLanguage}:`"></div>
                 <button type="button" v-for="name in labels" class="text-amber text-xs font-semibold mx-2 my-2" @click="removeLabel(name)" v-text="`#${name.toLowerCase()}`"></button>
             </div>
         </header>
