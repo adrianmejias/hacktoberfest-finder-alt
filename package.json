@@ -1,13 +1,42 @@
 {
+  "name": "hacktoberfest-finder",
+  "version": "1.0.0",
+  "description": "Hacktoberfest Finder helps you find issues which you could help fix.",
+  "keywords": [
+    "Hacktoberfest",
+    "Programming",
+    "GitHub",
+    "DigitalOcean",
+    "DEV"
+  ],
+  "private": true,
+  "main": "./public/index.html",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
+  "homepage": "https://hacktoberfest-finder.netlify.com",
+  "author": {
+    "name": "Duncan McClean",
+    "url": "http://duncan.mcclean.co.uk"
+  },
+  "repository": "github:damcclean/hacktoberfest-finder",
+  "contributors": [
+    {
+      "name": "Adrian Mejias",
+      "email": "adrianmejias@gmail.com",
+      "url": "https://adrianmejias.com"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
+    "and": "0.0.3",
+    "cache": "^2.1.0",
     "laravel-mix": "^5.0.0",
     "laravel-mix-purgecss": "^4.2.0",
+    "moment": "^2.24.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
