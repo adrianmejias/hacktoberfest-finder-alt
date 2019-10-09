@@ -8,13 +8,13 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Purge cache
-        uses: jakejarvis/cloudflare-purge-action@master
-        env:
-          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
-          PURGE_URLS: '["https://hacktoberfest.adrianmejias.com/index.html", "https://hacktoberfest.adrianmejias.com/css/app.css", "https://hacktoberfest.adrianmejias.com/js/app.js"]'
+      #- name: Purge cache
+        #uses: jakejarvis/cloudflare-purge-action@master
+        #env:
+          #CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          #CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          #CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+          #PURGE_URLS: '["https://hacktoberfest.adrianmejias.com/index.html", "https://hacktoberfest.adrianmejias.com/css/app.css", "https://hacktoberfest.adrianmejias.com/js/app.js"]'
       - name: Audit live URL
         uses: jakejarvis/lighthouse-action@master
         with:
