@@ -1,0 +1,26 @@
+name: Audit live site
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge cache
+        uses: jakejarvis/cloudflare-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+          # PURGE_URLS: '["https://hacktoberfest.adrianmejias.com/app.css", "https://hacktoberfest.adrianmejias.com/app.js"]'
+      - name: Audit live URL
+        uses: jakejarvis/lighthouse-action@master
+        with:
+          url: 'https://hacktoberfest.adrianmejias.com'
+      - name: Upload results as an artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: report
+          path: './report'
