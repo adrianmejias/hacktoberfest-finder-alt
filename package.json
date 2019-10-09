@@ -35,6 +35,8 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "and": "0.0.3",
+    "cache": "^2.1.0",
     "laravel-mix": "^5.0.0",
     "laravel-mix-purgecss": "^4.2.0",
     "moment": "^2.24.0",
