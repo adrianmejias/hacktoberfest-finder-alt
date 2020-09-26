@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <title>Hacktoberfest Issue Finder</title>
         <meta charset="UTF-8" />
@@ -9,8 +10,9 @@
         <meta name="description" content="Hacktoberfest Finder helps you find issues which you could help fix." />
         <meta name="keywords" content="Hacktoberfest, Programming, GitHub, DigitalOcean, DEV" />
         <meta name="author" content="Duncan McClean and Contributors" />
-        <meta property="og:title" content="Hacktoberfest 2019 Finder" />
-        <meta property="og:description" content="Hacktoberfest Finder helps you find issues which you could help fix." />
+        <meta property="og:title" content="Hacktoberfest 2020 Finder" />
+        <meta property="og:description"
+            content="Hacktoberfest Finder helps you find issues which you could help fix." />
         <meta property="og:image" content="" />
         <meta property="og:url" content="https://hacktoberfest-finder.netlify.com" />
         <script defer src="/js/manifest.js"></script>
@@ -19,10 +21,10 @@
         <script defer>
             (() => {
                 if ('serviceWorker' in navigator) {
-                  navigator.serviceWorker.register('/service-worker.js')
-                      .then(() => {
-                          console.log('%cService Worker is now registered', 'color: green;');
-                      });
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(() => {
+                            console.log('%cService Worker is now registered', 'color: green;');
+                        });
                 }
             })();
         </script>
@@ -44,11 +46,14 @@
         <link rel="dns-prefetch" href="//github.com">
         <link rel="dns-prefetch" href="//api.github.com">
         <link rel="stylesheet" href="/css/app.css" />
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-NMD3L7');</script>
+        <script async defer>(function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-NMD3L7');</script>
     </head>
 
     <body class="bg-secondary font-space">
@@ -56,7 +61,8 @@
         <div id="app">
             <app></app>
         </div>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMD3L7"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMD3L7" height="0" width="0"
+                style="display: none; visibility: hidden;"></iframe></noscript>
     </body>
+
 </html>
