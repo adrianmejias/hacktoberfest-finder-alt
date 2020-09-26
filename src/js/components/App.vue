@@ -121,10 +121,7 @@ export default {
       this.isFetching = true;
 
       fetch(
-        `https://api.github.com/search/issues?page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`,
-        {
-          mode: "no-cors",
-        }
+        `https://api.github.com/search/issues?page=${this.page}&q=${this.filterLabels}${this.filterLanguage}+type:issue+state:open${this.filterNoReply}`
       )
         .then((response) => response.json())
         .then((response) => {
