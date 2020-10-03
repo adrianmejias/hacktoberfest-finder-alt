@@ -52,7 +52,7 @@ export default {
 
       languages: languages,
 
-      labels: ["hacktoberfest"],
+      labels: ["hacktoberfest", "good first issue"],
 
       results: [],
       page: 1,
