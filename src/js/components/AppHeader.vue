@@ -7,7 +7,7 @@
       <div class="flex flex-row flex-wrap items-center justify-center align-center logo-wrapper">
         <a
           href="https://hacktoberfest.digitalocean.com"
-          title="Hacktoberfest 2020"
+          title="Hacktoberfest 2022"
           target="_blank"
           rel="noreferrer"
           class="logo-link sm:text-center"
