@@ -2,7 +2,7 @@
  * Fonts
  */
 
-@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i&display=swap");
 
 /**
  * TailwindCSS
@@ -16,12 +16,12 @@
  * Vue
  */
 
-[v-cloak]>* {
+[v-cloak] > * {
     display: none;
 }
 
 [v-cloak]::before {
-    content: 'Loading...';
+    content: "Loading...";
 }
 
 /**
@@ -59,8 +59,8 @@
  */
 @media (prefers-color-scheme: dark) {
     img {
-        opacity: .75;
-        transition: opacity .5s ease-in-out;
+        opacity: 0.75;
+        transition: opacity 0.5s ease-in-out;
     }
 
     img:hover {
@@ -84,7 +84,7 @@
     .grid {
         display: grid;
         grid-template-columns: auto auto auto;
-        grid-gap: theme('padding.4');
+        grid-gap: theme("padding.4");
 
         .grid-item {
             min-height: 250px;
