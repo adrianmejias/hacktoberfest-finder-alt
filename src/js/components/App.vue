@@ -34,6 +34,7 @@ import languages from "../data/languages.json";
 
 export default {
   components: { AppHeader, AppMain, AppMainModal, AppFooter },
+  inject: ['emitter'],
 
   data() {
     return {

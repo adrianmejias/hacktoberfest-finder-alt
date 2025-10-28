@@ -81,6 +81,7 @@
 <script>
 export default {
   props: ["labels", "noReplyOnly", "isFetching", "results", "showViewMore"],
+  inject: ['emitter'],
 
   computed: {
     sortedResults() {
