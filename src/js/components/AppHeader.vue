@@ -1,5 +1,5 @@
 <template>
-    <fixed-header>
+    <!-- <fixed-header> -->
     <header
       class="container flex flex-row flex-wrap items-center justify-between mx-auto my-6"
       v-cloak
@@ -119,11 +119,11 @@
         ></button>
       </div>
     </header>
-  </fixed-header>
+  <!-- </fixed-header> -->
 </template>
 
 <script>
-import FixedHeader from "vue-fixed-header";
+// import FixedHeader from "vue-fixed-header";
 import ClickOutside from "vue-click-outside";
 
 export default {
@@ -136,7 +136,7 @@ export default {
   ],
 
   inject: ['emitter'],
-  components: { FixedHeader },
+//   components: { FixedHeader },
   directives: { ClickOutside },
 
   data() {
