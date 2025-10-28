@@ -9,6 +9,6 @@
 
 ## CSS changes
 
-If you are making any changes related to the styles of this project, please use Tailwind styles instead of creating new rules inside the stylesheet.
+If you are making any changes related to the styles of this project, please use Tailwind styles instead of creating new rules inside the stylesheet. 
 
 You might find [this page helpful](https://tailwindcss.com/docs/utility-first).
