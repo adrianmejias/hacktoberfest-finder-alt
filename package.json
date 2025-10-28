@@ -37,12 +37,15 @@
     "laravel-mix": "^5.0.0",
     "laravel-mix-purgecss": "^4.2.0",
     "moment": "^2.24.0",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-click-outside": "^1.1.0",
+    "vue-fixed-header": "^3.2.15"
   },
   "devDependencies": {
     "cross-env": "6.0.3",
     "laravel-mix-postcss-config": "^1.0.2",
     "postcss-nested": "^4.1.2",
+    "sw-precache-webpack-plugin": "^1.0.0",
     "tailwindcss": "^1.1.2",
     "vue-template-compiler": "^2.6.10"
   }
