@@ -1,5 +1,5 @@
 <template>
-  <fixed-header>
+    <fixed-header>
     <header
       class="container flex flex-row flex-wrap items-center justify-between mx-auto my-6"
       v-cloak
@@ -91,7 +91,7 @@
           No Reply
         </button>
       </div>
-      <div class="flex flex-row flex-wrap items-center justify-center align-center sm:w-full md:w-auto mt-2">
+      <div class="flex flex-row flex-wrap items-center justify-center mt-2 align-center sm:w-full md:w-auto">
         <div class="sm:text-center md:w-64 sm:w-full sm:mx-auto md:mx-0 md:text-left">
           <label class="text-primary">
             <input

@@ -79,35 +79,35 @@ export default {
   },
 
   mounted() {
-    Bus.$on("toggleFilter", () => {
+    this.emitter.on("toggleFilter", () => {
       this.toggleFilter();
     });
 
-    Bus.$on("removeLabel", (labelName) => {
+    this.emitter.on("removeLabel", (labelName) => {
       this.removeLabel(labelName);
     });
 
-    Bus.$on("toggleNoReplyFilter", () => {
+    this.emitter.on("toggleNoReplyFilter", () => {
       this.toggleNoReplyFilter();
     });
 
-    Bus.$on("chooseLanguage", (language) => {
+    this.emitter.on("chooseLanguage", (language) => {
       this.chooseLanguage(language);
     });
 
-    Bus.$on("loadMoreIssues", () => {
+    this.emitter.on("loadMoreIssues", () => {
       this.loadMoreIssues();
     });
 
-    Bus.$on("appendLabel", (labelName) => {
+    this.emitter.on("appendLabel", (labelName) => {
       this.appendLabel(labelName);
     });
 
-    Bus.$on("toggleIssue", (result) => {
+    this.emitter.on("toggleIssue", (result) => {
       this.toggleIssue(result);
     });
 
-    Bus.$on("closeModal", () => {
+    this.emitter.on("closeModal", () => {
       this.closeModal();
     });
   },

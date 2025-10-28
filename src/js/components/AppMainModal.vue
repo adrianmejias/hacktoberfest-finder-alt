@@ -89,7 +89,7 @@ export default {
     },
 
     closeModal() {
-      Bus.$emit("closeModal");
+      this.emitter.emit("closeModal");
     },
 
     openWindow() {
