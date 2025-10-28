@@ -1,6 +1,7 @@
 module.exports = {
     prefix: "",
     important: false,
+    content: ["./src/**/*.html", "./src/js/**/*.vue", "./src/js/**/*.js"],
     separator: ":",
     theme: {
         screens: {
