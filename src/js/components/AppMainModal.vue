@@ -63,6 +63,7 @@
 <script>
 export default {
   props: ["labels", "noReplyOnly", "currentResult"],
+  inject: ['emitter'],
 
   mounted() {
     (() => {

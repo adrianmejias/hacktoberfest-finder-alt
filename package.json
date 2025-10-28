@@ -13,12 +13,12 @@
   "main": "./public/index.html",
   "scripts": {
     "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "npm run development -- --watch",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "mix --production"
   },
   "homepage": "https://hacktoberfest-finder.netlify.com",
   "author": {
@@ -35,21 +35,31 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@vueuse/core": "^14.0.0",
+    "@vueuse/integrations": "^14.0.0",
     "and": "0.0.3",
     "cache": "^2.1.0",
-    "laravel-mix": "^5.0.0",
-    "laravel-mix-purgecss": "^4.2.0",
+    "laravel-mix": "^6.0",
+    "mitt": "^3.0.1",
     "moment": "^2.24.0",
     "vue": "^3.0.0",
-    "vue-click-outside": "^1.1.0",
-    "vue-fixed-header": "^3.2.15"
+    "vue-click-outside": "^1.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-object-rest-spread": "^7.28.4",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@vue/compiler-sfc": "^3.5.22",
     "cross-env": "6.0.3",
-    "laravel-mix-postcss-config": "^1.0.2",
-    "postcss-nested": "^4.1.2",
-    "sw-precache-webpack-plugin": "^1.0.0",
-    "tailwindcss": "^1.1.2",
-    "vue-template-compiler": "^2.6.10"
+    "postcss": "^8",
+    "postcss-nested": "^7.0.2",
+    "tailwindcss": "^3.4",
+    "vue-loader": "^16.2.0",
+    "vue-template-compiler": "^2.7.16",
+    "webpack": "^5",
+    "webpack-cli": "^4"
   }
 }

@@ -123,8 +123,8 @@
 </template>
 
 <script>
-import FixedHeader from "vue-fixed-header";
-import ClickOutside from "vue-click-outside";
+// import FixedHeader from "vue-fixed-header";
+// import ClickOutside from "vue-click-outside";
 
 export default {
   props: [
@@ -135,6 +135,7 @@ export default {
     "noReplyOnly",
   ],
 
+  inject: ['emitter'],
   components: { FixedHeader },
   directives: { ClickOutside },
 
