@@ -94,15 +94,15 @@ export default {
 
   methods: {
     loadMoreIssues() {
-      Bus.$emit("loadMoreIssues");
+      this.emitter.emit("loadMoreIssues");
     },
 
     appendLabel(labelName) {
-      Bus.$emit("appendLabel", labelName);
+      this.emitter.emit("appendLabel", labelName);
     },
 
     toggleIssue(result) {
-      Bus.$emit("toggleIssue", result);
+      this.emitter.emit("toggleIssue", result);
     },
   },
 };
