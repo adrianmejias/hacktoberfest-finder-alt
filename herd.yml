@@ -1,0 +1,5 @@
+integrations:
+  forge:
+    hacktoberfest.adrianmejias.com:
+      server-id: 876787
+      site-id: 2907936
