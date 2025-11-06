@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', WelcomeController::class)->name('home');
 

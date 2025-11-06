@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Search;
 
 use App\Http\Controllers\Controller;
-use Inertia\Inertia;
-use App\Services\GitHub\Facades\GitHub;
-use Inertia\Response;
-use Illuminate\Http\Request;
 use App\Http\Requests\SearchRequest;
+use App\Services\GitHub\Facades\GitHub;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class SearchController extends Controller
 {

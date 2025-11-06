@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 use Inertia\Response;
+use Laravel\Fortify\Features;
 
 class WelcomeController extends Controller
 {

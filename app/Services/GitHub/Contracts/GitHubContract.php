@@ -39,6 +39,16 @@ interface GitHubContract
     public function getPage(): int;
 
     /**
+     * Get the current items per page
+     */
+    public function getPerPage(): int;
+
+    /**
+     * Set the items per page for pagination
+     */
+    public function setPerPage(int $perPage): self;
+
+    /**
      * Set the language filter
      */
     public function setLanguage(string $language, bool $validate = false): self;

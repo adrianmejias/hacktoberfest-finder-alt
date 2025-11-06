@@ -1,7 +1,7 @@
 <?php
 
-use App\Services\GitHub\GitHub;
 use App\Services\GitHub\Exceptions\GitHubException;
+use App\Services\GitHub\GitHub;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 

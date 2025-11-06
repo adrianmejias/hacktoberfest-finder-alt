@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\GitHub\Facades;
 
-use Illuminate\Support\Facades\Facade;
 use App\Services\GitHub\Contracts\GitHubContract;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static array getAllLanguages()
@@ -15,6 +15,8 @@ use Illuminate\Support\Collection;
  * @method static \App\Services\GitHub\Contracts\GitHubContract setBaseUri(string $baseUri)
  * @method static \App\Services\GitHub\Contracts\GitHubContract setPage(int $page)
  * @method static int getPage()
+ * @method static \App\Services\GitHub\Contracts\GitHubContract setPerPage(int $perPage)
+ * @method static int getPerPage()
  * @method static \App\Services\GitHub\Contracts\GitHubContract setLanguage(string $language, bool $validate = false)
  * @method static string|null getLanguage()
  * @method static \App\Services\GitHub\Contracts\GitHubContract setLabels(array $labels)

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\GitHub;
 
-use Illuminate\Support\Collection;
 use App\Services\GitHub\Contracts\GitHubContract;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Carbon;
 use App\Services\GitHub\Exceptions\GitHubException;
-use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class GitHub implements GitHubContract
 {
@@ -19,6 +19,8 @@ class GitHub implements GitHubContract
     private array $languages;
 
     private int $page = 1;
+
+    private int $perPage = 10;
 
     private array $q;
 
@@ -68,9 +70,21 @@ class GitHub implements GitHubContract
         return $this->page;
     }
 
+    public function setPerPage(int $perPage): self
+    {
+        $this->perPage = $perPage;
+
+        return $this;
+    }
+
+    public function getPerPage(): int
+    {
+        return $this->perPage;
+    }
+
     public function setLanguage(string $language, bool $validate = false): self
     {
-        if ($validate && !$this->isValidLanguage($language)) {
+        if ($validate && ! $this->isValidLanguage($language)) {
             throw new GitHubException("Invalid language: {$language}", 422);
         }
 
@@ -126,7 +140,7 @@ class GitHub implements GitHubContract
             ->map(fn ($value, $key) => "{$key}:{$value}")
             ->implode('+');
 
-        return sprintf("%s/search/issues?page=%d&q=%s", $this->baseUri, $this->page, $q);
+        return sprintf('%s/search/issues?page=%d&q=%s', $this->baseUri, $this->page, $q);
     }
 
     public function execute(?array $params = []): Collection
