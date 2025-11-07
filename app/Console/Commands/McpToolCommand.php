@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Mcp\Tools\GetCurrentHacktoberfestInfoTool;
@@ -14,8 +16,8 @@ class McpToolCommand extends Command
                             {tool : The tool to call (hacktoberfest-info, suggest-projects, guide)}
                             {--year= : Year for hacktoberfest-info}
                             {--language= : Language for suggest-projects}
-                            {--labels= : Labels for suggest-projects}
-                            {--comments=0 : Comments count for suggest-projects}
+                            {--label= : Labels for suggest-projects}
+                            {--comments= : Comments count for suggest-projects}
                             {--page=1 : Page number for suggest-projects}
                             {--limit=5 : Limit for suggest-projects}
                             {--stage=all : Stage for guide}';
@@ -38,7 +40,7 @@ class McpToolCommand extends Command
     {
         $tool = app(GetCurrentHacktoberfestInfoTool::class);
         $request = new Request([
-            'year' => $this->option('year') ?? date('Y'),
+            'year' => $this->option('year') ?? now()->format('Y'),
         ]);
 
         $response = $tool->handle($request);
@@ -52,8 +54,8 @@ class McpToolCommand extends Command
         $tool = app(SuggestOpenSourceProjectsTool::class);
         $request = new Request([
             'language' => $this->option('language'),
-            'labels' => $this->option('labels'),
-            'comments' => (int) $this->option('comments'),
+            'label' => $this->option('label'),
+            'comments' => $this->option('comments'),
             'page' => (int) $this->option('page'),
             'limit' => (int) $this->option('limit'),
         ]);

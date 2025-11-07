@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Search;
 
+use App\Actions\GitHub\SearchIssue;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
-use App\Services\GitHub\Facades\GitHub;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,37 +15,29 @@ class SearchController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(SearchRequest $request): Response
+    public function __invoke(SearchRequest $request, SearchIssue $searchIssue): Response
     {
-        $query = $request->input('q');
-        $language = $request->input('language');
-        $labels = $request->input('labels', []);
-        $page = $request->input('page', 1);
-        $results = [];
+        $validated = $request->validated();
+        $language = $validated['language'] ?? '';
+        $label = $validated['label'] ?? null;
+        $comments = $validated['comments'] ?? null;
+        $page = $validated['page'] ?? 1;
 
-        if ($query) {
-            $results = GitHub::setLanguage($language)
-                ->setLabels($labels)
-                ->setPage($page)
-                ->execute([
-                    'q' => $query,
-                ]);
-        }
-
-        Log::channel('githublog')->debug('Search executed', [
-            'query' => $query,
+        //
+        $results = $searchIssue->search([
             'language' => $language,
-            'labels' => $labels,
+            'label' => $label,
+            'comments' => $comments,
             'page' => $page,
-            'results' => $results,
         ]);
 
         return Inertia::render('search/SearchResults', [
-            'results' => $results,
-            'query' => $query,
             'language' => $language,
-            'labels' => $labels,
+            'label' => $label,
+            'comments' => $comments,
             'page' => $page,
+            //
+            'results' => $results,
         ]);
     }
 }
