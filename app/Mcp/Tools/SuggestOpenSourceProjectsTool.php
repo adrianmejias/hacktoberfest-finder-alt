@@ -81,6 +81,8 @@ class SuggestOpenSourceProjectsTool extends Tool
             'page' => $page,
             'limit' => $limit,
             //
+            'total_count' => $results['total_count'],
+            'incomplete_results' => $results['incomplete_results'],
             'items' => $results['items'],
         ])->render();
 

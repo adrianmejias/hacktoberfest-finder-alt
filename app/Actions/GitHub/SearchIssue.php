@@ -22,7 +22,7 @@ class SearchIssue implements SearchIssues
     public function search(array $input): array
     {
         Validator::make($input, [
-            'language' => ['nullable', 'string', 'max:100'],
+            'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
             'comments' => ['nullable', 'string', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1'],
@@ -36,7 +36,7 @@ class SearchIssue implements SearchIssues
      *
      * @param  array<string, mixed>  $input
      */
-    private function generateQ(array $input): string
+    public function getQueryString(array $input): string
     {
         $language = $input['language'] ?? null;
         $label = $input['label'] ?? null;
@@ -60,7 +60,7 @@ class SearchIssue implements SearchIssues
             )->toString();
         }
 
-        if ($comments) {
+        if ($comments || $comments === '0') {
             $query['comments'] = $comments;
         }
 
@@ -70,9 +70,9 @@ class SearchIssue implements SearchIssues
                     $query,
                     fn ($value, $key): string => sprintf('%s:%s', $key, $value)
                 ),
-                '+'
+                ' '
             )
-        )->replace(':', '%3A')->toString();
+        )->toString();
     }
 
     /**
@@ -82,9 +82,8 @@ class SearchIssue implements SearchIssues
      */
     private function getResults(array $input): array
     {
-        $q = $this->generateQ($input);
+        $q = $this->getQueryString($input);
 
-        // TODO: figure out why this isn't working as expected
         try {
             $results = GitHub::connection('none')->search()->issues($q);
         } catch (Exception $e) {
@@ -93,7 +92,12 @@ class SearchIssue implements SearchIssues
                 'error' => $e->getMessage(),
             ]);
 
-            return [];
+            return [
+                'total_count' => 0,
+                'incomplete_results' => false,
+                'items' => [],
+                'error' => $e->getMessage(),
+            ];
         }
 
         Log::channel('githublog')->debug('GitHub Issue Search', [

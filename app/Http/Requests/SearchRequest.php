@@ -24,7 +24,7 @@ class SearchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'language' => ['nullable', 'string', 'max:100'],
+            'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
             'comment' => ['nullable', 'string', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1'],

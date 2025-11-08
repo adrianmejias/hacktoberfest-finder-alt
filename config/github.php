@@ -43,49 +43,49 @@ return [
         'main' => [
             'method' => 'token',
             'token' => env('GITHUB_TOKEN', 'your-github-token'),
-            // 'backoff'    => false,
-            // 'cache'      => false,
-            // 'version'    => 'v3',
-            // 'enterprise' => false,
+            'backoff' => env('GITHUB_BACKOFF_ENABLED', false),
+            'cache' => env('GITHUB_CACHE_ENABLED', false),
+            'version' => env('GITHUB_VERSION', 'v3'),
+            'enterprise' => env('GITHUB_ENTERPRISE_ENABLED', false),
         ],
 
         'app' => [
             'method' => 'application',
             'clientId' => env('GITHUB_CLIENT_ID', 'your-client-id'),
             'clientSecret' => env('GITHUB_CLIENT_SECRET', 'your-client-secret'),
-            // 'backoff'      => false,
-            // 'cache'        => false,
-            // 'version'      => 'v3',
-            // 'enterprise'   => false,
+            'backoff' => env('GITHUB_BACKOFF_ENABLED', false),
+            'cache' => env('GITHUB_CACHE_ENABLED', false),
+            'version' => env('GITHUB_VERSION', 'v3'),
+            'enterprise' => env('GITHUB_ENTERPRISE_ENABLED', false),
         ],
 
         'jwt' => [
             'method' => 'jwt',
             'token' => env('GITHUB_JWT_TOKEN', 'your-jwt-token'),
-            // 'backoff'      => false,
-            // 'cache'        => false,
-            // 'version'      => 'v3',
-            // 'enterprise'   => false,
+            'backoff' => env('GITHUB_BACKOFF_ENABLED', false),
+            'cache' => env('GITHUB_CACHE_ENABLED', false),
+            'version' => env('GITHUB_VERSION', 'v3'),
+            'enterprise' => env('GITHUB_ENTERPRISE_ENABLED', false),
         ],
 
         'private' => [
             'method' => 'private',
             'appId' => env('GITHUB_APP_ID', 'your-github-app-id'),
             'keyPath' => env('GITHUB_PRIVATE_KEY_PATH', 'your-private-key-path'),
-            // 'key'        => 'your-private-key-content',
-            // 'passphrase' => 'your-private-key-passphrase'
-            // 'backoff'    => false,
-            // 'cache'      => false,
-            // 'version'    => 'v3',
-            // 'enterprise' => false,
+            'key' => env('GITHUB_PRIVATE_KEY_CONTENT', 'your-private-key-content'),
+            'passphrase' => env('GITHUB_PRIVATE_KEY_PASSPHRASE', null),
+            'backoff' => env('GITHUB_BACKOFF_ENABLED', false),
+            'cache' => env('GITHUB_CACHE_ENABLED', false),
+            'version' => env('GITHUB_VERSION', 'v3'),
+            'enterprise' => env('GITHUB_ENTERPRISE_ENABLED', false),
         ],
 
         'none' => [
             'method' => 'none',
-            'backoff' => false,
-            'cache' => false,
-            'version' => 'v3',
-            'enterprise' => false,
+            'backoff' => env('GITHUB_BACKOFF_ENABLED', false),
+            'cache' => env('GITHUB_CACHE_ENABLED', false),
+            'version' => env('GITHUB_VERSION', 'v3'),
+            'enterprise' => env('GITHUB_ENTERPRISE_ENABLED', false),
         ],
 
     ],
@@ -105,17 +105,37 @@ return [
 
         'main' => [
             'driver' => 'illuminate',
-            'connector' => null, // null means use default driver
-            // 'min'       => 43200,
-            // 'max'       => 172800
+            'connector' => env('GITHUB_CACHE_CONNECTOR', null), // null means use default driver
+            'min' => env('GITHUB_CACHE_MIN', 43200),
+            'max' => env('GITHUB_CACHE_MAX', 172800),
+        ],
+
+        'app' => [
+            'driver' => 'illuminate',
+            'connector' => env('GITHUB_CACHE_CONNECTOR', null),
+            'min' => env('GITHUB_CACHE_MIN', 43200),
+            'max' => env('GITHUB_CACHE_MAX', 172800),
+        ],
+
+        'jwt' => [
+            'driver' => 'illuminate',
+            'connector' => env('GITHUB_CACHE_CONNECTOR', null),
+            'min' => env('GITHUB_CACHE_MIN', 43200),
+            'max' => env('GITHUB_CACHE_MAX', 172800),
+        ],
+
+        'private' => [
+            'driver' => 'illuminate',
+            'connector' => env('GITHUB_CACHE_CONNECTOR', null),
+            'min' => env('GITHUB_CACHE_MIN', 43200),
+            'max' => env('GITHUB_CACHE_MAX', 172800),
         ],
 
         'none' => [
             'driver' => 'illuminate',
-            // 'connector' => 'redis', // config/cache.php
             'connector' => env('GITHUB_CACHE_CONNECTOR', null),
-            // 'min'       => 43200,
-            // 'max'       => 172800
+            'min' => env('GITHUB_CACHE_MIN', 43200),
+            'max' => env('GITHUB_CACHE_MAX', 172800),
         ],
 
     ],
