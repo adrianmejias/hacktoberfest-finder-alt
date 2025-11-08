@@ -69,7 +69,7 @@ MARKDOWN;
             'year' => $schema->integer()
                 ->description('The year to get Hacktoberfest information for (defaults to current year)')
                 ->default((int) date('Y'))
-                ->minimum(2014), // Hacktoberfest started in 2014
+                ->min(2014), // Hacktoberfest started in 2014
         ];
     }
 }

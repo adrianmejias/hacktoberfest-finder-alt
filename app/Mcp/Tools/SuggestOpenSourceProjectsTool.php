@@ -99,23 +99,23 @@ class SuggestOpenSourceProjectsTool extends Tool
         return [
             'language' => $schema->string()
                 ->description('Programming language to filter projects by (e.g., "PHP", "JavaScript", "Python")')
-                ->maxLength(50),
+                ->max(50),
             'label' => $schema->string()
                 ->description('Additional label to filter issues by (default: "hacktoberfest, good first issue")')
                 ->default('hacktoberfest, good first issue')
-                ->maxLength(100),
+                ->max(100),
             'comments' => $schema->string()
                 ->description('Minimum number of comments an issue should have to indicate activity')
-                ->maxLength(100),
+                ->max(100),
             'page' => $schema->integer()
                 ->description('Page number for paginated results')
                 ->default(1)
-                ->minimum(1),
+                ->min(1),
             'limit' => $schema->integer()
                 ->description('Number of projects to return (1-20)')
                 ->default(10)
-                ->minimum(1)
-                ->maximum(20),
+                ->min(1)
+                ->max(20),
         ];
     }
 }
