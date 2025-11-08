@@ -30,8 +30,9 @@ Below are some open source project suggestions for Hacktoberfest contributions.
 @endif
 
 **Description:**
+
 @if (!empty($item['body']))
-{{ Str::of($item['body'])->limit(200) }}
+{{ $item['body'] }}
 @else
 No description provided.
 @endif
