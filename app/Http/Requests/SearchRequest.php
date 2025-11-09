@@ -21,9 +21,13 @@ class SearchRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        // Convert empty strings to null for optional fields
+        // Convert empty strings to null for optional fields (but not '0')
         if ($this->language === '') {
             $this->merge(['language' => null]);
+        }
+
+        if ($this->comments === '') {
+            $this->merge(['comments' => null]);
         }
     }
 
@@ -35,10 +39,10 @@ class SearchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'q' => ['required', 'string', 'max:100'],
+            'q' => ['nullable', 'string', 'max:100'],
             'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
-            'comment' => ['nullable', 'string', 'max:100'],
+            'comments' => ['nullable', 'string', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1'],
         ];
     }

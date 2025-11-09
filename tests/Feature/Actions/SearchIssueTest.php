@@ -19,7 +19,7 @@ test('generate query string', function () {
 
     $queryString = $method->invokeArgs($this->searchIssue, [$input]);
 
-    expect($queryString)->toBe('created:>'.now()->startOfYear()->format('Y-m-d').' state:open language:php label:hacktoberfest comments:>=0');
+    expect($queryString)->toBe('created:>'.now()->startOfYear()->format('Y-m-d').' state:open language:php comments:>=0 label:hacktoberfest');
 });
 
 test('search issues with valid input', function () {

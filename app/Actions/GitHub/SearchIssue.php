@@ -22,7 +22,7 @@ class SearchIssue implements SearchIssues
     public function search(array $input): array
     {
         Validator::make($input, [
-            'q' => ['required', 'string', 'max:100'],
+            'q' => ['nullable', 'string', 'max:100'],
             'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
             'comments' => ['nullable', 'string', 'max:100'],
@@ -54,27 +54,34 @@ class SearchIssue implements SearchIssues
             $query['language'] = $language;
         }
 
-        // TODO: handle comma separated labels
-        if ($label) {
-            $query['label'] = Str::of($label)->when(
-                Str::of($label)->contains(' '),
-                fn ($str) => $str->wrap('"', '"')
-            )->toString();
-        }
-
         if ($comments || $comments === '0') {
             $query['comments'] = $comments;
         }
 
-        return Str::of(
-            Arr::join(
-                Arr::map(
-                    $query,
-                    fn ($value, $key): string => sprintf('%s:%s', $key, $value)
-                ),
-                ' '
-            )
-        )->prepend($q.' ')->toString();
+        // Build the base query string
+        $queryString = Arr::join(
+            Arr::map(
+                $query,
+                fn ($value, $key): string => sprintf('%s:%s', $key, $value)
+            ),
+            ' '
+        );
+
+        // Add labels separately to allow multiple label: filters
+        if ($label) {
+            $labels = array_map('trim', explode(',', $label));
+            $labelParts = [];
+            foreach ($labels as $singleLabel) {
+                $formattedLabel = Str::of($singleLabel)->when(
+                    Str::of($singleLabel)->contains(' '),
+                    fn ($str) => $str->wrap('"', '"')
+                )->toString();
+                $labelParts[] = 'label:' . $formattedLabel;
+            }
+            $queryString .= ' ' . implode(' ', $labelParts);
+        }
+
+        return $q ? $q . ' ' . $queryString : $queryString;
     }
 
     /**
@@ -104,7 +111,11 @@ class SearchIssue implements SearchIssues
 
         Log::channel('githublog')->debug('GitHub Issue Search', [
             'q' => $q,
-            'results' => $results,
+            'results' => [
+                'total_count' => $results['total_count'],
+                'incomplete_results' => $results['incomplete_results'],
+                // 'items' => $results['items'],
+            ],
         ]);
 
         return $results;

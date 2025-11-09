@@ -1,6 +1,14 @@
+<script setup lang="ts">
+interface Props {
+    class?: string;
+}
+
+defineProps<Props>();
+</script>
+
 <template>
     <svg
-        class="me-2 h-4 w-4"
+        :class="$props.class || 'me-2 h-4 w-4'"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

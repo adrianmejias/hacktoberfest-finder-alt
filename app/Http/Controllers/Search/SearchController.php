@@ -37,21 +37,27 @@ class SearchController extends Controller
         // Transform GitHub API response to match frontend interface
         $transformedResults = [
             'total_amount' => $results['total_count'] ?? 0,
-            'items' => collect($results['items'] ?? [])->map(function ($item) {
-                $repoUrl = $item['repository_url'] ?? '';
-                $repoName = Str::of($repoUrl)->replace('https://api.github.com/repos/', '')->toString();
-                $repoLink = 'https://github.com/'.$repoName;
+            'incomplete_results' => $results['incomplete_results'] ?? false,
+            'items' => collect($results['items'] ?? [])
+                ->map(function ($item) {
+                    $repoUrl = $item['repository_url'] ?? '';
+                    $repoName = Str::of($repoUrl)
+                        ->replace('https://api.github.com/repos/', '')
+                        ->toString();
+                    $repoLink = 'https://github.com/'.$repoName;
 
-                return [
-                    'repo_title' => $item['title'] ?? '',
-                    'repo_url' => $item['html_url'] ?? '',
-                    'repo_name' => $repoName,
-                    'repo_link' => $repoLink,
-                    'updated_at' => $item['updated_at'] ?? '',
-                    'labels' => collect($item['labels'] ?? [])->map(fn ($label) => $label['name'])->toArray(),
-                    'body' => $item['body'] ?? '',
-                ];
-            })->toArray(),
+                    return [
+                        'repo_title' => $item['title'] ?? '',
+                        'repo_url' => $item['html_url'] ?? '',
+                        'repo_name' => $repoName,
+                        'repo_link' => $repoLink,
+                        'updated_at' => $item['updated_at'] ?? '',
+                        'labels' => collect($item['labels'] ?? [])
+                            ->map(fn ($label) => $label['name'])
+                            ->toArray(),
+                        'body' => $item['body'] ?? '',
+                    ];
+                })->toArray(),
         ];
 
         return Inertia::render('Welcome', [
@@ -59,6 +65,7 @@ class SearchController extends Controller
             'results' => $transformedResults,
             'canRegister' => true,
             'languages' => config('githublang', []),
+            'selectedLanguage' => $language,
         ]);
     }
 }
