@@ -34,7 +34,7 @@ withDefaults(defineProps<Props>(), {
                 </Link>
             </div>
             <div class="flex items-center gap-4">
-                <Link
+                <!-- <Link
                     v-if="isAuthenticated"
                     :href="dashboard()"
                     class="inline-block rounded-sm border border-border px-5 py-1.5 text-sm leading-normal text-foreground hover:border-primary transition-colors"
@@ -55,7 +55,7 @@ withDefaults(defineProps<Props>(), {
                     >
                         Register
                     </Link>
-                </template>
+                </template> -->
             </div>
         </nav>
     </header>

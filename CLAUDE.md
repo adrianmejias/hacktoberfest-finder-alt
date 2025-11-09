@@ -319,17 +319,89 @@ class SearchIssue implements SearchIssues
 - **Layout Composition**: Pages import layouts, not the reverse
 - **TypeScript Props**: Always define props with types using `defineProps<{ ... }>()`
 - **Composition API**: Use `<script setup>` syntax for all Vue 3 components
+- **Icon Components**: SVG icons are extracted as Vue components in `resources/js/components/icons/` with optional `class` prop for customization
+- **Single-View Navigation**: Search results use a TikTok-style single-view pattern with keyboard controls (↑↓ or j/k keys)
+- **Keyboard Event Handling**: Use `onMounted`/`onUnmounted` to add/remove global keyboard event listeners
+
+### Search Results Architecture
+
+The search results use a single-view navigation pattern inspired by TikTok:
+
+- **Current Index Tracking**: Use `ref(0)` to track which result is currently displayed
+- **Computed Current Item**: Derive the current item from `results.items[currentIndex.value]`
+- **Navigation Functions**: `goToNext()` and `goToPrevious()` with boundary checks
+- **Keyboard Controls**: Support both arrow keys (↑↓) and vim-style keys (j/k)
+- **Visual Indicators**: Show current position counter (e.g., "1 / 30")
+- **Accessibility**: Include tooltips with full timestamps using `title` attributes
+
+Example implementation in [SearchResults.vue](resources/js/pages/search/SearchResults.vue):
+
+```vue
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+
+const currentIndex = ref(0);
+const currentItem = computed(() => props.results.items[currentIndex.value]);
+
+const handleKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowDown' || event.key === 'j') {
+        event.preventDefault();
+        goToNext();
+    } else if (event.key === 'ArrowUp' || event.key === 'k') {
+        event.preventDefault();
+        goToPrevious();
+    }
+};
+
+onMounted(() => window.addEventListener('keydown', handleKeydown));
+onUnmounted(() => window.removeEventListener('keydown', handleKeydown));
+</script>
+```
+
+### Icon Component Pattern
+
+Icon components follow a consistent pattern for reusability:
+
+```vue
+<script setup lang="ts">
+interface Props {
+    class?: string;
+}
+defineProps<Props>();
+</script>
+
+<template>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        :class="$props.class || 'h-4 w-4'"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+    >
+        <!-- SVG path -->
+    </svg>
+</template>
+```
+
+Examples: [CalendarIcon.vue](resources/js/components/icons/CalendarIcon.vue), [RepositoryIcon.vue](resources/js/components/icons/RepositoryIcon.vue)
 
 ## Key Files to Review
 
+### Backend
 - `app/Actions/GitHub/SearchIssue.php` - GitHub issue search logic
-- `resources/js/app.ts` - Vue app initialization
-- `vite.config.ts` - Build configuration with Wayfinder plugin
 - `config/github.php` - GitHub API configuration (languages, labels, defaults)
 - `tests/Pest.php` - Test configuration & global helpers
 - `bootstrap/providers.php` - Service provider registration
 - `app/Mcp/Servers/HacktoberfestServer.php` - MCP server definition
 - `app/Mcp/Tools/SuggestOpenSourceProjectsTool.php` - MCP tool using SearchIssue action
+
+### Frontend
+- `resources/js/app.ts` - Vue app initialization
+- `resources/js/pages/Welcome.vue` - Main search page with form and results
+- `resources/js/pages/search/SearchForm.vue` - Search input and filters component
+- `resources/js/pages/search/SearchResults.vue` - Single-view TikTok-style results display
+- `resources/js/components/WelcomeHeader.vue` - Header with logo and branding
+- `resources/js/components/icons/` - Reusable SVG icon components
+- `vite.config.ts` - Build configuration with Wayfinder plugin
 
 ## Environment Setup
 
