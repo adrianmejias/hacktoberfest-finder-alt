@@ -43,6 +43,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Hostname
+    |--------------------------------------------------------------------------
+    |
+    | This value is the hostname of your application, which can be used for
+    | generating links or for other identification purposes.
+    |
+    */
+
+    'hostname' => env('APP_HOSTNAME', 'localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |
@@ -52,7 +64,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://'.env('APP_HOSTNAME', 'localhost')),
 
     /*
     |--------------------------------------------------------------------------

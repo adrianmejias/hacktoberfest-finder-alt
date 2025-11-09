@@ -32,7 +32,7 @@ class SearchController extends Controller
             'label' => $label,
             'comments' => $comments,
             'page' => $page,
-        ]);
+        ], true);
 
         // Transform GitHub API response to match frontend interface
         $transformedResults = [

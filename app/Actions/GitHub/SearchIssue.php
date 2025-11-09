@@ -8,6 +8,7 @@ use App\Actions\GitHub\Contracts\SearchIssues;
 use Exception;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -19,17 +20,49 @@ class SearchIssue implements SearchIssues
      *
      * @param  array<string, mixed>  $input
      */
-    public function search(array $input): array
+    public function search(array $input, bool $useCache = false): array
     {
-        Validator::make($input, [
+        $validated = Validator::make($input, [
             'q' => ['nullable', 'string', 'max:100'],
             'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
             'comments' => ['nullable', 'string', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1'],
+            'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
         ])->validate();
 
-        return $this->getResults($input);
+        $cacheKey = Str::of('github.search.')
+            ->append(values: md5(serialize($validated)))
+            ->toString();
+        $cacheTtl = app()->environment('production')
+            ? now()->addMinutes(15)
+            : now()->addSeconds(30);
+        // Cache::forget($cacheKey); // Uncomment to clear cache for testing
+
+        if (Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
+
+        //
+        $results = $this->getResults($validated);
+
+        if (! $useCache) {
+            return $results;
+        }
+
+        if (! empty($results['error'] ?? null)) {
+            return $results;
+        }
+
+        $results['cached_at'] = now()->toDateTimeString();
+        $results['cache_key'] = $cacheKey;
+        $results['cache_ttl'] = $cacheTtl->diffInMinutes(now());
+
+        return Cache::remember(
+            $cacheKey,
+            $cacheTtl,
+            fn () => $results
+        );
     }
 
     /**
@@ -58,7 +91,6 @@ class SearchIssue implements SearchIssues
             $query['comments'] = $comments;
         }
 
-        // Build the base query string
         $queryString = Arr::join(
             Arr::map(
                 $query,
@@ -67,7 +99,6 @@ class SearchIssue implements SearchIssues
             ' '
         );
 
-        // Add labels separately to allow multiple label: filters
         if ($label) {
             $labels = array_map('trim', explode(',', $label));
             $labelParts = [];
@@ -76,12 +107,14 @@ class SearchIssue implements SearchIssues
                     Str::of($singleLabel)->contains(' '),
                     fn ($str) => $str->wrap('"', '"')
                 )->toString();
-                $labelParts[] = 'label:' . $formattedLabel;
+                $labelParts[] = 'label:'.$formattedLabel;
             }
-            $queryString .= ' ' . implode(' ', $labelParts);
+            $queryString .= ' '.implode(' ', $labelParts);
         }
 
-        return $q ? $q . ' ' . $queryString : $queryString;
+        return Str::of($queryString)
+            ->when($q, fn ($str) => $str->prepend($q.' '))
+            ->toString();
     }
 
     /**
@@ -89,11 +122,10 @@ class SearchIssue implements SearchIssues
      *
      * @param  array<string, mixed>  $input
      */
-    private function getResults(array $input): array
+    public function getResults(array $input): array
     {
-        $q = $this->getQueryString($input);
-
         try {
+            $q = $this->getQueryString($input);
             $results = GitHub::connection('none')->search()->issues($q);
         } catch (Exception $e) {
             Log::channel('githublog')->error('GitHub Issue Search Failed', [

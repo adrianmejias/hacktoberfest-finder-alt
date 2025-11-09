@@ -167,9 +167,6 @@ const handleLabelClick = (label: string) => {
                         >
                             {{ currentItem.repo_name }}
                         </a>
-                        <span v-if="language" class="text-xs">
-                            • {{ language }}
-                        </span>
                     </div>
                     <div
                         class="flex items-center gap-1.5 text-sm text-muted-foreground whitespace-nowrap"

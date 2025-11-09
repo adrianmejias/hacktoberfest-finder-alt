@@ -43,12 +43,17 @@ const form = reactive<{
     noReplies: boolean;
 }>({
     q: '',
-    language: null,
-    labels: ['hacktoberfest', 'good first issue'],
-    noReplies: false,
+    language: localStorage.getItem('language') || null,
+    labels: localStorage.getItem('labels')
+        ? JSON.parse(localStorage.getItem('labels')!)
+        : ['hacktoberfest', 'good first issue'],
+    noReplies: localStorage.getItem('no-replies') === 'true' || false,
 });
 
 const submitForm = () => {
+    localStorage.setItem('language', form.language || '');
+    localStorage.setItem('labels', JSON.stringify(form.labels));
+    localStorage.setItem('no-replies', form.noReplies.toString());
     router.post(search(), {
         q: form.q,
         language: form.language,

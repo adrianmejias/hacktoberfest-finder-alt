@@ -53,7 +53,7 @@ class SuggestOpenSourceProjectsTool extends Tool
                 'comments' => $comments,
                 'page' => $page,
                 'limit' => $limit,
-            ]);
+            ], true);
         } catch (Exception $e) {
             return Response::text('An error occurred while searching for projects: '.$e->getMessage());
         }
