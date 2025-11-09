@@ -22,6 +22,7 @@ class SearchIssue implements SearchIssues
     public function search(array $input): array
     {
         Validator::make($input, [
+            'q' => ['required', 'string', 'max:100'],
             'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
             'comments' => ['nullable', 'string', 'max:100'],
@@ -38,6 +39,7 @@ class SearchIssue implements SearchIssues
      */
     public function getQueryString(array $input): string
     {
+        $q = $input['q'] ?? '';
         $language = $input['language'] ?? null;
         $label = $input['label'] ?? null;
         $comments = $input['comments'] ?? null;
@@ -72,7 +74,7 @@ class SearchIssue implements SearchIssues
                 ),
                 ' '
             )
-        )->toString();
+        )->prepend($q.' ')->toString();
     }
 
     /**

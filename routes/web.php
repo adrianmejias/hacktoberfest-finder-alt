@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', WelcomeController::class)->name('home');
 
-Route::post('/search', SearchController::class)->name('search');
+Route::post('/search', SearchController::class)
+    ->middleware(['throttle:5,1'])
+    ->name('search');
 
-Route::get('dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', DashboardController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 require __DIR__.'/settings.php';

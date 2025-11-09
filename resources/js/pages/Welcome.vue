@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { dashboard, login, register } from '@/routes';
-import { Head, Link } from '@inertiajs/vue3';
-import SearchForm from '@/pages/search/SearchForm.vue';
+import { reactive } from 'vue';
+import { dashboard, login, register, search } from '@/routes';
+import { Head, Link, Form } from '@inertiajs/vue3';
+import LanguageDropdown from '@/pages/search/LanguageDropdown.vue';
 import SearchResults from '@/pages/search/SearchResults.vue';
-
-withDefaults(
-    defineProps<{
-        canRegister: boolean;
-        languages?: string[];
-    }>(),
-    {
-        canRegister: true,
-        // languages: [],
-    },
-);
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import InputError from '@/components/InputError.vue';
 
 interface SearchItem {
     repo_title: string;
+    repo_url: string;
+    repo_name: string;
+    repo_link: string;
     updated_at: string;
+    labels: string[];
+    body: string;
 }
 
 interface SearchResult {
@@ -26,10 +23,24 @@ interface SearchResult {
     items: SearchItem[];
 }
 
-const searchQuery = ref<string | null>(null);
-const searchResults = ref<SearchResult>({
-    total_amount: 0,
-    items: [],
+withDefaults(
+    defineProps<{
+        canRegister: boolean;
+        languages?: string[];
+        query?: string;
+        results?: SearchResult;
+    }>(),
+    {
+        canRegister: true,
+    },
+);
+
+const form = reactive<{
+    q: string;
+    language: string | null;
+}>({
+    q: '',
+    language: null,
 });
 </script>
 
@@ -53,7 +64,6 @@ const searchResults = ref<SearchResult>({
                     Dashboard
                 </Link>
                 <template v-else>
-                    <SearchForm :languages="languages" @search="searchResults = $event" />
                     <Link
                         :href="login()"
                         class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
@@ -74,16 +84,64 @@ const searchResults = ref<SearchResult>({
             class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0"
         >
             <main
-                class="flex w-full max-w-[335px] flex-col-reverse overflow-hidden rounded-lg lg:max-w-4xl lg:flex-row"
+                class="flex w-full max-w-[335px] flex-col gap-6 rounded-lg lg:max-w-4xl"
             >
+                <!-- Search Form -->
                 <div
-                    x-if="searchQuery && searchResults"
-                    class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
+                    class="rounded-lg bg-white p-6 shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:bg-[#161615] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
                 >
-                    <SearchResults :query="searchQuery" :results="searchResults" />
+                    <h1
+                        class="mb-4 text-2xl font-bold text-[#1b1b18] dark:text-[#EDEDEC]"
+                    >
+                        Find Hacktoberfest Issues
+                    </h1>
+                    <Form
+                        v-bind="search.form()"
+                        :data="form"
+                        v-slot="{ errors, processing }"
+                        class="space-y-4"
+                    >
+                        <div class="flex flex-col gap-4 sm:flex-row">
+                            <div class="flex-1">
+                                <Input
+                                    v-model="form.q"
+                                    id="q"
+                                    type="text"
+                                    name="q"
+                                    placeholder="Search for issues..."
+                                    class="w-full dark:bg-[#0a0a0a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:placeholder:text-[#62605b]"
+                                    required
+                                    autofocus
+                                    :tabindex="1"
+                                />
+                                <InputError :message="errors.q" />
+                            </div>
+                            <LanguageDropdown
+                                v-model="form.language"
+                                :languages="languages"
+                            />
+                            <input
+                                type="hidden"
+                                name="language"
+                                :value="form.language || ''"
+                            />
+                            <Button
+                                type="submit"
+                                class="whitespace-nowrap"
+                                :disabled="processing"
+                            >
+                                Search Issues
+                            </Button>
+                        </div>
+                    </Form>
                 </div>
-                <div x-else class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-center text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <p>No search query provided.</p>
+
+                <!-- Search Results -->
+                <div
+                    v-if="results"
+                    class="rounded-lg bg-white p-6 shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:bg-[#161615] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
+                >
+                    <SearchResults :query="query || ''" :results="results" />
                 </div>
             </main>
         </div>

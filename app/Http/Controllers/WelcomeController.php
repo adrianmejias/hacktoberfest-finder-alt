@@ -12,7 +12,7 @@ class WelcomeController extends Controller
     {
         return Inertia::render('Welcome', [
             'canRegister' => Features::enabled(Features::registration()),
-            'languages' => config('github.languages', []),
+            'languages' => config('githublang', []),
         ]);
     }
 }

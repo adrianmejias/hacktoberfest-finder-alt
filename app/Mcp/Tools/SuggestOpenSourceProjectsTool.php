@@ -29,6 +29,7 @@ class SuggestOpenSourceProjectsTool extends Tool
     public function handle(Request $request): Response
     {
         $validated = $request->validate([
+            'q' => ['required', 'string', 'max:100'],
             'language' => ['nullable', 'string', 'max:50'],
             'label' => ['nullable', 'string', 'max:100'],
             'comments' => ['nullable', 'string', 'max:100'],
@@ -36,6 +37,7 @@ class SuggestOpenSourceProjectsTool extends Tool
             'limit' => ['sometimes', 'integer', 'min:1', 'max:20'],
         ]);
 
+        $q = $validated['q'] ?? '';
         $language = $validated['language'] ?? null;
         $label = $validated['label'] ?? null;
         $comments = $validated['comments'] ?? null;
@@ -45,6 +47,7 @@ class SuggestOpenSourceProjectsTool extends Tool
         //
         try {
             $results = $this->searchIssue->search([
+                'q' => $q,
                 'language' => $language,
                 'label' => $label,
                 'comments' => $comments,
@@ -75,6 +78,7 @@ class SuggestOpenSourceProjectsTool extends Tool
 
         // Format the results as markdown
         $markdown = view('mcp.suggest-open-source-projects', [
+            'q' => $q,
             'language' => $language,
             'label' => $label,
             'comments' => $comments,
@@ -97,6 +101,9 @@ class SuggestOpenSourceProjectsTool extends Tool
     public function schema(JsonSchema $schema): array
     {
         return [
+            'q' => $schema->string()
+                ->description('Search query to find relevant open source projects')
+                ->max(100),
             'language' => $schema->string()
                 ->description('Programming language to filter projects by (e.g., "PHP", "JavaScript", "Python")')
                 ->max(50),
