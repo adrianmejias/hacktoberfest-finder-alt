@@ -122,7 +122,7 @@ class SearchIssue implements SearchIssues
      *
      * @param  array<string, mixed>  $input
      */
-    public function getResults(array $input): array
+    private function getResults(array $input): array
     {
         try {
             $q = $this->getQueryString($input);
@@ -136,7 +136,7 @@ class SearchIssue implements SearchIssues
             return [
                 'total_count' => 0,
                 'incomplete_results' => false,
-                'items' => [],
+                // 'items' => [],
                 'error' => $e->getMessage(),
             ];
         }

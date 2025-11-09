@@ -9,7 +9,6 @@ use function Pest\Laravel\post;
 it('can search without language parameter', function () {
     $this->withoutMiddleware();
 
-    // Mock the SearchIssue action to avoid GitHub API calls
     mock(SearchIssue::class)
         ->shouldReceive('search')
         ->once()
@@ -68,11 +67,12 @@ it('can search with null language parameter', function () {
     mock(SearchIssue::class)
         ->shouldReceive('search')
         ->once()
-        ->with(\Mockery::on(function ($arg) {
-            return $arg['q'] === 'test query' && $arg['language'] === null;
-        }))
+        ->with(Mockery::on(
+            fn ($arg) => $arg['q'] === 'test query' && $arg['language'] === null
+        ))
         ->andReturn([
             'total_count' => 0,
+            'incomplete_results' => false,
             'items' => [],
         ]);
 
@@ -95,20 +95,19 @@ it('can search with specific language parameter', function () {
     mock(SearchIssue::class)
         ->shouldReceive('search')
         ->once()
-        ->with(\Mockery::on(function ($arg) {
-            return $arg['q'] === 'test query' && $arg['language'] === 'JavaScript';
-        }))
+        ->with(Mockery::on(
+            fn ($arg) => $arg['q'] === 'test query' && $arg['language'] === 'JavaScript'
+        ))
         ->andReturn([
             'total_count' => 1,
+            'incomplete_results' => false,
             'items' => [
                 [
                     'title' => 'JavaScript Issue',
                     'html_url' => 'https://github.com/test/js-repo/issues/1',
                     'repository_url' => 'https://api.github.com/repos/test/js-repo',
                     'updated_at' => '2025-01-03T00:00:00Z',
-                    'labels' => [
-                        ['name' => 'javascript'],
-                    ],
+                    'labels' => ['javascript'],
                     'body' => 'A JavaScript related issue',
                 ],
             ],
@@ -122,7 +121,9 @@ it('can search with specific language parameter', function () {
     $response->assertInertia(fn (Assert $page) => $page
         ->component('Welcome')
         ->where('query', 'test query')
+        ->where('language', 'JavaScript')
         ->where('results.total_amount', 1)
+        ->where('results.incomplete_results', false)
         ->has('results.items.0', fn (Assert $item) => $item
             ->where('repo_title', 'JavaScript Issue')
             ->where('repo_url', 'https://github.com/test/js-repo/issues/1')

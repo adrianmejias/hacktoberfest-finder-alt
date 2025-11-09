@@ -24,6 +24,7 @@ class SearchController extends Controller
         $label = $validated['label'] ?? null;
         $comments = $validated['comments'] ?? null;
         $page = $validated['page'] ?? 1;
+        $limit = $validated['limit'] ?? 10;
 
         //
         $results = $searchIssue->search([
@@ -32,6 +33,7 @@ class SearchController extends Controller
             'label' => $label,
             'comments' => $comments,
             'page' => $page,
+            'limit'=> $limit,
         ], true);
 
         // Transform GitHub API response to match frontend interface

@@ -6,6 +6,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string|null $q
+ * @property string|null $language
+ * @property string|null $label
+ * @property string|null $comments
+ * @property int|null $page
+ * @property int|null $limit
+ */
 class SearchRequest extends FormRequest
 {
     /**
@@ -44,6 +52,7 @@ class SearchRequest extends FormRequest
             'label' => ['nullable', 'string', 'max:100'],
             'comments' => ['nullable', 'string', 'max:100'],
             'page' => ['nullable', 'integer', 'min:1'],
+            'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
         ];
     }
 }
