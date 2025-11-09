@@ -3,17 +3,13 @@
 use App\Actions\GitHub\SearchIssue;
 use Inertia\Testing\AssertableInertia as Assert;
 
-use function Pest\Laravel\mock;
-use function Pest\Laravel\post;
-
 it('can search without language parameter', function () {
-    $this->withoutMiddleware();
-
-    mock(SearchIssue::class)
-        ->shouldReceive('search')
+    $mock = $this->mock(SearchIssue::class);
+    $mock->shouldReceive('search')
         ->once()
         ->andReturn([
             'total_count' => 2,
+            'incomplete_results' => false,
             'items' => [
                 [
                     'title' => 'Test Issue 1',
@@ -37,9 +33,12 @@ it('can search without language parameter', function () {
             ],
         ]);
 
-    $response = post('/search', [
-        'q' => 'test query',
-    ]);
+    $this->instance(SearchIssue::class, $mock);
+
+    $response = $this->withoutMiddleware()
+        ->post('/search', [
+            'q' => 'test query',
+        ]);
 
     $response->assertInertia(fn (Assert $page) => $page
         ->component('Welcome')
@@ -62,42 +61,42 @@ it('can search without language parameter', function () {
 });
 
 it('can search with null language parameter', function () {
-    $this->withoutMiddleware();
-
-    mock(SearchIssue::class)
-        ->shouldReceive('search')
+    $mock = $this->mock(SearchIssue::class);
+    $mock->shouldReceive('search')
         ->once()
         ->with(Mockery::on(
             fn ($arg) => $arg['q'] === 'test query' && $arg['language'] === null
-        ))
+        ), true)
         ->andReturn([
             'total_count' => 0,
             'incomplete_results' => false,
             'items' => [],
         ]);
 
-    $response = post('/search', [
-        'q' => 'test query',
-        'language' => null,
-    ]);
+    $this->instance(SearchIssue::class, $mock);
+
+    $response = $this->withoutMiddleware()
+        ->post('/search', [
+            'q' => 'test query',
+            'language' => null,
+        ]);
 
     $response->assertInertia(fn (Assert $page) => $page
         ->component('Welcome')
         ->where('query', 'test query')
+        ->where('selectedLanguage', null)
         ->where('results.total_amount', 0)
         ->has('results.items', 0)
     );
 });
 
 it('can search with specific language parameter', function () {
-    $this->withoutMiddleware();
-
-    mock(SearchIssue::class)
-        ->shouldReceive('search')
+    $mock = $this->mock(SearchIssue::class);
+    $mock->shouldReceive('search')
         ->once()
         ->with(Mockery::on(
             fn ($arg) => $arg['q'] === 'test query' && $arg['language'] === 'JavaScript'
-        ))
+        ), true)
         ->andReturn([
             'total_count' => 1,
             'incomplete_results' => false,
@@ -107,21 +106,24 @@ it('can search with specific language parameter', function () {
                     'html_url' => 'https://github.com/test/js-repo/issues/1',
                     'repository_url' => 'https://api.github.com/repos/test/js-repo',
                     'updated_at' => '2025-01-03T00:00:00Z',
-                    'labels' => ['javascript'],
+                    'labels' => [['name' => 'javascript']],
                     'body' => 'A JavaScript related issue',
                 ],
             ],
         ]);
 
-    $response = post('/search', [
-        'q' => 'test query',
-        'language' => 'JavaScript',
-    ]);
+    $this->instance(SearchIssue::class, $mock);
+
+    $response = $this->withoutMiddleware()
+        ->post('/search', [
+            'q' => 'test query',
+            'language' => 'JavaScript',
+        ]);
 
     $response->assertInertia(fn (Assert $page) => $page
         ->component('Welcome')
         ->where('query', 'test query')
-        ->where('language', 'JavaScript')
+        ->where('selectedLanguage', 'JavaScript')
         ->where('results.total_amount', 1)
         ->where('results.incomplete_results', false)
         ->has('results.items.0', fn (Assert $item) => $item

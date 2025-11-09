@@ -66,7 +66,7 @@ class SearchController extends Controller
             'query' => $q,
             'results' => $transformedResults,
             'canRegister' => true,
-            'languages' => config('githublang', []),
+            'languages' => config('github.languages', []),
             'selectedLanguage' => $language,
         ]);
     }
