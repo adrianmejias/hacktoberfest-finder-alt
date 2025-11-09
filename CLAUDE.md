@@ -245,9 +245,7 @@ To add new MCP functionality:
 ### Configuration Files
 
 - **GitHub API**: `config/github.php` - API endpoint, supported languages, default labels/filters
-  - `top_languages` - Languages shown first in UI
-  - `default_labels` - Default search includes 'hacktoberfest' + 'good first issue'
-  - `languages` - Comprehensive list of all GitHub languages
+- **GitHub Languages**: `config/github/languages.php`
 - **Fortify**: `config/fortify.php` - Authentication configuration
 - **Inertia**: `config/inertia.php` - Inertia.js settings
 
@@ -275,7 +273,7 @@ use GrahamCampbell\GitHub\Facades\GitHub;
 
 class SearchIssue implements SearchIssues
 {
-    public function search(array $input): array
+    public function search(array $input, bool $useCache = false): array
     {
         $q = $this->getQueryString($input);
         return GitHub::connection('none')->search()->issues($q);
