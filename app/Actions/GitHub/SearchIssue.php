@@ -70,7 +70,7 @@ class SearchIssue implements SearchIssues
      *
      * @param  array<string, mixed>  $input
      */
-    public function getQueryString(array $input): string
+    private function getQueryString(array $input): string
     {
         $q = $input['q'] ?? '';
         $language = $input['language'] ?? null;

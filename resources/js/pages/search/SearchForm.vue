@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Form } from '@inertiajs/vue3';
-import { search } from '@/routes';
-import LanguageDropdown from '@/pages/search/LanguageDropdown.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import InputError from '@/components/InputError.vue';
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 import SearchIcon from '@/components/icons/SearchIcon.vue';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import LanguageDropdown from '@/pages/search/LanguageDropdown.vue';
+import { search } from '@/routes';
+import { Form } from '@inertiajs/vue3';
 
 interface FormData {
     q: string;
@@ -29,7 +29,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <div class="rounded-lg bg-card p-6 border border-border">
+    <div class="bg-card border-border rounded-lg border p-6">
         <Form
             v-bind="search.form()"
             :data="form"
@@ -57,10 +57,11 @@ const emit = defineEmits<{
                 <button
                     type="button"
                     @click="emit('toggle-no-replies')"
-                    class="inline-flex items-center justify-center rounded bg-muted px-3 py-1.5 text-sm transition-colors whitespace-nowrap"
+                    class="bg-muted inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1.5 text-sm transition-colors"
                     :class="{
-                        'bg-accent text-accent-foreground ring-1 ring-accent': form.noReplies,
-                        'hover:bg-muted/80': !form.noReplies
+                        'bg-accent text-accent-foreground ring-accent ring-1':
+                            form.noReplies,
+                        'hover:bg-muted/80': !form.noReplies,
                     }"
                     title="Show issues where no replies have been submitted"
                 >
@@ -95,16 +96,16 @@ const emit = defineEmits<{
                 <span
                     v-for="(label, index) in form.labels"
                     :key="index"
-                    class="inline-flex items-center gap-1 rounded bg-muted px-2 py-1 text-xs cursor-pointer"
+                    class="bg-muted inline-flex cursor-pointer items-center gap-1 rounded px-2 py-1 text-xs"
                     :class="{
-                        'cursor-pointer hover:bg-muted/80':
+                        'hover:bg-muted/80 cursor-pointer':
                             label.toLowerCase() !== 'hacktoberfest',
                         'cursor-not-allowed opacity-75':
                             label.toLowerCase() === 'hacktoberfest',
                     }"
                     @click="
                         label.toLowerCase() !== 'hacktoberfest' &&
-                            emit('remove-label', label)
+                        emit('remove-label', label)
                     "
                 >
                     #{{ label }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 
 // Components
 import { Button } from '@/components/ui/button';
@@ -47,7 +47,7 @@ const filteredLanguages = computed(() => {
         return props.languages || [];
     }
     return (props.languages || []).filter((language) =>
-        language.toLowerCase().includes(searchQuery.value.toLowerCase())
+        language.toLowerCase().includes(searchQuery.value.toLowerCase()),
     );
 });
 </script>
@@ -68,7 +68,7 @@ const filteredLanguages = computed(() => {
         <div
             v-if="isDropdownOpen"
             id="dropdown"
-            class="absolute top-full left-0 z-50 mt-1 w-56 divide-y divide-border rounded-lg bg-popover shadow-lg border border-border"
+            class="divide-border bg-popover border-border absolute left-0 top-full z-50 mt-1 w-56 divide-y rounded-lg border shadow-lg"
         >
             <div class="p-2">
                 <Input
@@ -81,33 +81,28 @@ const filteredLanguages = computed(() => {
                 />
             </div>
             <ul
-                class="max-h-60 overflow-y-auto py-2 text-sm text-popover-foreground"
+                class="text-popover-foreground max-h-60 overflow-y-auto py-2 text-sm"
                 aria-labelledby="dropdown-button"
             >
                 <li v-if="!searchQuery">
                     <button
                         type="button"
                         @click="selectLanguage('All Languages')"
-                        class="block w-full px-4 py-2 text-left hover:bg-muted transition-colors"
+                        class="hover:bg-muted block w-full px-4 py-2 text-left transition-colors"
                         :class="{
-                            'bg-muted':
-                                selectedLanguage === 'All Languages',
+                            'bg-muted': selectedLanguage === 'All Languages',
                         }"
                     >
                         All Languages
                     </button>
                 </li>
-                <li
-                    v-for="(language, index) in filteredLanguages"
-                    :key="index"
-                >
+                <li v-for="(language, index) in filteredLanguages" :key="index">
                     <button
                         type="button"
                         @click="selectLanguage(language)"
-                        class="block w-full px-4 py-2 text-left hover:bg-muted transition-colors"
+                        class="hover:bg-muted block w-full px-4 py-2 text-left transition-colors"
                         :class="{
-                            'bg-muted':
-                                selectedLanguage === language,
+                            'bg-muted': selectedLanguage === language,
                         }"
                     >
                         {{ language }}
@@ -115,7 +110,7 @@ const filteredLanguages = computed(() => {
                 </li>
                 <li
                     v-if="searchQuery && filteredLanguages.length === 0"
-                    class="px-4 py-2 text-muted-foreground"
+                    class="text-muted-foreground px-4 py-2"
                 >
                     No languages found
                 </li>

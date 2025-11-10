@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { dashboard, login, register } from '@/routes';
 
 interface Props {
     canRegister?: boolean;
@@ -15,20 +14,19 @@ withDefaults(defineProps<Props>(), {
 
 <template>
     <header
-        class="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl"
+        class="not-has-[nav]:hidden mb-6 w-full max-w-[335px] text-sm lg:max-w-4xl"
     >
         <nav class="flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <Link
-                    href="/"
-                    class="flex items-center gap-3 group"
-                >
+                <Link href="/" class="group flex items-center gap-3">
                     <img
                         src="/logo-hacktoberfest-nav.svg"
                         alt="Hacktoberfest"
-                        class="h-8 w-auto group-hover:opacity-80 transition-opacity"
+                        class="h-8 w-auto transition-opacity group-hover:opacity-80"
                     />
-                    <span class="text-lg font-bold text-foreground group-hover:opacity-80 transition-opacity">
+                    <span
+                        class="text-foreground text-lg font-bold transition-opacity group-hover:opacity-80"
+                    >
                         Issue Finder
                     </span>
                 </Link>

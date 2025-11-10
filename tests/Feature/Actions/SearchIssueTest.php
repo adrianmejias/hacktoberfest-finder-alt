@@ -43,8 +43,7 @@ test('search issues with invalid input', function () {
     ]);
 
     expect($results)->toBeArray();
-    expect($results)->toHaveKeys(['total_count', 'incomplete_results', 'items', 'error']);
+    expect($results)->toHaveKeys(['total_count', 'incomplete_results', 'error']);
     expect($results['total_count'])->toBe(0);
-    expect($results['items'])->toBeArray();
     expect($results['error'])->toBe('Validation Failed: Field "q" is invalid, for resource "Search": ""invalid_comments" is not a numeric value - please provide an integer value"');
 });

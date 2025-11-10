@@ -94,7 +94,7 @@ import { Form, Head } from '@inertiajs/vue3';
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
+            <div class="text-muted-foreground text-center text-sm">
                 Already have an account?
                 <TextLink
                     :href="login()"

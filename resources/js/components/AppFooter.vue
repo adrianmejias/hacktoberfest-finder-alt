@@ -1,13 +1,18 @@
 <script setup lang="ts">
-// Simple footer component for the public pages
+const currentYear = new Date().getFullYear();
 </script>
 
 <template>
     <footer
-        class="mt-8 w-full max-w-[335px] lg:max-w-4xl border-t border-border pt-6"
+        class="border-border mt-8 w-full max-w-[335px] border-t pt-6 lg:max-w-4xl"
     >
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-sm text-muted-foreground">
-            <p>© 2025 Hacktoberfest Finder. Made with ❤️ for open source.</p>
+        <div
+            class="text-muted-foreground flex flex-col gap-4 text-sm sm:flex-row sm:items-center sm:justify-between"
+        >
+            <p>
+                &copy; {{ currentYear }} Hacktoberfest Finder. Made with ❤️ for
+                open source in conjunction with AI.
+            </p>
             <div class="flex gap-4">
                 <a
                     href="https://github.com"
