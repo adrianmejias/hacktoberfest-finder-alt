@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Actions\GitHub;
 
 use App\Actions\GitHub\Contracts\SearchIssues;
+use App\Services\GitHub\Facades\GitHub;
 use Exception;
-use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -126,7 +126,7 @@ class SearchIssue implements SearchIssues
     {
         try {
             $q = $this->getQueryString($input);
-            $results = GitHub::connection('none')->search()->issues($q);
+            $results = GitHub::issues($q);
         } catch (Exception $e) {
             Log::channel('githublog')->error('GitHub Issue Search Failed', [
                 'q' => $q,

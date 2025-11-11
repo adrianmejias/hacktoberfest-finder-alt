@@ -8,7 +8,7 @@ Hacktoberfest Finder - A web application that helps developers discover open sou
 
 ## Tech Stack
 
-- **Backend**: Laravel 12 with graham-campbell/github package
+- **Backend**: Laravel 12
 - **Frontend**: Vue 3 + TypeScript + Inertia.js (SPA with SSR support)
 - **Styling**: Tailwind CSS 4 + Reka UI components
 - **Auth**: Laravel Fortify (with 2FA support)
@@ -70,9 +70,8 @@ php artisan ide-helper:generate  # Generate IDE helper files
 
 ### GitHub Integration
 
-This project uses the **graham-campbell/github** package for GitHub API interactions:
+This project uses the **App\Services\GitHub\Facades\GitHub** package for GitHub API interactions:
 
-- **Package**: `graham-campbell/github` - A Laravel wrapper for php-github-api
 - **Usage**: Access via `GitHub` facade or dependency injection
 - **Actions Pattern**: Business logic encapsulated in action classes
 - **Location**: `app/Actions/GitHub/`
@@ -269,14 +268,15 @@ To add new MCP functionality:
 
 Example:
 ```php
-use GrahamCampbell\GitHub\Facades\GitHub;
+use App\Services\GitHub\Facades\GitHub;
 
 class SearchIssue implements SearchIssues
 {
     public function search(array $input, bool $useCache = false): array
     {
         $q = $this->getQueryString($input);
-        return GitHub::connection('none')->search()->issues($q);
+
+        return GitHub::issues($q);
     }
 }
 ```
