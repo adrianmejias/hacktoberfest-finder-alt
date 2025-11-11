@@ -32,7 +32,7 @@ withDefaults(
     }>(),
     {
         canRegister: true,
-        selectedLanguage: null,
+        selectedLanguage: localStorage.getItem('language') || null,
     },
 );
 
@@ -163,6 +163,7 @@ const dismissBanner = () => {
                 <SearchForm
                     :form="form"
                     :languages="languages"
+                    :selected-language="selectedLanguage"
                     @remove-label="removeLabel"
                     @toggle-no-replies="toggleNoReplies"
                 />

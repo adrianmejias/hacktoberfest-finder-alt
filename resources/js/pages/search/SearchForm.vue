@@ -18,6 +18,7 @@ interface FormData {
 interface SearchFormProps {
     form: FormData;
     languages?: string[];
+    selectedLanguage?: string | null;
 }
 
 defineProps<SearchFormProps>();
@@ -49,7 +50,10 @@ const emit = defineEmits<{
                     />
                     <InputError :message="errors.q" />
                 </div>
-                <LanguageDropdown :languages="languages" />
+                <LanguageDropdown
+                    :languages="languages"
+                    :selected-language="selectedLanguage"
+                />
                 <button
                     type="button"
                     @click="emit('toggle-no-replies')"

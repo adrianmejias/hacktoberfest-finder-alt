@@ -10,6 +10,7 @@ import ChevronDown from '@/components/icons/ChevronDown.vue';
 
 const props = defineProps<{
     languages?: string[];
+    selectedLanguage?: string | null;
     modelValue?: string | null;
 }>();
 
@@ -17,7 +18,9 @@ const emit = defineEmits<{
     'update:modelValue': [language: string | null];
 }>();
 
-const selectedLanguage = ref<string>(props.modelValue || 'All Languages');
+const selectedLanguage = ref<string>(
+    props.modelValue || props.selectedLanguage || 'All Languages',
+);
 const isDropdownOpen = ref(false);
 const searchQuery = ref('');
 const searchInputRef = ref<InstanceType<typeof Input> | null>(null);
@@ -27,7 +30,6 @@ const toggleDropdown = () => {
     if (!isDropdownOpen.value) {
         searchQuery.value = '';
     } else {
-        // Focus the search input when dropdown opens
         nextTick(() => {
             searchInputRef.value?.$el?.focus();
         });

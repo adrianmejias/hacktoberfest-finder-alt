@@ -34,9 +34,12 @@ const emit = defineEmits<{
 const currentIndex = ref(0);
 const currentItem = computed(() => props.results.items[currentIndex.value]);
 
-watch(() => props.results, () => {
-    currentIndex.value = 0;
-});
+watch(
+    () => props.results,
+    () => {
+        currentIndex.value = 0;
+    },
+);
 
 const goToNext = () => {
     if (currentIndex.value < props.results.items.length - 1) {
@@ -49,6 +52,17 @@ const goToPrevious = () => {
     }
 };
 const handleKeydown = (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement;
+    const isInputField =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'SELECT' ||
+        target.isContentEditable;
+
+    if (isInputField) {
+        return;
+    }
+
     if (event.key === 'ArrowDown' || event.key === 'j') {
         event.preventDefault();
         goToNext();
