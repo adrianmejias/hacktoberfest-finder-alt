@@ -7,4 +7,5 @@ use Laravel\Mcp\Facades\Mcp;
 
 Mcp::web('/mcp/hacktoberfest', HacktoberfestServer::class)
     // ->middleware(['throttle:mcp'])
+    ->middleware(['throttle:10,1'])
     ->name('mcp.hacktoberfest');

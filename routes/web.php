@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', WelcomeController::class)->name('home');
 
 Route::post('/search', SearchController::class)
-    ->middleware(['throttle:5,1'])
+    ->middleware(['throttle:10,1'])
     ->name('search');
 
 Route::get('dashboard', DashboardController::class)

@@ -106,7 +106,7 @@ const dismissBanner = () => {
         />
     </Head>
     <div
-        class="bg-background text-foreground flex min-h-screen flex-col items-center p-6 lg:justify-center lg:p-8"
+        class="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8"
     >
         <WelcomeHeader
             :can-register="canRegister"
@@ -120,7 +120,7 @@ const dismissBanner = () => {
             >
                 <button
                     @click="dismissBanner"
-                    class="absolute right-4 top-4 rounded-md p-1 text-orange-600 transition-colors hover:bg-orange-500/20 hover:text-orange-700 dark:text-orange-400 dark:hover:bg-orange-400/20 dark:hover:text-orange-300"
+                    class="absolute top-4 right-4 rounded-md p-1 text-orange-600 transition-colors hover:bg-orange-500/20 hover:text-orange-700 dark:text-orange-400 dark:hover:bg-orange-400/20 dark:hover:text-orange-300"
                     aria-label="Dismiss banner"
                 >
                     <svg
@@ -141,11 +141,11 @@ const dismissBanner = () => {
                 >
                     Hacktoberfest 2025 has ended
                 </h2>
-                <p class="text-muted-foreground mb-4">
+                <p class="mb-4 text-muted-foreground">
                     Thank you to everyone who participated! Hacktoberfest 2025
                     concluded on October 31st.
                 </p>
-                <p class="text-muted-foreground text-sm">
+                <p class="text-sm text-muted-foreground">
                     You can still search for and contribute to open source
                     projects year-round. Check back in
                     <strong class="text-foreground">October 2026</strong> for
@@ -155,7 +155,7 @@ const dismissBanner = () => {
         </div>
 
         <div
-            class="duration-750 starting:opacity-0 flex w-full items-center justify-center opacity-100 transition-opacity lg:grow"
+            class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0"
         >
             <main
                 class="flex w-full max-w-[335px] flex-col gap-6 rounded-lg lg:max-w-4xl"
@@ -169,7 +169,7 @@ const dismissBanner = () => {
 
                 <div
                     v-if="results"
-                    class="bg-card border-border rounded-lg border p-6"
+                    class="rounded-lg border border-border bg-card p-6"
                 >
                     <SearchResults
                         :query="query || ''"

@@ -4,7 +4,13 @@ import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+    build: {
+        sourcemap: mode === 'production' ? false : 'inline',
+    },
+    esbuild: {
+        drop: mode === 'production' ? ['console'] : [],
+    },
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],
@@ -24,4 +30,4 @@ export default defineConfig({
             },
         }),
     ],
-});
+}));

@@ -9,18 +9,18 @@ import { search } from '@/routes';
 import { Form } from '@inertiajs/vue3';
 
 interface FormData {
-    q: string;
+    q: string | null;
     language: string | null;
     labels: string[];
     noReplies: boolean;
 }
 
-interface Props {
+interface SearchFormProps {
     form: FormData;
     languages?: string[];
 }
 
-defineProps<Props>();
+defineProps<SearchFormProps>();
 
 const emit = defineEmits<{
     'remove-label': [label: string];
@@ -29,17 +29,16 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <div class="bg-card border-border rounded-lg border p-6">
+    <div class="rounded-lg border border-border bg-card p-6">
         <Form
             v-bind="search.form()"
-            :data="form"
+            :reset-on-success="[]"
             v-slot="{ errors, processing }"
             class="space-y-4"
         >
             <div class="flex flex-col gap-4 sm:flex-row">
                 <div class="flex-1">
                     <Input
-                        v-model="form.q"
                         id="q"
                         type="text"
                         name="q"
@@ -50,16 +49,13 @@ const emit = defineEmits<{
                     />
                     <InputError :message="errors.q" />
                 </div>
-                <LanguageDropdown
-                    v-model="form.language"
-                    :languages="languages"
-                />
+                <LanguageDropdown :languages="languages" />
                 <button
                     type="button"
                     @click="emit('toggle-no-replies')"
-                    class="bg-muted inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1.5 text-sm transition-colors"
+                    class="inline-flex items-center justify-center rounded bg-muted px-3 py-1.5 text-sm whitespace-nowrap transition-colors"
                     :class="{
-                        'bg-accent text-accent-foreground ring-accent ring-1':
+                        'bg-accent text-accent-foreground ring-1 ring-accent':
                             form.noReplies,
                         'hover:bg-muted/80': !form.noReplies,
                     }"
@@ -96,9 +92,9 @@ const emit = defineEmits<{
                 <span
                     v-for="(label, index) in form.labels"
                     :key="index"
-                    class="bg-muted inline-flex cursor-pointer items-center gap-1 rounded px-2 py-1 text-xs"
+                    class="inline-flex cursor-pointer items-center gap-1 rounded bg-muted px-2 py-1 text-xs"
                     :class="{
-                        'hover:bg-muted/80 cursor-pointer':
+                        'cursor-pointer hover:bg-muted/80':
                             label.toLowerCase() !== 'hacktoberfest',
                         'cursor-not-allowed opacity-75':
                             label.toLowerCase() === 'hacktoberfest',
