@@ -31,28 +31,19 @@ const emit = defineEmits<{
     'label-clicked': [label: string];
 }>();
 
-// Track current result index for single-view navigation
 const currentIndex = ref(0);
-
-// Computed property for current item
 const currentItem = computed(() => props.results.items[currentIndex.value]);
-
-// Navigation functions
 const goToNext = () => {
     if (currentIndex.value < props.results.items.length - 1) {
         currentIndex.value++;
     }
 };
-
 const goToPrevious = () => {
     if (currentIndex.value > 0) {
         currentIndex.value--;
     }
 };
-
-// Keyboard navigation
 const handleKeydown = (event: KeyboardEvent) => {
-    // Arrow keys or j/k navigation (like vim/TikTok)
     if (event.key === 'ArrowDown' || event.key === 'j') {
         event.preventDefault();
         goToNext();
@@ -62,16 +53,13 @@ const handleKeydown = (event: KeyboardEvent) => {
     }
 };
 
-// Set up keyboard listeners
 onMounted(() => {
     window.addEventListener('keydown', handleKeydown);
 });
-
 onUnmounted(() => {
     window.removeEventListener('keydown', handleKeydown);
 });
 
-// Configure marked for safe rendering
 marked.setOptions({
     breaks: true,
     gfm: true,
@@ -125,7 +113,6 @@ const handleLabelClick = (label: string) => {
 
 <template>
     <div>
-        <!-- Header with navigation counter -->
         <div class="mb-6 flex items-center justify-between gap-4">
             <h1 class="text-2xl font-bold text-card-foreground">
                 <span v-if="query">Search Results for "{{ query }}"</span>
@@ -137,15 +124,10 @@ const handleLabelClick = (label: string) => {
                 </p>
             </div>
         </div>
-
-        <!-- No results state -->
         <div v-if="results.total_amount === 0">
             <p class="text-muted-foreground">No results found.</p>
         </div>
-
-        <!-- Single result view -->
         <div v-else-if="currentItem" class="space-y-4">
-            <!-- Issue title -->
             <a
                 :href="currentItem.repo_url"
                 target="_blank"
@@ -154,10 +136,7 @@ const handleLabelClick = (label: string) => {
             >
                 {{ currentItem.repo_title }}
             </a>
-
-            <!-- Metadata -->
             <div class="space-y-3">
-                <!-- Two-column layout for repo and updated -->
                 <div class="flex items-start justify-between gap-4">
                     <div
                         class="flex items-center gap-1.5 text-sm text-muted-foreground"
@@ -182,8 +161,6 @@ const handleLabelClick = (label: string) => {
                         Updated {{ getRelativeTime(currentItem.updated_at) }}
                     </div>
                 </div>
-
-                <!-- Labels -->
                 <div
                     v-if="currentItem.labels.length > 0"
                     class="flex flex-wrap gap-2"
@@ -208,16 +185,12 @@ const handleLabelClick = (label: string) => {
                     </button>
                 </div>
             </div>
-
-            <!-- Full description -->
             <div v-if="currentItem.body" class="mt-6">
                 <div
                     class="prose prose-sm max-w-none text-sm text-card-foreground dark:prose-invert"
                     v-html="parseMarkdown(currentItem.body)"
                 ></div>
             </div>
-
-            <!-- Navigation controls -->
             <div
                 class="mt-8 flex items-center justify-between border-t border-border pt-6"
             >
