@@ -2,7 +2,7 @@
 import CalendarIcon from '@/components/icons/CalendarIcon.vue';
 import RepositoryIcon from '@/components/icons/RepositoryIcon.vue';
 import { marked } from 'marked';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 interface SearchItem {
     repo_title: string;
@@ -33,6 +33,11 @@ const emit = defineEmits<{
 
 const currentIndex = ref(0);
 const currentItem = computed(() => props.results.items[currentIndex.value]);
+
+watch(() => props.results, () => {
+    currentIndex.value = 0;
+});
+
 const goToNext = () => {
     if (currentIndex.value < props.results.items.length - 1) {
         currentIndex.value++;
