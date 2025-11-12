@@ -133,12 +133,12 @@ const handleLabelClick = (label: string) => {
 <template>
     <div>
         <div class="mb-6 flex items-center justify-between gap-4">
-            <h1 class="text-2xl font-bold text-card-foreground">
+            <h1 class="text-card-foreground text-2xl font-bold">
                 <span v-if="query">Search Results for "{{ query }}"</span>
                 <span v-else>Search Results</span>
             </h1>
             <div class="flex items-center gap-3">
-                <p class="text-sm whitespace-nowrap text-muted-foreground">
+                <p class="text-muted-foreground whitespace-nowrap text-sm">
                     {{ currentIndex + 1 }} / {{ results.items.length }}
                 </p>
             </div>
@@ -151,14 +151,14 @@ const handleLabelClick = (label: string) => {
                 :href="currentItem.repo_url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="block text-2xl font-bold text-accent hover:underline"
+                class="text-accent block text-2xl font-bold hover:underline"
             >
                 {{ currentItem.repo_title }}
             </a>
             <div class="space-y-3">
                 <div class="flex items-start justify-between gap-4">
                     <div
-                        class="flex items-center gap-1.5 text-sm text-muted-foreground"
+                        class="text-muted-foreground flex items-center gap-1.5 text-sm"
                     >
                         <RepositoryIcon class="h-4 w-4 shrink-0" />
                         <a
@@ -171,7 +171,7 @@ const handleLabelClick = (label: string) => {
                         </a>
                     </div>
                     <div
-                        class="flex items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground"
+                        class="text-muted-foreground flex items-center gap-1.5 whitespace-nowrap text-sm"
                         :title="
                             new Date(currentItem.updated_at).toLocaleString()
                         "
@@ -192,9 +192,9 @@ const handleLabelClick = (label: string) => {
                             label.toLowerCase() !== 'hacktoberfest' &&
                             handleLabelClick(label)
                         "
-                        class="inline-block rounded bg-muted px-2 py-1 text-xs transition-colors"
+                        class="bg-muted inline-block rounded px-2 py-1 text-xs transition-colors"
                         :class="{
-                            'cursor-pointer hover:bg-muted/80':
+                            'hover:bg-muted/80 cursor-pointer':
                                 label.toLowerCase() !== 'hacktoberfest',
                             'cursor-not-allowed opacity-75':
                                 label.toLowerCase() === 'hacktoberfest',
@@ -206,27 +206,27 @@ const handleLabelClick = (label: string) => {
             </div>
             <div v-if="currentItem.body" class="mt-6">
                 <div
-                    class="prose prose-sm max-w-none text-sm text-card-foreground dark:prose-invert"
+                    class="prose prose-sm text-card-foreground dark:prose-invert max-w-none text-sm"
                     v-html="parseMarkdown(currentItem.body)"
                 ></div>
             </div>
             <div
-                class="mt-8 flex items-center justify-between border-t border-border pt-6"
+                class="border-border mt-8 flex items-center justify-between border-t pt-6"
             >
                 <button
                     @click="goToPrevious"
                     :disabled="currentIndex === 0"
-                    class="rounded bg-muted px-4 py-2 text-muted-foreground transition-colors hover:bg-muted/80 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="bg-muted text-muted-foreground hover:bg-muted/80 rounded px-4 py-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     ← Previous
                 </button>
-                <p class="text-xs text-muted-foreground">
+                <p class="text-muted-foreground text-xs">
                     Use ↑↓ arrow keys or j/k to navigate
                 </p>
                 <button
                     @click="goToNext"
                     :disabled="currentIndex === results.items.length - 1"
-                    class="rounded bg-muted px-4 py-2 text-muted-foreground transition-colors hover:bg-muted/80 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="bg-muted text-muted-foreground hover:bg-muted/80 rounded px-4 py-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     Next →
                 </button>

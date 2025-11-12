@@ -30,7 +30,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <div class="rounded-lg border border-border bg-card p-6">
+    <div class="border-border bg-card rounded-lg border p-6">
         <Form
             v-bind="search.form()"
             :reset-on-success="[]"
@@ -57,9 +57,9 @@ const emit = defineEmits<{
                 <button
                     type="button"
                     @click="emit('toggle-no-replies')"
-                    class="inline-flex items-center justify-center rounded bg-muted px-3 py-1.5 text-sm whitespace-nowrap transition-colors"
+                    class="bg-muted inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1.5 text-sm transition-colors"
                     :class="{
-                        'bg-accent text-accent-foreground ring-1 ring-accent':
+                        'bg-accent text-accent-foreground ring-accent ring-1':
                             form.noReplies,
                         'hover:bg-muted/80': !form.noReplies,
                     }"
@@ -96,9 +96,9 @@ const emit = defineEmits<{
                 <span
                     v-for="(label, index) in form.labels"
                     :key="index"
-                    class="inline-flex cursor-pointer items-center gap-1 rounded bg-muted px-2 py-1 text-xs"
+                    class="bg-muted inline-flex cursor-pointer items-center gap-1 rounded px-2 py-1 text-xs"
                     :class="{
-                        'cursor-pointer hover:bg-muted/80':
+                        'hover:bg-muted/80 cursor-pointer':
                             label.toLowerCase() !== 'hacktoberfest',
                         'cursor-not-allowed opacity-75':
                             label.toLowerCase() === 'hacktoberfest',

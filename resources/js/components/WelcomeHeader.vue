@@ -14,7 +14,7 @@ withDefaults(defineProps<Props>(), {
 
 <template>
     <header
-        class="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl"
+        class="not-has-[nav]:hidden mb-6 w-full max-w-[335px] text-sm lg:max-w-4xl"
     >
         <nav class="flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -25,7 +25,7 @@ withDefaults(defineProps<Props>(), {
                         class="h-8 w-auto transition-opacity group-hover:opacity-80"
                     />
                     <span
-                        class="text-lg font-bold text-foreground transition-opacity group-hover:opacity-80"
+                        class="text-foreground text-lg font-bold transition-opacity group-hover:opacity-80"
                     >
                         Issue Finder
                     </span>
