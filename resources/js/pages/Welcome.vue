@@ -92,7 +92,7 @@ const dismissBanner = () => {
 </script>
 
 <template>
-    <Head title="Hacktoberfest Issue Finder">
+    <Head title="Search 2025">
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
