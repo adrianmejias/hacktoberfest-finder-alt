@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import { mcp } from '@/routes';
 
 interface Props {
     canRegister?: boolean;
@@ -18,7 +19,7 @@ withDefaults(defineProps<Props>(), {
     >
         <nav class="flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <Link href="/" class="group flex items-center gap-3">
+                <Link href="/" title="Hacktoberfest Issue Finder" class="group flex items-center gap-3">
                     <img
                         src="/logo-hacktoberfest-nav.svg"
                         alt="Hacktoberfest"
@@ -54,6 +55,12 @@ withDefaults(defineProps<Props>(), {
                         Register
                     </Link>
                 </template> -->
+                <Link
+                    :href="mcp()"
+                    class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-foreground hover:border-border transition-colors"
+                >
+                    MCP Server Guide
+                </Link>
             </div>
         </nav>
     </header>

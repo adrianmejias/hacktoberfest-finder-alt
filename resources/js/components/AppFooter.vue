@@ -10,7 +10,7 @@ const currentYear = new Date().getFullYear();
             class="text-muted-foreground flex flex-col gap-4 text-sm sm:flex-row sm:items-center sm:justify-between"
         >
             <p>
-                &copy; {{ currentYear }} Hacktoberfest Finder. Made with ❤️ for
+                &copy; {{ currentYear }} Hacktoberfest Issue Finder. Made with ❤️ for
                 open source in conjunction with AI.
             </p>
             <div class="flex gap-4">
