@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
 import { mcp } from '@/routes';
+import { Link } from '@inertiajs/vue3';
 
 interface Props {
     canRegister?: boolean;
@@ -15,18 +15,22 @@ withDefaults(defineProps<Props>(), {
 
 <template>
     <header
-        class="not-has-[nav]:hidden mb-6 w-full max-w-[335px] text-sm lg:max-w-4xl"
+        class="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl"
     >
         <nav class="flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <Link href="/" title="Hacktoberfest Issue Finder" class="group flex items-center gap-3">
+                <Link
+                    href="/"
+                    title="Hacktoberfest Issue Finder"
+                    class="group flex items-center gap-3"
+                >
                     <img
                         src="/logo-hacktoberfest-nav.svg"
                         alt="Hacktoberfest"
                         class="h-8 w-auto transition-opacity group-hover:opacity-80"
                     />
                     <span
-                        class="text-foreground text-lg font-bold transition-opacity group-hover:opacity-80"
+                        class="text-lg font-bold text-foreground transition-opacity group-hover:opacity-80"
                     >
                         Issue Finder
                     </span>
@@ -57,7 +61,7 @@ withDefaults(defineProps<Props>(), {
                 </template> -->
                 <Link
                     :href="mcp()"
-                    class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-foreground hover:border-border transition-colors"
+                    class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-foreground transition-colors hover:border-border"
                 >
                     MCP Server Guide
                 </Link>

@@ -99,7 +99,7 @@ defineProps<{
             </div>
 
             <div
-                class="text-muted-foreground text-center text-sm"
+                class="text-center text-sm text-muted-foreground"
                 v-if="canRegister"
             >
                 Don't have an account?
