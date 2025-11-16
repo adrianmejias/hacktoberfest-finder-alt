@@ -15,6 +15,7 @@ import {
     CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { Separator } from '@/components/ui/separator';
+import PageLayout from '@/layouts/PageLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -97,9 +98,8 @@ const openSections = ref<Record<string, boolean>>({
             rel="stylesheet"
         />
     </Head>
-    <div
-        class="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8"
-    >
+
+    <PageLayout>
         <WelcomeHeader
             :can-register="canRegister"
             :is-authenticated="!!$page.props.auth.user"
@@ -764,5 +764,5 @@ EOF</code></pre>
         </div>
 
         <AppFooter />
-    </div>
+    </PageLayout>
 </template>

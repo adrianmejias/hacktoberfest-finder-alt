@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppFooter from '@/components/AppFooter.vue';
 import WelcomeHeader from '@/components/WelcomeHeader.vue';
+import PageLayout from '@/layouts/PageLayout.vue';
 import SearchForm from '@/pages/search/SearchForm.vue';
 import SearchResults from '@/pages/search/SearchResults.vue';
 import { search } from '@/routes';
@@ -105,9 +106,8 @@ const dismissBanner = () => {
             rel="stylesheet"
         />
     </Head>
-    <div
-        class="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8"
-    >
+
+    <PageLayout>
         <WelcomeHeader
             :can-register="canRegister"
             :is-authenticated="!!$page.props.auth.user"
@@ -183,5 +183,5 @@ const dismissBanner = () => {
         </div>
 
         <AppFooter />
-    </div>
+    </PageLayout>
 </template>
