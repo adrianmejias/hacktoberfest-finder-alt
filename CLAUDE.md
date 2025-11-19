@@ -1,201 +1,990 @@
-# Claude AI Assistant Guide
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-**Hacktoberfest Finder** is a Vue 3 single-page application that helps users discover GitHub issues tagged for Hacktoberfest participation. The app uses the GitHub Search API to find and display issues, with filtering capabilities by programming language, labels, and reply status.
+Hacktoberfest Finder - A web application that helps developers discover open source issues tagged for Hacktoberfest by searching the GitHub API. Built with Laravel 12, Inertia.js, Vue 3, TypeScript, and Tailwind CSS 4.
+
+## Tech Stack
+
+- **Backend**: Laravel 12
+- **Frontend**: Vue 3 + TypeScript + Inertia.js (SPA with SSR support)
+- **Styling**: Tailwind CSS 4 + Reka UI components
+- **Auth**: Laravel Fortify (with 2FA support)
+- **Testing**: Pest (Feature + Unit tests)
+- **Routing**: Laravel Wayfinder for type-safe Vue routing
+- **MCP**: Laravel MCP server for AI integration
+
+## Development Commands
+
+### Starting Development
+
+```bash
+composer dev  # Runs server + queue + logs + vite concurrently
+# OR separately:
+php artisan serve
+npm run dev
+```
+
+### Testing
+
+```bash
+composer test           # Run all Pest tests
+php artisan test        # Alternative
+php artisan test --filter DashboardTest  # Run specific test
+```
+
+### Building for Production
+
+```bash
+npm run build           # Client-side only
+npm run build:ssr       # With SSR support
+composer dev:ssr        # Run with SSR in dev mode
+```
+
+### Code Quality
+
+```bash
+./vendor/bin/pint       # Format PHP (Laravel Pint)
+npm run format          # Format JS/Vue (Prettier)
+npm run format:check    # Check formatting
+npm run lint            # Lint & fix (ESLint)
+```
+
+### Route Generation
+
+```bash
+php artisan wayfinder:generate  # Generate type-safe routes
+# Auto-runs in dev mode via vite plugin
+```
+
+### IDE Helper
+
+```bash
+php artisan ide-helper:generate  # Generate IDE helper files
+# Auto-runs on composer update
+```
 
 ## Architecture
 
-### Tech Stack
-- **Frontend Framework**: Vue 3
-- **Styling**: Tailwind CSS 3
-- **Build Tool**: Laravel Mix (Webpack wrapper)
-- **Event Bus**: Mitt
-- **Package Manager**: Yarn
-- **Deployment**: Netlify
+### GitHub Integration
 
-### Project Structure
+This project uses the **App\Services\GitHub\Facades\GitHub** package for GitHub API interactions:
+
+- **Usage**: Access via `GitHub` facade or dependency injection
+- **Actions Pattern**: Business logic encapsulated in action classes
+- **Location**: `app/Actions/GitHub/`
+- **Pattern**: Contract interface + concrete implementation
+
+Example structure:
 ```
-hacktoberfest-finder-alt/
-├── src/
-│   ├── js/
-│   │   ├── app.js                 # Main entry point, sets up Vue app & mitt emitter
-│   │   ├── components/
-│   │   │   ├── App.vue            # Root component with API logic
-│   │   │   ├── AppHeader.vue      # Filter controls & navigation
-│   │   │   ├── AppMain.vue        # Results display grid
-│   │   │   ├── AppMainModal.vue   # Issue detail modal
-│   │   │   └── AppFooter.vue      # Footer content
-│   │   └── data/
-│   │       └── languages.json     # 498+ programming languages
-│   └── css/
-│       └── app.css                # Tailwind imports & custom styles
-├── public/                        # Compiled assets (auto-generated)
-├── webpack.mix.js                 # Laravel Mix configuration
-├── tailwind.config.js             # Tailwind theme customization
-└── package.json                   # Dependencies & scripts
-
+app/Actions/GitHub/
+├── Contracts/SearchIssues.php (interface)
+└── SearchIssue.php (implementation)
 ```
 
-## Key Patterns & Conventions
+The `SearchIssue` action handles GitHub issue searches for Hacktoberfest projects. It uses the GitHub facade to perform unauthenticated searches, which are rate limited to 10 requests/minute. The action builds query strings with filters for language, labels, comments, and date ranges.
 
-### Component Communication
-The app uses **mitt** for event-driven communication between components:
+### Frontend Architecture
 
-```javascript
-// In app.js - emitter is provided globally
-import mitt from 'mitt';
-const emitter = mitt();
-app.provide('emitter', emitter);
+- **Pages**: `resources/js/pages/` - Top-level Inertia views (Welcome.vue, Dashboard.vue, auth/*, settings/*)
+- **Layouts**: `resources/js/layouts/` - Shared layouts (AppLayout, AuthLayout, settings variants)
+- **Components**: `resources/js/components/` - Reusable Vue components
+  - `ui/` - Reka UI component library (shadcn/ui-like components)
+  - App-specific components at root level
+- **Composables**: `resources/js/composables/` - Shared logic (e.g., `useAppearance` for dark mode)
+- **Routes**: `resources/js/routes/index.ts` - Auto-generated type-safe route helpers via Wayfinder
+- **Actions**: `resources/js/actions/` - Fortify auth action handlers
+- **Types**: `resources/js/types/` - TypeScript type definitions
 
-// In components - inject and use
-inject: ['emitter'],
-methods: {
-  someMethod() {
-    this.emitter.emit('eventName', data);
+### Type-Safe Routing with Wayfinder
+
+Routes defined in `routes/web.php` are auto-generated as TypeScript helpers:
+
+```typescript
+import { dashboard, login } from '@/routes';
+
+// Usage in Vue:
+<Link :href="dashboard()">Dashboard</Link>
+router.visit(login());
+```
+
+Run `php artisan wayfinder:generate` after route changes (auto-runs in dev mode via Vite plugin).
+
+### MCP Server Integration
+
+Laravel MCP server provides AI-powered Hacktoberfest assistance:
+
+- **Location**: `app/Mcp/`
+- **Server**: `Servers/HacktoberfestServer.php` - Main MCP server definition
+- **Tools**: `Tools/` - AI-callable functions (e.g., SuggestOpenSourceProjectsTool, GetCurrentHacktoberfestInfoTool)
+- **Resources**: `Resources/` - Static information resources (e.g., HacktoberfestEventResource)
+- **Prompts**: `Prompts/` - Pre-built conversation prompts (e.g., FindProjectsToContributePrompt)
+- **Route**: `/mcp/hacktoberfest` (defined in `routes/ai.php`)
+
+#### Adding MCP Server to Claude Desktop
+
+To use this MCP server with Claude Desktop, add the configuration to your Claude Desktop config file.
+
+**Config file locations:**
+- **macOS/Linux**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+**Manual configuration:**
+```json
+{
+  "mcpServers": {
+    "hacktoberfest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch",
+        "http://localhost:8000/mcp/hacktoberfest"
+      ]
+    }
   }
 }
 ```
 
-**Event Names:**
-- `toggleFilter` - Show/hide language filter dropdown
-- `chooseLanguage` - Change language filter
-- `removeLabel` - Remove a label from filters
-- `toggleNoReplyFilter` - Toggle "no reply" filter
-- `loadMoreIssues` - Load next page of results
-- `appendLabel` - Add new label to filters
-- `toggleIssue` - Open issue detail modal
-- `closeModal` - Close issue detail modal
-
-### GitHub API Integration
-Direct fetch calls to GitHub Search API:
-
-```javascript
-const url = `https://api.github.com/search/issues?q=${query}&page=${page}`;
+**Command-line setup (macOS/Linux):**
+```bash
+# Create or update Claude Desktop config
+mkdir -p ~/Library/Application\ Support/Claude
+cat > ~/Library/Application\ Support/Claude/claude_desktop_config.json << 'EOF'
+{
+  "mcpServers": {
+    "hacktoberfest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch",
+        "http://localhost:8000/mcp/hacktoberfest"
+      ]
+    }
+  }
+}
+EOF
 ```
 
-**Query Building:** Computed properties in `App.vue` build search query strings:
-```javascript
-filterLabels() {
-  return "label:" + this.labels.map(name => `"${name}"`).join("+label:");
+**Command-line setup (Windows PowerShell):**
+```powershell
+# Create or update Claude Desktop config
+$configPath = "$env:APPDATA\Claude\claude_desktop_config.json"
+New-Item -ItemType Directory -Force -Path "$env:APPDATA\Claude"
+@"
+{
+  "mcpServers": {
+    "hacktoberfest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch",
+        "http://localhost:8000/mcp/hacktoberfest"
+      ]
+    }
+  }
+}
+"@ | Set-Content -Path $configPath
+```
+
+Make sure your Laravel development server is running (`php artisan serve`) before using the MCP server in Claude Desktop.
+
+#### Adding MCP Server to VS Code (Claude Code Extension)
+
+For VS Code with the Claude Code extension, add the MCP server to your workspace or user settings.
+
+**Command-line setup:**
+```bash
+# Add to workspace settings (.vscode/settings.json)
+mkdir -p .vscode
+cat > .vscode/settings.json << 'EOF'
+{
+  "mcpServers": {
+    "hacktoberfest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch",
+        "http://localhost:8000/mcp/hacktoberfest"
+      ]
+    }
+  }
+}
+EOF
+```
+
+**Or add to user settings manually:**
+1. Open VS Code Settings (JSON): `Cmd/Ctrl + Shift + P` → "Preferences: Open User Settings (JSON)"
+2. Add the `mcpServers` configuration:
+```json
+{
+  "mcpServers": {
+    "hacktoberfest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch",
+        "http://localhost:8000/mcp/hacktoberfest"
+      ]
+    }
+  }
 }
 ```
 
-### State Management
-- **No Vuex** - Uses props down, events up pattern
-- **LocalStorage** persists:
-  - `language` - Selected programming language
-  - `labels` - Active filter labels (default: `["hacktoberfest", "good first issue"]`)
-  - `noreply` - No reply filter state
-  - `auto-refresh` - Auto-refresh toggle state
+Restart VS Code after adding the configuration.
 
-### Styling
-- **Utility-first Tailwind CSS**
-- **Custom theme colors** in `tailwind.config.js`:
-  - Primary: `#A11EC6` (Hacktoberfest purple)
-  - Secondary: Custom color scheme
-- **Responsive breakpoints**: sm (576px), md (768px), lg (992px), xl (1200px)
-- **Fixed header** using `vue-fixed-header` component
+#### Adding New MCP Functionality
 
-## Development Workflow
+To add new MCP functionality:
+1. Create tool/resource/prompt class in appropriate directory
+2. Register in `HacktoberfestServer.php` arrays
+3. Add corresponding tests in `tests/Feature/Mcp/`
 
-### Build Commands
+### Configuration Files
+
+- **GitHub API**: `config/github.php` - API endpoint, supported languages, default labels/filters
+- **GitHub Languages**: `config/github/languages.php`
+- **Fortify**: `config/fortify.php` - Authentication configuration
+- **Inertia**: `config/inertia.php` - Inertia.js settings
+
+### Dark Mode Implementation
+
+- Composable: `resources/js/composables/useAppearance.ts`
+- Middleware: `app/Http/Middleware/HandleAppearance.php` - Syncs cookie with localStorage
+- Persists via localStorage + cookie (for SSR)
+- Three modes: 'light', 'dark', 'system'
+- Applied via Tailwind's `dark:` classes
+
+## Common Tasks
+
+### Adding a GitHub Action
+
+1. Create contract interface: `app/Actions/GitHub/Contracts/{Action}Interface.php`
+2. Implement action class: `app/Actions/GitHub/{Action}.php`
+3. Inject dependencies via constructor (e.g., `GitHub` facade)
+4. Use in controllers, MCP tools, or other actions via dependency injection
+5. Add corresponding tests in `tests/Feature/Actions/GitHub/`
+
+Example:
+```php
+use App\Services\GitHub\Facades\GitHub;
+
+class SearchIssue implements SearchIssues
+{
+    public function search(array $input, bool $useCache = false): array
+    {
+        $q = $this->getQueryString($input);
+
+        return GitHub::issues($q);
+    }
+}
+```
+
+### Adding a New Page
+
+1. Create Vue component: `resources/js/pages/{Page}.vue`
+2. Add route: `routes/web.php` (or `routes/settings.php` for settings pages)
+3. Create controller: `app/Http/Controllers/{Page}Controller.php`
+4. Return Inertia response: `return Inertia::render('PageName', [...props])`
+5. Type-safe routes auto-generate via Wayfinder
+
+### Working with Inertia
+
+- Props passed from controller are reactive in Vue
+- Use `<Link>` component for SPA navigation (not `<a>`)
+- Forms: Use Inertia's `useForm` composable or `router.post()` methods
+- Shared data (e.g., auth user): Available via `$page.props.auth`
+
+### Adding Tests
+
+- Use Pest's `test()` function syntax
+- Feature tests extend `Tests\TestCase` and use `RefreshDatabase`
+- Test authenticated routes: `$this->actingAs(User::factory()->create())`
+- Test structure: Arrange, Act, Assert
+- MCP tests: Use `Mcp::web()` fake in `tests/Feature/Mcp/`
+
+## File Naming Conventions
+
+- **Vue files**: PascalCase (e.g., `WelcomeController.vue`, `AppLayout.vue`)
+- **PHP files**: PascalCase classes, snake_case config files
+- **TypeScript**: camelCase files except components
+- **CSS**: kebab-case for custom classes
+
+## Component Patterns
+
+- **Reka UI First**: Use Reka UI components from `resources/js/components/ui/` for consistent design
+- **Layout Composition**: Pages import layouts, not the reverse
+- **TypeScript Props**: Always define props with types using `defineProps<{ ... }>()`
+- **Composition API**: Use `<script setup>` syntax for all Vue 3 components
+- **Icon Components**: SVG icons are extracted as Vue components in `resources/js/components/icons/` with optional `class` prop for customization
+- **Single-View Navigation**: Search results use a TikTok-style single-view pattern with keyboard controls (↑↓ or j/k keys)
+- **Keyboard Event Handling**: Use `onMounted`/`onUnmounted` to add/remove global keyboard event listeners
+
+### Search Results Architecture
+
+The search results use a single-view navigation pattern inspired by TikTok:
+
+- **Current Index Tracking**: Use `ref(0)` to track which result is currently displayed
+- **Computed Current Item**: Derive the current item from `results.items[currentIndex.value]`
+- **Navigation Functions**: `goToNext()` and `goToPrevious()` with boundary checks
+- **Keyboard Controls**: Support both arrow keys (↑↓) and vim-style keys (j/k)
+- **Visual Indicators**: Show current position counter (e.g., "1 / 30")
+- **Accessibility**: Include tooltips with full timestamps using `title` attributes
+
+Example implementation in [SearchResults.vue](resources/js/pages/search/SearchResults.vue):
+
+```vue
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+
+const currentIndex = ref(0);
+const currentItem = computed(() => props.results.items[currentIndex.value]);
+
+const handleKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowDown' || event.key === 'j') {
+        event.preventDefault();
+        goToNext();
+    } else if (event.key === 'ArrowUp' || event.key === 'k') {
+        event.preventDefault();
+        goToPrevious();
+    }
+};
+
+onMounted(() => window.addEventListener('keydown', handleKeydown));
+onUnmounted(() => window.removeEventListener('keydown', handleKeydown));
+</script>
+```
+
+### Icon Component Pattern
+
+Icon components follow a consistent pattern for reusability:
+
+```vue
+<script setup lang="ts">
+interface Props {
+    class?: string;
+}
+defineProps<Props>();
+</script>
+
+<template>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        :class="$props.class || 'h-4 w-4'"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+    >
+        <!-- SVG path -->
+    </svg>
+</template>
+```
+
+Examples: [CalendarIcon.vue](resources/js/components/icons/CalendarIcon.vue), [RepositoryIcon.vue](resources/js/components/icons/RepositoryIcon.vue)
+
+## Key Files to Review
+
+### Backend
+- `app/Actions/GitHub/SearchIssue.php` - GitHub issue search logic
+- `config/github.php` - GitHub API configuration (languages, labels, defaults)
+- `tests/Pest.php` - Test configuration & global helpers
+- `bootstrap/providers.php` - Service provider registration
+- `app/Mcp/Servers/HacktoberfestServer.php` - MCP server definition
+- `app/Mcp/Tools/SuggestOpenSourceProjectsTool.php` - MCP tool using SearchIssue action
+
+### Frontend
+- `resources/js/app.ts` - Vue app initialization
+- `resources/js/pages/Welcome.vue` - Main search page with form and results
+- `resources/js/pages/search/SearchForm.vue` - Search input and filters component
+- `resources/js/pages/search/SearchResults.vue` - Single-view TikTok-style results display
+- `resources/js/components/WelcomeHeader.vue` - Header with logo and branding
+- `resources/js/components/icons/` - Reusable SVG icon components
+- `vite.config.ts` - Build configuration with Wayfinder plugin
+
+## Environment Setup
+
+The project uses SQLite by default for the database. After cloning:
+
 ```bash
-# Install dependencies
-yarn install
-
-# Development build with source maps
-yarn run dev
-
-# Production build (optimized, minified)
-yarn run production
-
-# Watch mode (auto-recompile on changes)
-yarn run watch
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
 ```
 
-### File Watching
-Laravel Mix compiles:
-- `src/js/**/*.{js,vue}` → `public/js/app.js`
-- `src/css/app.css` → `public/css/app.css` (with Tailwind processing)
+Or use the setup script:
 
-### Adding New Features
-
-**Adding a Filter:**
-1. Add state to `App.vue` data
-2. Create computed property for query string
-3. Add UI controls to `AppHeader.vue`
-4. Implement event handlers
-5. Update localStorage persistence
-
-**Adding a Component:**
-1. Create `.vue` file in `src/js/components/`
-2. Import in parent component
-3. Register in `components: { }` object
-4. Use `inject: ['emitter']` for event bus access
-
-## Common Issues & Solutions
-
-### FixedHeader Component
-- **Package**: `vue-fixed-header`
-- **Must be installed**: `yarn add vue-fixed-header`
-- **Must be imported**: `import FixedHeader from "vue-fixed-header";`
-- **Must be registered**: `components: { FixedHeader }`
-
-### ClickOutside Directive
-- **Package**: `vue-click-outside` (already in package.json)
-- **Usage**: `v-click-outside="methodName"` on filter dropdown
-
-### Tailwind Warnings
-If you see "content option missing" warnings, this is expected but doesn't break the build. The app uses an older Tailwind config format.
-
-### API Rate Limiting
-GitHub API limits unauthenticated requests to ~60/hour. Consider adding authentication tokens for higher limits in production use.
-
-## Important Files
-
-### `src/js/app.js`
-Sets up Vue app instance, mitt emitter, and mounts to `#app` element.
-
-### `src/js/components/App.vue`
-- Central state manager
-- GitHub API integration
-- Event listeners for all component communications
-- Issue data transformation and pagination logic
-
-### `webpack.mix.js`
-Laravel Mix configuration:
-- JavaScript compilation with Vue loader
-- PostCSS/Tailwind processing
-- Asset versioning for production
-- Source map generation for development
-
-### `tailwind.config.js`
-Custom Tailwind configuration with Hacktoberfest branding colors and responsive breakpoints.
-
-## API Response Processing
-
-Issues from GitHub API are transformed to add computed fields:
-
-```javascript
-const items = response.items.map(({ repository_url, updated_at, ...rest }) => ({
-  ...rest,
-  repo_title: repository_url.split("/").slice(-1).join(),
-  formatted_date: this.formatDate(new Date(updated_at))
-}));
+```bash
+composer setup
 ```
 
-## Testing
-Currently, there is no test suite for this project.
+===
 
-## Deployment
-The app deploys to Netlify automatically from the git repository. The `public/` directory contains the compiled assets that are served.
+<laravel-boost-guidelines>
+=== foundation rules ===
 
-## Contributing
-See `CONTRIBUTING.md` for contribution guidelines. This is an open-source project welcoming first-time contributors during Hacktoberfest and year-round.
+# Laravel Boost Guidelines
 
----
+The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to enhance the user's satisfaction building Laravel applications.
 
-**Last Updated:** October 2025
-**Vue Version:** 3.x
-**Node Version:** 24.x (recommended)
+## Foundational Context
+This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
+
+- php - 8.4.14
+- inertiajs/inertia-laravel (INERTIA) - v2
+- laravel/fortify (FORTIFY) - v1
+- laravel/framework (LARAVEL) - v12
+- laravel/mcp (MCP) - v0
+- laravel/prompts (PROMPTS) - v0
+- laravel/wayfinder (WAYFINDER) - v0
+- laravel/pint (PINT) - v1
+- laravel/sail (SAIL) - v1
+- pestphp/pest (PEST) - v4
+- phpunit/phpunit (PHPUNIT) - v12
+- @inertiajs/vue3 (INERTIA) - v2
+- tailwindcss (TAILWINDCSS) - v4
+- vue (VUE) - v3
+- @laravel/vite-plugin-wayfinder (WAYFINDER) - v0
+- eslint (ESLINT) - v9
+- prettier (PRETTIER) - v3
+
+## Conventions
+- You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, naming.
+- Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
+- Check for existing components to reuse before writing a new one.
+
+## Verification Scripts
+- Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
+
+## Application Structure & Architecture
+- Stick to existing directory structure - don't create new base folders without approval.
+- Do not change the application's dependencies without approval.
+
+## Frontend Bundling
+- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
+
+## Replies
+- Be concise in your explanations - focus on what's important rather than explaining obvious details.
+
+## Documentation Files
+- You must only create documentation files if explicitly requested by the user.
+
+
+=== boost rules ===
+
+## Laravel Boost
+- Laravel Boost is an MCP server that comes with powerful tools designed specifically for this application. Use them.
+
+## Artisan
+- Use the `list-artisan-commands` tool when you need to call an Artisan command to double check the available parameters.
+
+## URLs
+- Whenever you share a project URL with the user you should use the `get-absolute-url` tool to ensure you're using the correct scheme, domain / IP, and port.
+
+## Tinker / Debugging
+- You should use the `tinker` tool when you need to execute PHP to debug code or query Eloquent models directly.
+- Use the `database-query` tool when you only need to read from the database.
+
+## Reading Browser Logs With the `browser-logs` Tool
+- You can read browser logs, errors, and exceptions using the `browser-logs` tool from Boost.
+- Only recent browser logs will be useful - ignore old logs.
+
+## Searching Documentation (Critically Important)
+- Boost comes with a powerful `search-docs` tool you should use before any other approaches. This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation specific for the user's circumstance. You should pass an array of packages to filter on if you know you need docs for particular packages.
+- The 'search-docs' tool is perfect for all Laravel related packages, including Laravel, Inertia, Livewire, Filament, Tailwind, Pest, Nova, Nightwatch, etc.
+- You must use this tool to search for Laravel-ecosystem documentation before falling back to other approaches.
+- Search the documentation before making code changes to ensure we are taking the correct approach.
+- Use multiple, broad, simple, topic based queries to start. For example: `['rate limiting', 'routing rate limiting', 'routing']`.
+- Do not add package names to queries - package information is already shared. For example, use `test resource table`, not `filament 4 test resource table`.
+
+### Available Search Syntax
+- You can and should pass multiple queries at once. The most relevant results will be returned first.
+
+1. Simple Word Searches with auto-stemming - query=authentication - finds 'authenticate' and 'auth'
+2. Multiple Words (AND Logic) - query=rate limit - finds knowledge containing both "rate" AND "limit"
+3. Quoted Phrases (Exact Position) - query="infinite scroll" - Words must be adjacent and in that order
+4. Mixed Queries - query=middleware "rate limit" - "middleware" AND exact phrase "rate limit"
+5. Multiple Queries - queries=["authentication", "middleware"] - ANY of these terms
+
+
+=== php rules ===
+
+## PHP
+
+- Always use curly braces for control structures, even if it has one line.
+
+### Constructors
+- Use PHP 8 constructor property promotion in `__construct()`.
+    - <code-snippet>public function __construct(public GitHub $github) { }</code-snippet>
+- Do not allow empty `__construct()` methods with zero parameters.
+
+### Type Declarations
+- Always use explicit return type declarations for methods and functions.
+- Use appropriate PHP type hints for method parameters.
+
+<code-snippet name="Explicit Return Types and Method Params" lang="php">
+protected function isAccessible(User $user, ?string $path = null): bool
+{
+    ...
+}
+</code-snippet>
+
+## Comments
+- Prefer PHPDoc blocks over comments. Never use comments within the code itself unless there is something _very_ complex going on.
+
+## PHPDoc Blocks
+- Add useful array shape type definitions for arrays when appropriate.
+
+## Enums
+- Typically, keys in an Enum should be TitleCase. For example: `FavoritePerson`, `BestLake`, `Monthly`.
+
+
+=== herd rules ===
+
+## Laravel Herd
+
+- The application is served by Laravel Herd and will be available at: https?://[kebab-case-project-dir].test. Use the `get-absolute-url` tool to generate URLs for the user to ensure valid URLs.
+- You must not run any commands to make the site available via HTTP(s). It is _always_ available through Laravel Herd.
+
+
+=== inertia-laravel/core rules ===
+
+## Inertia Core
+
+- Inertia.js components should be placed in the `resources/js/Pages` directory unless specified differently in the JS bundler (vite.config.js).
+- Use `Inertia::render()` for server-side routing instead of traditional Blade views.
+- Use `search-docs` for accurate guidance on all things Inertia.
+
+<code-snippet lang="php" name="Inertia::render Example">
+// routes/web.php example
+Route::get('/users', function () {
+    return Inertia::render('Users/Index', [
+        'users' => User::all()
+    ]);
+});
+</code-snippet>
+
+
+=== inertia-laravel/v2 rules ===
+
+## Inertia v2
+
+- Make use of all Inertia features from v1 & v2. Check the documentation before making any changes to ensure we are taking the correct approach.
+
+### Inertia v2 New Features
+- Polling
+- Prefetching
+- Deferred props
+- Infinite scrolling using merging props and `WhenVisible`
+- Lazy loading data on scroll
+
+### Deferred Props & Empty States
+- When using deferred props on the frontend, you should add a nice empty state with pulsing / animated skeleton.
+
+### Inertia Form General Guidance
+- The recommended way to build forms when using Inertia is with the `<Form>` component - a useful example is below. Use `search-docs` with a query of `form component` for guidance.
+- Forms can also be built using the `useForm` helper for more programmatic control, or to follow existing conventions. Use `search-docs` with a query of `useForm helper` for guidance.
+- `resetOnError`, `resetOnSuccess`, and `setDefaultsOnSuccess` are available on the `<Form>` component. Use `search-docs` with a query of 'form component resetting' for guidance.
+
+
+=== laravel/core rules ===
+
+## Do Things the Laravel Way
+
+- Use `php artisan make:` commands to create new files (i.e. migrations, controllers, models, etc.). You can list available Artisan commands using the `list-artisan-commands` tool.
+- If you're creating a generic PHP class, use `artisan make:class`.
+- Pass `--no-interaction` to all Artisan commands to ensure they work without user input. You should also pass the correct `--options` to ensure correct behavior.
+
+### Database
+- Always use proper Eloquent relationship methods with return type hints. Prefer relationship methods over raw queries or manual joins.
+- Use Eloquent models and relationships before suggesting raw database queries
+- Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities rather than bypassing them.
+- Generate code that prevents N+1 query problems by using eager loading.
+- Use Laravel's query builder for very complex database operations.
+
+### Model Creation
+- When creating new models, create useful factories and seeders for them too. Ask the user if they need any other things, using `list-artisan-commands` to check the available options to `php artisan make:model`.
+
+### APIs & Eloquent Resources
+- For APIs, default to using Eloquent API Resources and API versioning unless existing API routes do not, then you should follow existing application convention.
+
+### Controllers & Validation
+- Always create Form Request classes for validation rather than inline validation in controllers. Include both validation rules and custom error messages.
+- Check sibling Form Requests to see if the application uses array or string based validation rules.
+
+### Queues
+- Use queued jobs for time-consuming operations with the `ShouldQueue` interface.
+
+### Authentication & Authorization
+- Use Laravel's built-in authentication and authorization features (gates, policies, Sanctum, etc.).
+
+### URL Generation
+- When generating links to other pages, prefer named routes and the `route()` function.
+
+### Configuration
+- Use environment variables only in configuration files - never use the `env()` function directly outside of config files. Always use `config('app.name')`, not `env('APP_NAME')`.
+
+### Testing
+- When creating models for tests, use the factories for the models. Check if the factory has custom states that can be used before manually setting up the model.
+- Faker: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`. Follow existing conventions whether to use `$this->faker` or `fake()`.
+- When creating tests, make use of `php artisan make:test [options] <name>` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
+
+### Vite Error
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+
+
+=== laravel/v12 rules ===
+
+## Laravel 12
+
+- Use the `search-docs` tool to get version specific documentation.
+- Since Laravel 11, Laravel has a new streamlined file structure which this project uses.
+
+### Laravel 12 Structure
+- No middleware files in `app/Http/Middleware/`.
+- `bootstrap/app.php` is the file to register middleware, exceptions, and routing files.
+- `bootstrap/providers.php` contains application specific service providers.
+- **No app\Console\Kernel.php** - use `bootstrap/app.php` or `routes/console.php` for console configuration.
+- **Commands auto-register** - files in `app/Console/Commands/` are automatically available and do not require manual registration.
+
+### Database
+- When modifying a column, the migration must include all of the attributes that were previously defined on the column. Otherwise, they will be dropped and lost.
+- Laravel 11 allows limiting eagerly loaded records natively, without external packages: `$query->latest()->limit(10);`.
+
+### Models
+- Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property. Follow existing conventions from other models.
+
+
+=== mcp/core rules ===
+
+## Laravel MCP
+
+- MCP (Model Context Protocol) is very new. You must use the `search-docs` tool to get documentation for how to write and test Laravel MCP servers, tools, resources, and prompts effectively.
+- MCP servers need to be registered with a route or handle in `routes/ai.php`. Typically, they will be registered using `Mcp::web()` to register a HTTP streaming MCP server.
+- Servers are very testable - use the `search-docs` tool to find testing instructions.
+- Do not run `mcp:start`. This command hangs waiting for JSON RPC MCP requests.
+- Some MCP clients use Node, which has its own certificate store. If a user tries to connect to their web MCP server locally using https://, it could fail due to this reason. They will need to switch to http:// during local development.
+
+
+=== wayfinder/core rules ===
+
+## Laravel Wayfinder
+
+Wayfinder generates TypeScript functions and types for Laravel controllers and routes which you can import into your client side code. It provides type safety and automatic synchronization between backend routes and frontend code.
+
+### Development Guidelines
+- Always use `search-docs` to check wayfinder correct usage before implementing any features.
+- Always Prefer named imports for tree-shaking (e.g., `import { show } from '@/actions/...'`)
+- Avoid default controller imports (prevents tree-shaking)
+- Run `wayfinder:generate` after route changes if Vite plugin isn't installed
+
+### Feature Overview
+- Form Support: Use `.form()` with `--with-form` flag for HTML form attributes — `<form {...store.form()}>` → `action="/posts" method="post"`
+- HTTP Methods: Call `.get()`, `.post()`, `.patch()`, `.put()`, `.delete()` for specific methods — `show.head(1)` → `{ url: "/posts/1", method: "head" }`
+- Invokable Controllers: Import and invoke directly as functions. For example, `import StorePost from '@/actions/.../StorePostController'; StorePost()`
+- Named Routes: Import from `@/routes/` for non-controller routes. For example, `import { show } from '@/routes/post'; show(1)` for route name `post.show`
+- Parameter Binding: Detects route keys (e.g., `{post:slug}`) and accepts matching object properties — `show("my-post")` or `show({ slug: "my-post" })`
+- Query Merging: Use `mergeQuery` to merge with `window.location.search`, set values to `null` to remove — `show(1, { mergeQuery: { page: 2, sort: null } })`
+- Query Parameters: Pass `{ query: {...} }` in options to append params — `show(1, { query: { page: 1 } })` → `"/posts/1?page=1"`
+- Route Objects: Functions return `{ url, method }` shaped objects — `show(1)` → `{ url: "/posts/1", method: "get" }`
+- URL Extraction: Use `.url()` to get URL string — `show.url(1)` → `"/posts/1"`
+
+### Example Usage
+
+<code-snippet name="Wayfinder Basic Usage" lang="typescript">
+    // Import controller methods (tree-shakable)
+    import { show, store, update } from '@/actions/App/Http/Controllers/PostController'
+
+    // Get route object with URL and method...
+    show(1) // { url: "/posts/1", method: "get" }
+
+    // Get just the URL...
+    show.url(1) // "/posts/1"
+
+    // Use specific HTTP methods...
+    show.get(1) // { url: "/posts/1", method: "get" }
+    show.head(1) // { url: "/posts/1", method: "head" }
+
+    // Import named routes...
+    import { show as postShow } from '@/routes/post' // For route name 'post.show'
+    postShow(1) // { url: "/posts/1", method: "get" }
+</code-snippet>
+
+
+### Wayfinder + Inertia
+If your application uses the `<Form>` component from Inertia, you can use Wayfinder to generate form action and method automatically.
+<code-snippet name="Wayfinder Form Component (Vue)" lang="vue">
+
+<Form v-bind="store.form()"><input name="title" /></Form>
+
+</code-snippet>
+
+
+=== pint/core rules ===
+
+## Laravel Pint Code Formatter
+
+- You must run `vendor/bin/pint --dirty` before finalizing changes to ensure your code matches the project's expected style.
+- Do not run `vendor/bin/pint --test`, simply run `vendor/bin/pint` to fix any formatting issues.
+
+
+=== pest/core rules ===
+
+## Pest
+
+### Testing
+- If you need to verify a feature is working, write or update a Unit / Feature test.
+
+### Pest Tests
+- All tests must be written using Pest. Use `php artisan make:test --pest <name>`.
+- You must not remove any tests or test files from the tests directory without approval. These are not temporary or helper files - these are core to the application.
+- Tests should test all of the happy paths, failure paths, and weird paths.
+- Tests live in the `tests/Feature` and `tests/Unit` directories.
+- Pest tests look and behave like this:
+<code-snippet name="Basic Pest Test Example" lang="php">
+it('is true', function () {
+    expect(true)->toBeTrue();
+});
+</code-snippet>
+
+### Running Tests
+- Run the minimal number of tests using an appropriate filter before finalizing code edits.
+- To run all tests: `php artisan test`.
+- To run all tests in a file: `php artisan test tests/Feature/ExampleTest.php`.
+- To filter on a particular test name: `php artisan test --filter=testName` (recommended after making a change to a related file).
+- When the tests relating to your changes are passing, ask the user if they would like to run the entire test suite to ensure everything is still passing.
+
+### Pest Assertions
+- When asserting status codes on a response, use the specific method like `assertForbidden` and `assertNotFound` instead of using `assertStatus(403)` or similar, e.g.:
+<code-snippet name="Pest Example Asserting postJson Response" lang="php">
+it('returns all', function () {
+    $response = $this->postJson('/api/docs', []);
+
+    $response->assertSuccessful();
+});
+</code-snippet>
+
+### Mocking
+- Mocking can be very helpful when appropriate.
+- When mocking, you can use the `Pest\Laravel\mock` Pest function, but always import it via `use function Pest\Laravel\mock;` before using it. Alternatively, you can use `$this->mock()` if existing tests do.
+- You can also create partial mocks using the same import or self method.
+
+### Datasets
+- Use datasets in Pest to simplify tests which have a lot of duplicated data. This is often the case when testing validation rules, so consider going with this solution when writing tests for validation rules.
+
+<code-snippet name="Pest Dataset Example" lang="php">
+it('has emails', function (string $email) {
+    expect($email)->not->toBeEmpty();
+})->with([
+    'james' => 'james@laravel.com',
+    'taylor' => 'taylor@laravel.com',
+]);
+</code-snippet>
+
+
+=== pest/v4 rules ===
+
+## Pest 4
+
+- Pest v4 is a huge upgrade to Pest and offers: browser testing, smoke testing, visual regression testing, test sharding, and faster type coverage.
+- Browser testing is incredibly powerful and useful for this project.
+- Browser tests should live in `tests/Browser/`.
+- Use the `search-docs` tool for detailed guidance on utilizing these features.
+
+### Browser Testing
+- You can use Laravel features like `Event::fake()`, `assertAuthenticated()`, and model factories within Pest v4 browser tests, as well as `RefreshDatabase` (when needed) to ensure a clean state for each test.
+- Interact with the page (click, type, scroll, select, submit, drag-and-drop, touch gestures, etc.) when appropriate to complete the test.
+- If requested, test on multiple browsers (Chrome, Firefox, Safari).
+- If requested, test on different devices and viewports (like iPhone 14 Pro, tablets, or custom breakpoints).
+- Switch color schemes (light/dark mode) when appropriate.
+- Take screenshots or pause tests for debugging when appropriate.
+
+### Example Tests
+
+<code-snippet name="Pest Browser Test Example" lang="php">
+it('may reset the password', function () {
+    Notification::fake();
+
+    $this->actingAs(User::factory()->create());
+
+    $page = visit('/sign-in'); // Visit on a real browser...
+
+    $page->assertSee('Sign In')
+        ->assertNoJavascriptErrors() // or ->assertNoConsoleLogs()
+        ->click('Forgot Password?')
+        ->fill('email', 'nuno@laravel.com')
+        ->click('Send Reset Link')
+        ->assertSee('We have emailed your password reset link!')
+
+    Notification::assertSent(ResetPassword::class);
+});
+</code-snippet>
+
+<code-snippet name="Pest Smoke Testing Example" lang="php">
+$pages = visit(['/', '/about', '/contact']);
+
+$pages->assertNoJavascriptErrors()->assertNoConsoleLogs();
+</code-snippet>
+
+
+=== inertia-vue/core rules ===
+
+## Inertia + Vue
+
+- Vue components must have a single root element.
+- Use `router.visit()` or `<Link>` for navigation instead of traditional links.
+
+<code-snippet name="Inertia Client Navigation" lang="vue">
+
+    import { Link } from '@inertiajs/vue3'
+    <Link href="/">Home</Link>
+
+</code-snippet>
+
+
+=== inertia-vue/v2/forms rules ===
+
+## Inertia + Vue Forms
+
+<code-snippet name="`<Form>` Component Example" lang="vue">
+
+<Form
+    action="/users"
+    method="post"
+    #default="{
+        errors,
+        hasErrors,
+        processing,
+        progress,
+        wasSuccessful,
+        recentlySuccessful,
+        setError,
+        clearErrors,
+        resetAndClearErrors,
+        defaults,
+        isDirty,
+        reset,
+        submit,
+  }"
+>
+    <input type="text" name="name" />
+
+    <div v-if="errors.name">
+        {{ errors.name }}
+    </div>
+
+    <button type="submit" :disabled="processing">
+        {{ processing ? 'Creating...' : 'Create User' }}
+    </button>
+
+    <div v-if="wasSuccessful">User created successfully!</div>
+</Form>
+
+</code-snippet>
+
+
+=== tailwindcss/core rules ===
+
+## Tailwind Core
+
+- Use Tailwind CSS classes to style HTML, check and use existing tailwind conventions within the project before writing your own.
+- Offer to extract repeated patterns into components that match the project's conventions (i.e. Blade, JSX, Vue, etc..)
+- Think through class placement, order, priority, and defaults - remove redundant classes, add classes to parent or child carefully to limit repetition, group elements logically
+- You can use the `search-docs` tool to get exact examples from the official documentation when needed.
+
+### Spacing
+- When listing items, use gap utilities for spacing, don't use margins.
+
+    <code-snippet name="Valid Flex Gap Spacing Example" lang="html">
+        <div class="flex gap-8">
+            <div>Superior</div>
+            <div>Michigan</div>
+            <div>Erie</div>
+        </div>
+    </code-snippet>
+
+
+### Dark Mode
+- If existing pages and components support dark mode, new pages and components must support dark mode in a similar way, typically using `dark:`.
+
+
+=== tailwindcss/v4 rules ===
+
+## Tailwind 4
+
+- Always use Tailwind CSS v4 - do not use the deprecated utilities.
+- `corePlugins` is not supported in Tailwind v4.
+- In Tailwind v4, configuration is CSS-first using the `@theme` directive — no separate `tailwind.config.js` file is needed.
+<code-snippet name="Extending Theme in CSS" lang="css">
+@theme {
+  --color-brand: oklch(0.72 0.11 178);
+}
+</code-snippet>
+
+- In Tailwind v4, you import Tailwind using a regular CSS `@import` statement, not using the `@tailwind` directives used in v3:
+
+<code-snippet name="Tailwind v4 Import Tailwind Diff" lang="diff">
+   - @tailwind base;
+   - @tailwind components;
+   - @tailwind utilities;
+   + @import "tailwindcss";
+</code-snippet>
+
+
+### Replaced Utilities
+- Tailwind v4 removed deprecated utilities. Do not use the deprecated option - use the replacement.
+- Opacity values are still numeric.
+
+| Deprecated |	Replacement |
+|------------+--------------|
+| bg-opacity-* | bg-black/* |
+| text-opacity-* | text-black/* |
+| border-opacity-* | border-black/* |
+| divide-opacity-* | divide-black/* |
+| ring-opacity-* | ring-black/* |
+| placeholder-opacity-* | placeholder-black/* |
+| flex-shrink-* | shrink-* |
+| flex-grow-* | grow-* |
+| overflow-ellipsis | text-ellipsis |
+| decoration-slice | box-decoration-slice |
+| decoration-clone | box-decoration-clone |
+
+
+=== tests rules ===
+
+## Test Enforcement
+
+- Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
+- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test` with a specific filename or filter.
+
+
+=== laravel/fortify rules ===
+
+## Laravel Fortify
+
+Fortify is a headless authentication backend that provides authentication routes and controllers for Laravel applications.
+
+**Before implementing any authentication features, use the `search-docs` tool to get the latest docs for that specific feature.**
+
+### Configuration & Setup
+- Check `config/fortify.php` to see what's enabled. Use `search-docs` for detailed information on specific features.
+- Enable features by adding them to the `'features' => []` array: `Features::registration()`, `Features::resetPasswords()`, etc.
+- To see the all Fortify registered routes, use the `list-routes` tool with the `only_vendor: true` and `action: "Fortify"` parameters.
+- Fortify includes view routes by default (login, register). Set `'views' => false` in the configuration file to disable them if you're handling views yourself.
+
+### Customization
+- Views can be customized in `FortifyServiceProvider`'s `boot()` method using `Fortify::loginView()`, `Fortify::registerView()`, etc.
+- Customize authentication logic with `Fortify::authenticateUsing()` for custom user retrieval / validation.
+- Actions in `app/Actions/Fortify/` handle business logic (user creation, password reset, etc.). They're fully customizable, so you can modify them to change feature behavior.
+
+## Available Features
+- `Features::registration()` for user registration.
+- `Features::emailVerification()` to verify new user emails.
+- `Features::twoFactorAuthentication()` for 2FA with QR codes and recovery codes.
+  - Add options: `['confirmPassword' => true, 'confirm' => true]` to require password confirmation and OTP confirmation before enabling 2FA.
+- `Features::updateProfileInformation()` to let users update their profile.
+- `Features::updatePasswords()` to let users change their passwords.
+- `Features::resetPasswords()` for password reset via email.
+</laravel-boost-guidelines>

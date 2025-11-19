@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+/**
+ * @property string|null $q
+ * @property string|null $language
+ * @property string|null $label
+ * @property string|null $comments
+ * @property int|null $page
+ * @property int|null $limit
+ */
+class SearchRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        // Convert empty strings to null for optional fields (but not '0')
+        if ($this->language === '') {
+            $this->merge(['language' => null]);
+        }
+
+        if ($this->comments === '') {
+            $this->merge(['comments' => null]);
+        }
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'q' => ['nullable', 'string', 'max:100'],
+            'language' => ['nullable', 'string', 'max:50'],
+            'label' => ['nullable', 'string', 'max:100'],
+            'comments' => ['nullable', 'string', 'max:100'],
+            'page' => ['nullable', 'integer', 'min:1'],
+            'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
+        ];
+    }
+}

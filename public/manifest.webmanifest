@@ -1,0 +1,35 @@
+{
+    "id": "/",
+    "short_name": "HIF",
+    "name": "Hacktoberfest Issue Finder",
+    "description": "Find issues to contribute to during Hacktoberfest.",
+    "start_url": "/",
+    "orientation": "portrait",
+    "display": "standalone",
+    "theme_color": "#2563eb",
+    "background_color": "#ffffff",
+    "display_override": ["window-controls-overlay", "standalone", "fullscreen"],
+    "icons": [
+        {
+            "src": "/favicon-144x72.gif",
+            "sizes": "144x72",
+            "type": "image/gif"
+        },
+        {
+            "src": "/favicon-192x96.gif",
+            "sizes": "192x96",
+            "type": "image/gif"
+        },
+        {
+            "src": "/favicon-512x256.gif",
+            "sizes": "512x256",
+            "type": "image/gif"
+        }
+    ],
+    "protocol_handlers": [
+        {
+            "protocol": "web+hacktoberfest",
+            "url": "/?url=%s"
+        }
+    ]
+}
