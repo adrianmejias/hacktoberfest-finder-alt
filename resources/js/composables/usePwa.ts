@@ -243,6 +243,10 @@ export function handlePWAInstallPrompt(): void {
     const pwaInstallButton = new PWAInstallButton();
 
     window.addEventListener('load', () => pwaInstallButton.checkDisplayMode());
-    window.addEventListener('beforeinstallprompt', (e) => pwaInstallButton.loadBeforeInstallPrompt(e));
-    window.addEventListener('appinstalled', () => pwaInstallButton.hideInstallPrompt());
+    window.addEventListener('beforeinstallprompt', (e) =>
+        pwaInstallButton.loadBeforeInstallPrompt(e),
+    );
+    window.addEventListener('appinstalled', () =>
+        pwaInstallButton.hideInstallPrompt(),
+    );
 }

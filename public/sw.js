@@ -8,6 +8,13 @@
  */
 class ServiceWorker {
     /**
+     * Environment
+     *
+     * @type {string}
+     */
+    environment = 'production';
+
+    /**
      * Cache name
      *
      * @type {string}
@@ -15,14 +22,27 @@ class ServiceWorker {
     cacheName = 'hacktoberfest-finder';
 
     /**
+     * Offline URL
+     *
+     * @type {string}
+     */
+    offlineUrl = '/offline.html';
+
+    /**
      * Files to cache
      *
      * @type {string[]}
      */
-    filesToCache = ['/offline.html'];
+    filesToCache = [this.offlineUrl];
 
     constructor() {
-        //
+        if (typeof environment !== 'undefined') {
+            this.environment = environment;
+        }
+
+        if (this.environment === 'production') {
+            console.log = function () {};
+        }
     }
 
     /**
@@ -31,7 +51,7 @@ class ServiceWorker {
      * @param {ExtendableEvent} event
      */
     handleInstall(event) {
-        console.log('[ServiceWorker] Install');
+        console.log('[ServiceWorker] Install', 'color: green');
         event.waitUntil(
             caches.open(this.cacheName)
                 .then((cache) => cache.addAll(this.filesToCache))
@@ -45,7 +65,7 @@ class ServiceWorker {
      * @param {ExtendableEvent} event
      */
     handleActivate(event) {
-        console.log('[ServiceWorker] Activate');
+        console.log('[ServiceWorker] Activate', 'color: blue');
         event.waitUntil(
             caches.keys().then((cacheNames) => {
                 return Promise.all(
@@ -64,12 +84,14 @@ class ServiceWorker {
      * @param {FetchEvent} event
      */
     handleFetch(event) {
-        console.log('[ServiceWorker] Fetch', event.request.url);
+        console.log('[ServiceWorker] Fetch', event.request.url, 'color: orange');
         if (event.request.mode === 'navigate') {
+            console.warn('[ServiceWorker] Serving offline page for navigation request', 'color: orange');
             event.respondWith(
-                fetch(event.request).catch(() => caches.match(OFFLINE_URL))
+                fetch(event.request).catch(() => caches.match(this.offlineUrl))
             );
         } else {
+            console.log('[ServiceWorker] Fetching resource', event.request.url);
             event.respondWith(
                 caches.match(event.request).then((response) => response || fetch(event.request))
             );

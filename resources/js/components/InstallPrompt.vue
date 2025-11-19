@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { handlePWAInstallPrompt, registerServiceWorker } from '@/composables/usePwa';
+import {
+    handlePWAInstallPrompt,
+    registerServiceWorker,
+} from '@/composables/usePwa';
 
 registerServiceWorker();
 handlePWAInstallPrompt();
@@ -9,7 +12,7 @@ handlePWAInstallPrompt();
     <div
         id="install-prompt"
         class="bg-indigo/90 fixed right-4 bottom-4 z-50 flex items-center justify-center rounded-full p-4 shadow-lg backdrop-blur-md dark:bg-indigo-800/90"
-        style="display: none;"
+        style="display: none"
     >
         <div
             id="install-button"

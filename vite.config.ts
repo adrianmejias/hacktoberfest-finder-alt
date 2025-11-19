@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
         sourcemap: mode === 'production' ? false : 'inline',
     },
     esbuild: {
-        drop: mode === 'production' ? ['console'] : [],
+        drop: mode === 'production' ? ['console', 'debugger'] : [],
     },
     plugins: [
         laravel({

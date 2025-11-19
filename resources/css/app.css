@@ -189,7 +189,9 @@
     position: absolute;
     top: -10px;
     left: -10px;
-    transition: transform ease-out 0.1s, background 0.2s;
+    transition:
+        transform ease-out 0.1s,
+        background 0.2s;
 }
 
 .box-icon .circle:after {

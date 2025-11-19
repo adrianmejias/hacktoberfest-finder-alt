@@ -6,6 +6,8 @@
 
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
+            const environment = '{{ config('app.env') }}';
+
             (function() {
                 const appearance = '{{ $appearance ?? "system" }}';
 
