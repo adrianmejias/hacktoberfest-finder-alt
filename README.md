@@ -1,37 +1,225 @@
 # Hacktoberfest Finder
 
-> Web app to make it easy to find Github issues with the tag 'Hacktoberfest'.
+> A modern web application that helps developers discover open source issues tagged for Hacktoberfest by searching the GitHub API.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bf2c479d-fcaf-4c46-b1ad-dccf2cc4e988/deploy-status)](https://app.netlify.com/sites/hacktoberfest-finder/deploys)
+## What is Hacktoberfest?
 
-## ❓ What is Hacktoberfest?
+[Hacktoberfest](https://hacktoberfest.com/) is an annual festival that encourages people to participate in the open-source software community by contributing to projects throughout October.
 
-[Hacktoberfest](https://hacktoberfest.digitalocean.com/) is a festival run by Digital Ocean and .dev encourages people to participate in the open-source software community.
+## Features
+
+- **GitHub Issue Search** - Search for Hacktoberfest-tagged issues with advanced filters
+- **Language Filtering** - Filter issues by programming language
+- **Smart Defaults** - Pre-configured search with sensible defaults for finding good first issues
+- **Single-View Navigation** - TikTok-style interface with keyboard controls (↑↓ or j/k keys)
+- **Dark Mode** - System-aware theme with manual toggle support
+- **Authentication** - User accounts with 2FA support via Laravel Fortify
+- **AI Integration** - MCP server for AI-powered Hacktoberfest assistance
+- **Type-Safe Routing** - Auto-generated TypeScript route helpers with Laravel Wayfinder
+- **Progressive Web App** - Offline support with service worker
 
 ## Tech Stack
 
-* [Tailwind CSS](http://tailwindcss.com)
-* [Vuejs](https://vuejs.org/)
+### Backend
+- **[Laravel 12](https://laravel.com/)** - PHP framework
+- **[Laravel Fortify](https://laravel.com/docs/fortify)** - Authentication backend (with 2FA)
+- **[Laravel Wayfinder](https://github.com/laravel/wayfinder)** - Type-safe routing for Vue
+- **[Laravel MCP](https://laravel.com/docs/mcp)** - AI integration via Model Context Protocol
 
-## 💻 Local Setup
+### Frontend
+- **[Vue 3](https://vuejs.org/)** - Progressive JavaScript framework
+- **[Inertia.js](https://inertiajs.com/)** - SPA experience with SSR support
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
+- **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Reka UI](https://www.reka-ui.com/)** - Accessible Vue component library
 
-If you want to get Hacktoberfest Finder setup on your computer, you'll need:
+### Developer Experience
+- **[Laravel Pint](https://laravel.com/docs/pint)** - PHP code formatter
+- **[Pest](https://pestphp.com/)** - Testing framework with browser testing
+- **[ESLint](https://eslint.org/)** & **[Prettier](https://prettier.io/)** - JavaScript/Vue linting and formatting
+- **[Vite](https://vitejs.dev/)** - Fast frontend build tool
 
-* Node
-* npm/yarn
+## Local Setup
 
-If you've got everything, you can install it by following the below steps.
+### Requirements
 
-1. Fork and clone this repository to your computer.
-2. Run `yarn install` or `npm install` in the project folder.
-3. Then run `yarn run dev` or `npm run dev` to compile JavaScript and PostCSS stylesheets for development.
+- **PHP** 8.4 or higher
+- **Composer** 2.x
+- **Node.js** 18.x or higher
+- **npm** or **yarn**
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/adrianmejias/hacktoberfest-finder-alt.git
+   cd hacktoberfest-finder-alt
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Set up environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Create database**
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate
+   ```
+
+   Or use the automated setup script:
+   ```bash
+   composer setup
+   ```
+
+### Development
+
+**Start the development server** (runs Laravel server + queue worker + logs + Vite):
+```bash
+composer dev
+```
+
+Or run services separately:
+```bash
+# Terminal 1: Laravel server
+php artisan serve
+
+# Terminal 2: Vite dev server
+npm run dev
+```
+
+The application will be available at `http://localhost:8000` (or via Laravel Herd at `https://hacktoberfest-finder-alt.test`).
+
+### Testing
+
+```bash
+# Run all tests
+composer test
+# or
+php artisan test
+
+# Run specific test file
+php artisan test tests/Feature/DashboardTest.php
+
+# Run with filter
+php artisan test --filter testUserCanSearch
+```
+
+### Code Quality
+
+```bash
+# Format PHP code
+./vendor/bin/pint
+
+# Format JavaScript/Vue
+npm run format
+
+# Lint JavaScript/Vue
+npm run lint
+
+# Check formatting
+npm run format:check
+```
+
+### Building for Production
+
+```bash
+# Client-side only
+npm run build
+
+# With SSR support
+npm run build:ssr
+```
+
+## MCP Server Integration
+
+This project includes a Laravel MCP server for AI-powered Hacktoberfest assistance. The server provides tools for suggesting projects, searching issues, and getting Hacktoberfest information.
+
+### Setup with Claude Desktop
+
+Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+
+```json
+{
+  "mcpServers": {
+    "hacktoberfest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch",
+        "http://localhost:8000/mcp/hacktoberfest"
+      ]
+    }
+  }
+}
+```
+
+Make sure your Laravel development server is running before using the MCP server.
+
+## Project Structure
+
+```
+├── app/
+│   ├── Actions/GitHub/       # GitHub API action classes
+│   ├── Http/Controllers/     # Laravel controllers
+│   ├── Mcp/                  # MCP server, tools, resources, prompts
+│   └── Models/               # Eloquent models
+├── config/                   # Configuration files
+├── database/                 # Migrations, factories, seeders
+├── resources/
+│   ├── js/
+│   │   ├── components/       # Vue components
+│   │   │   ├── ui/          # Reka UI component library
+│   │   │   └── icons/       # SVG icon components
+│   │   ├── composables/      # Vue composables
+│   │   ├── layouts/          # Inertia layouts
+│   │   ├── pages/           # Inertia page components
+│   │   └── routes/          # Auto-generated type-safe routes
+│   └── views/               # Blade templates
+├── routes/
+│   ├── web.php              # Web routes
+│   ├── ai.php               # MCP server routes
+│   └── console.php          # Console routes
+└── tests/
+    ├── Feature/             # Feature tests
+    ├── Unit/                # Unit tests
+    └── Browser/             # Browser tests (Pest v4)
+```
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Contributions are welcome! Please follow these guidelines:
 
-If you are a first time contributor, please add your name to [CONTRIBUTORS.md](https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTORS.md)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes following the project's code style
+4. Run tests and code formatters:
+   ```bash
+   composer test
+   ./vendor/bin/pint
+   npm run format
+   npm run lint
+   ```
+5. Commit your changes with a descriptive message
+6. Push to your fork and submit a pull request
 
-## 👥 Contributors
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and development process.
 
-You can find a list of contributors to this project in the [`CONTRIBUTORS.md`](https://github.com/damcclean/hacktoberfest-finder/blob/master/CONTRIBUTORS.md) file.
+First-time contributors should add their name to [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
+## License
+
+This project is open-sourced software licensed under the MIT license.
+
+## Acknowledgments
+
+- [Digital Ocean](https://www.digitalocean.com/) for organizing Hacktoberfest
+- All the amazing [contributors](CONTRIBUTORS.md) who have helped improve this project
+- The Laravel and Vue.js communities for their excellent tools and documentation

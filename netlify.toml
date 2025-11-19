@@ -1,3 +1,0 @@
-[build]
-  command = "yarn run production"
-  publish = "public"
