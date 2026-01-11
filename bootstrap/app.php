@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\HandleAppearance;
+use App\Http\Middleware\HandleCacheHeaders;
+use App\Http\Middleware\HandleETag;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,9 +19,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
         $middleware->web(append: [
+            HandleETag::class,
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
+        ]);
+
+        $middleware->alias([
+            'cache' => HandleCacheHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
