@@ -1,7 +1,11 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\FortifyServiceProvider;
+use App\Services\GitHub\Providers\GitHubServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\FortifyServiceProvider::class,
-    App\Services\GitHub\Providers\GitHubServiceProvider::class,
+    AppServiceProvider::class,
+    FortifyServiceProvider::class,
+    GitHubServiceProvider::class,
 ];

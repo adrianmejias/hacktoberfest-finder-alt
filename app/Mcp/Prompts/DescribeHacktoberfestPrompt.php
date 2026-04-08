@@ -17,7 +17,7 @@ class DescribeHacktoberfestPrompt extends Prompt
     /**
      * Handle the prompt request.
      *
-     * @return array<int, \Laravel\Mcp\Response>
+     * @return array<int, Response>
      */
     public function handle(Request $request): array
     {
@@ -67,7 +67,7 @@ USER,
     /**
      * Get the prompt's arguments.
      *
-     * @return array<int, \Laravel\Mcp\Server\Prompts\Argument>
+     * @return array<int, Argument>
      */
     public function arguments(): array
     {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\GitHub\Contracts;
 
+use App\Services\GitHub\Exceptions\GitHubException;
+
 interface GitHubContract
 {
     /**
@@ -12,7 +14,7 @@ interface GitHubContract
      * @param  string  $query  The search query string
      * @return array<string, mixed>
      *
-     * @throws \App\Services\GitHub\Exceptions\GitHubException
+     * @throws GitHubException
      */
     public function issues(string $query): array;
 }

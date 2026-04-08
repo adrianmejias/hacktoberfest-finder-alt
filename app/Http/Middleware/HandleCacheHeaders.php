@@ -11,7 +11,7 @@ class HandleCacheHeaders
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      * @param  string  $maxAge  Maximum cache age in seconds (default: 3600)
      * @param  string  $visibility  Cache visibility: 'public' or 'private' (default: 'public')
      */
